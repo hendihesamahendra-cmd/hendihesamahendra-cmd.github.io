@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Reading — HESA</title>
 
@@ -33,18 +39,26 @@
     html,
     body {
       width: 100%;
-      min-height: 100%;
+      height: 100%;
     }
 
     body {
+
       background: var(--paper);
       color: var(--ink);
 
-      font-family: Arial, Helvetica, sans-serif;
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
       -webkit-font-smoothing: antialiased;
 
       overflow: hidden;
+
+      user-select: none;
+
+      overscroll-behavior: none;
     }
 
     button {
@@ -57,10 +71,13 @@
     ========================= */
 
     .reader {
+
       position: fixed;
+
       inset: 0;
 
       display: flex;
+
       flex-direction: column;
 
       background: var(--paper);
@@ -68,25 +85,33 @@
 
 
     /* =========================
-       TOP BAR
+       HEADER
     ========================= */
 
     .reader-header {
+
       height: 70px;
 
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
 
       padding: 0 32px;
 
-      border-bottom: 1px solid var(--line);
+      border-bottom:
+        1px solid var(--line);
 
       flex-shrink: 0;
     }
 
     .reader-title {
-      font-family: Georgia, "Times New Roman", serif;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
       font-size: 15px;
 
@@ -94,6 +119,13 @@
     }
 
     .reader-page {
+
+      position: absolute;
+
+      left: 50%;
+
+      transform: translateX(-50%);
+
       font-size: 10px;
 
       letter-spacing: 0.12em;
@@ -104,7 +136,9 @@
     }
 
     .close-button {
+
       border: none;
+
       background: none;
 
       color: var(--muted);
@@ -119,10 +153,12 @@
 
       padding: 8px 0;
 
-      transition: color 0.25s ease;
+      transition:
+        color 0.25s ease;
     }
 
     .close-button:hover {
+
       color: var(--ink);
     }
 
@@ -132,34 +168,127 @@
     ========================= */
 
     .book-area {
+
       position: relative;
 
       flex: 1;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
-      overflow: auto;
+      overflow: hidden;
 
       padding: 40px;
     }
 
 
     /* =========================
-       CANVAS
+       BOOK STAGE
+    ========================= */
+
+    .book-stage {
+
+      position: relative;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      width: min(
+        900px,
+        80vw
+      );
+
+      height: min(
+        100%,
+        1100px
+      );
+
+      perspective: 1400px;
+
+      touch-action: pan-y;
+
+      cursor: grab;
+    }
+
+    .book-stage.dragging {
+
+      cursor: grabbing;
+    }
+
+
+    /* =========================
+       PAGE
     ========================= */
 
     #pdf-canvas {
+
       display: block;
 
       max-width: 100%;
+
+      max-height: 100%;
+
+      width: auto;
+
       height: auto;
 
       background: white;
 
       box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.08);
+        0 24px 60px
+        rgba(0, 0, 0, 0.10);
+
+      transform:
+        translateX(0)
+        rotateY(0deg);
+
+      transition:
+        transform 0.55s
+        cubic-bezier(
+          0.22,
+          1,
+          0.36,
+          1
+        );
+
+      will-change:
+        transform;
+    }
+
+    #pdf-canvas.dragging {
+
+      transition: none;
+    }
+
+
+    /* =========================
+       PAGE SHADOW
+    ========================= */
+
+    .page-shadow {
+
+      position: absolute;
+
+      width: 100%;
+
+      height: 100%;
+
+      max-width: 100%;
+
+      max-height: 100%;
+
+      pointer-events: none;
+
+      opacity: 0;
+
+      transition:
+        opacity 0.3s ease;
     }
 
 
@@ -168,71 +297,98 @@
     ========================= */
 
     .nav-button {
+
       position: fixed;
 
       top: 50%;
-      transform: translateY(-50%);
 
-      width: 54px;
-      height: 54px;
+      transform:
+        translateY(-50%);
 
-      border: 1px solid var(--line);
+      width: 48px;
 
-      background: rgba(246, 244, 239, 0.9);
+      height: 48px;
 
-      color: var(--ink);
+      border: none;
+
+      background: transparent;
+
+      color: var(--muted);
 
       cursor: pointer;
 
-      font-size: 18px;
+      font-size: 19px;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
       transition:
-        background 0.25s ease,
-        border-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease,
         opacity 0.25s ease;
     }
 
     .nav-button:hover {
-      background: var(--ink);
-      border-color: var(--ink);
-      color: var(--paper);
+
+      color: var(--ink);
+
+    }
+
+    .nav-button.previous {
+
+      left: 28px;
+    }
+
+    .nav-button.next {
+
+      right: 28px;
+    }
+
+    .nav-button.previous:hover {
+
+      transform:
+        translate(-4px, -50%);
+    }
+
+    .nav-button.next:hover {
+
+      transform:
+        translate(4px, -50%);
     }
 
     .nav-button:disabled {
-      opacity: 0.25;
+
+      opacity: 0.15;
+
       cursor: default;
-    }
-
-    .previous {
-      left: 24px;
-    }
-
-    .next {
-      right: 24px;
     }
 
 
     /* =========================
-       BOTTOM BAR
+       FOOTER
     ========================= */
 
     .reader-footer {
+
       height: 58px;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
-      border-top: 1px solid var(--line);
+      border-top:
+        1px solid var(--line);
 
       flex-shrink: 0;
     }
 
     .hint {
+
       font-size: 9px;
 
       letter-spacing: 0.12em;
@@ -240,6 +396,8 @@
       color: var(--muted);
 
       text-transform: uppercase;
+
+      opacity: 0.8;
     }
 
 
@@ -248,27 +406,38 @@
     ========================= */
 
     .loading {
+
       position: fixed;
+
       inset: 0;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
       background: var(--paper);
 
       z-index: 10;
 
-      transition: opacity 0.4s ease;
+      transition:
+        opacity 0.5s ease;
     }
 
     .loading.hidden {
+
       opacity: 0;
+
       pointer-events: none;
     }
 
     .loading-text {
-      font-family: Georgia, "Times New Roman", serif;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
       font-size: 18px;
 
@@ -283,29 +452,42 @@
     ========================= */
 
     .error {
+
       position: fixed;
+
       inset: 0;
 
       display: none;
 
       align-items: center;
+
       justify-content: center;
 
       text-align: center;
 
       padding: 30px;
+
+      background: var(--paper);
+
+      z-index: 20;
     }
 
     .error.visible {
+
       display: flex;
     }
 
     .error-inner {
+
       max-width: 420px;
     }
 
     .error-title {
-      font-family: Georgia, "Times New Roman", serif;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
       font-size: 28px;
 
@@ -315,6 +497,7 @@
     }
 
     .error-text {
+
       font-size: 11px;
 
       line-height: 1.7;
@@ -330,12 +513,14 @@
     @media (max-width: 700px) {
 
       .reader-header {
+
         height: 58px;
 
         padding: 0 18px;
       }
 
       .reader-title {
+
         font-size: 13px;
 
         max-width: 55%;
@@ -348,54 +533,72 @@
       }
 
       .reader-page {
+
         display: none;
       }
 
       .close-button {
+
         font-size: 9px;
       }
 
-
       .book-area {
-        padding: 20px 12px;
+
+        padding:
+          20px 12px;
       }
 
+      .book-stage {
+
+        width: 100%;
+
+        height: 100%;
+
+        perspective: 1000px;
+      }
 
       #pdf-canvas {
-        width: 100%;
-        height: auto;
-      }
 
+        max-width: 100%;
+
+        max-height: 100%;
+      }
 
       .nav-button {
+
         width: 40px;
+
         height: 40px;
 
-        background: rgba(246, 244, 239, 0.95);
-
         font-size: 15px;
+
+        z-index: 5;
       }
 
-      .previous {
-        left: 10px;
+      .nav-button.previous {
+
+        left: 6px;
       }
 
-      .next {
-        right: 10px;
-      }
+      .nav-button.next {
 
+        right: 6px;
+      }
 
       .reader-footer {
+
         height: 45px;
       }
 
       .hint {
+
         font-size: 8px;
       }
 
     }
 
   </style>
+
 </head>
 
 
@@ -406,7 +609,10 @@
        LOADING
   ========================== -->
 
-  <div class="loading" id="loading">
+  <div
+    class="loading"
+    id="loading"
+  >
 
     <div class="loading-text">
       Opening book...
@@ -415,12 +621,14 @@
   </div>
 
 
-
   <!-- =========================
        ERROR
   ========================== -->
 
-  <div class="error" id="error">
+  <div
+    class="error"
+    id="error"
+  >
 
     <div class="error-inner">
 
@@ -428,7 +636,10 @@
         This book could not be opened.
       </div>
 
-      <div class="error-text" id="error-message">
+      <div
+        class="error-text"
+        id="error-message"
+      >
         Something went wrong while opening the book.
       </div>
 
@@ -437,23 +648,31 @@
   </div>
 
 
-
   <!-- =========================
        READER
   ========================== -->
 
-  <main class="reader" id="reader">
+  <main
+    class="reader"
+    id="reader"
+  >
 
 
     <!-- HEADER -->
 
     <header class="reader-header">
 
-      <div class="reader-title" id="book-title">
+      <div
+        class="reader-title"
+        id="book-title"
+      >
         HESA
       </div>
 
-      <div class="reader-page" id="page-counter">
+      <div
+        class="reader-page"
+        id="page-counter"
+      >
         01 / 01
       </div>
 
@@ -468,15 +687,25 @@
     </header>
 
 
-
     <!-- BOOK -->
 
-    <div class="book-area" id="book-area">
+    <div
+      class="book-area"
+      id="book-area"
+    >
 
-      <canvas id="pdf-canvas"></canvas>
+      <div
+        class="book-stage"
+        id="book-stage"
+      >
+
+        <canvas
+          id="pdf-canvas"
+        ></canvas>
+
+      </div>
 
     </div>
-
 
 
     <!-- PREVIOUS -->
@@ -491,7 +720,6 @@
     </button>
 
 
-
     <!-- NEXT -->
 
     <button
@@ -504,30 +732,20 @@
     </button>
 
 
-
     <!-- FOOTER -->
 
-    <footer class="reader-footer">
+    <footer
+      class="reader-footer"
+    >
 
       <div class="hint">
-        ← → to navigate · Esc to close
+        Drag to turn · ← → to navigate · Esc to close
       </div>
 
     </footer>
 
 
   </main>
-
-
-
-  <!-- =========================
-       PDF.JS
-  ========================== -->
-
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs"
-    type="module"
-  ></script>
 
 
   <!-- =========================
@@ -541,4 +759,5 @@
 
 
 </body>
+
 </html>
