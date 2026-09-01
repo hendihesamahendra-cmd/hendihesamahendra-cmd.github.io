@@ -1,57 +1,80 @@
 import * as pdfjsLib from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
-    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";
+  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";
 
+
+/* =========================
+   BOOKS
+========================= */
 
 const books = {
 
-    saliyah: {
-        title: "Saliyah Layu Melulu",
-        pdf: "books/saliyah-layu-melulu.pdf"
-    },
+  saliyah: {
+    title: "Saliyah Layu Melulu",
+    pdf: "books/saliyah-layu-melulu.pdf"
+  },
 
-    kita: {
-        title: "Kita di Antara Kata",
-        pdf: "books/kita-di-antara-kata.pdf"
-    },
+  kita: {
+    title: "Kita di Antara Kata",
+    pdf: "books/kita-di-antara-kata.pdf"
+  },
 
-    kesepian: {
-        title: "Kesepian Modern",
-        pdf: "books/kesepian-modern.pdf"
-    },
+  kesepian: {
+    title: "Kesepian Modern",
+    pdf: "books/kesepian-modern.pdf"
+  },
 
-    jatuhcinta: {
-        title: "Kalau Nanti Jatuh Cinta Lagi",
-        pdf: "books/kalau-nanti-jatuh-cinta-lagi.pdf"
-    },
+  jatuhcinta: {
+    title: "Kalau Nanti Jatuh Cinta Lagi",
+    pdf: "books/kalau-nanti-jatuh-cinta-lagi.pdf"
+  },
 
-    keuangan: {
-        title: "Manajemen Keuangan Kecil-Kecilan",
-        pdf: "books/manajemen-keuangan-kecil-kecilan.pdf"
-    }
+  keuangan: {
+    title: "Manajemen Keuangan Kecil-Kecilan",
+    pdf: "books/manajemen-keuangan-kecil-kecilan.pdf"
+  }
 
 };
 
 
+/* =========================
+   GET BOOK FROM URL
+========================= */
+
 const params = new URLSearchParams(window.location.search);
 const bookKey = params.get("book");
-
 const book = books[bookKey];
 
+
+/* =========================
+   ELEMENTS
+========================= */
 
 const canvas = document.getElementById("pdf-canvas");
 const context = canvas.getContext("2d");
 
 const titleElement = document.getElementById("book-title");
-const pageNumberElement = document.getElementById("page-number");
-const totalPagesElement = document.getElementById("total-pages");
+const pageCounterElement = document.getElementById("page-counter");
+
 const loadingElement = document.getElementById("loading");
+
 const errorElement = document.getElementById("error");
+const errorMessageElement = document.getElementById("error-message");
 
-const previousButton = document.getElementById("prev");
-const nextButton = document.getElementById("next");
+const previousButton =
+  document.getElementById("previous-button");
 
+const nextButton =
+  document.getElementById("next-button");
+
+const closeButton =
+  document.getElementById("close-button");
+
+
+/* =========================
+   STATE
+========================= */
 
 let pdfDoc = null;
 let pageNum = 1;
@@ -59,155 +82,272 @@ let rendering = false;
 let pendingPage = null;
 
 
+/* =========================
+   INITIALIZE
+========================= */
+
 if (!book) {
 
-    loadingElement.style.display = "none";
-    errorElement.textContent = "Book not found.";
-    errorElement.style.display = "block";
+  showError("This book could not be found.");
 
 } else {
 
-    titleElement.textContent = book.title;
+  titleElement.textContent = book.title;
 
-    loadPDF(book.pdf);
+  loadPDF(book.pdf);
 
 }
 
+
+/* =========================
+   LOAD PDF
+========================= */
 
 async function loadPDF(url) {
 
-    try {
+  try {
 
-        const loadingTask = pdfjsLib.getDocument(url);
+    const loadingTask = pdfjsLib.getDocument(url);
 
-        pdfDoc = await loadingTask.promise;
+    pdfDoc = await loadingTask.promise;
 
-        totalPagesElement.textContent = pdfDoc.numPages;
+    loadingElement.classList.add("hidden");
 
-        loadingElement.style.display = "none";
+    updatePageCounter();
 
-        renderPage(pageNum);
+    updateButtons();
 
-    } catch (error) {
+    renderPage(pageNum);
 
-        console.error(error);
+  } catch (error) {
 
-        loadingElement.style.display = "none";
+    console.error("PDF Error:", error);
 
-        errorElement.textContent =
-            "Unable to load this book.";
+    showError(
+      "The book could not be loaded. Please check the PDF file."
+    );
 
-        errorElement.style.display = "block";
-
-    }
+  }
 
 }
 
+
+/* =========================
+   RENDER PAGE
+========================= */
 
 async function renderPage(num) {
 
-    rendering = true;
+  if (!pdfDoc) return;
 
-    const page = await pdfDoc.getPage(num);
+  rendering = true;
 
-    const viewport = page.getViewport({
-        scale: 1.5
-    });
+  const page = await pdfDoc.getPage(num);
 
-    canvas.height = viewport.height;
-    canvas.width = viewport.width;
+  const viewport = page.getViewport({
+    scale: 1.5
+  });
 
-    await page.render({
-        canvasContext: context,
-        viewport: viewport
-    }).promise;
+  canvas.width = viewport.width;
+  canvas.height = viewport.height;
 
-    pageNumberElement.textContent = num;
+  await page.render({
+    canvasContext: context,
+    viewport: viewport
+  }).promise;
 
-    rendering = false;
+  pageNum = num;
 
-    if (pendingPage !== null) {
+  updatePageCounter();
 
-        renderPage(pendingPage);
+  updateButtons();
 
-        pendingPage = null;
+  rendering = false;
 
-    }
+  if (pendingPage !== null) {
+
+    const nextPageNum = pendingPage;
+
+    pendingPage = null;
+
+    renderPage(nextPageNum);
+
+  }
 
 }
 
+
+/* =========================
+   QUEUE PAGE
+========================= */
 
 function queueRenderPage(num) {
 
-    if (rendering) {
+  if (rendering) {
 
-        pendingPage = num;
+    pendingPage = num;
 
-    } else {
+  } else {
 
-        renderPage(num);
+    renderPage(num);
 
-    }
+  }
 
 }
 
+
+/* =========================
+   PREVIOUS PAGE
+========================= */
 
 function previousPage() {
 
-    if (pageNum <= 1) return;
+  if (!pdfDoc) return;
 
-    pageNum--;
+  if (pageNum <= 1) return;
 
-    queueRenderPage(pageNum);
+  queueRenderPage(pageNum - 1);
 
 }
 
+
+/* =========================
+   NEXT PAGE
+========================= */
 
 function nextPage() {
 
-    if (!pdfDoc) return;
+  if (!pdfDoc) return;
 
-    if (pageNum >= pdfDoc.numPages) return;
+  if (pageNum >= pdfDoc.numPages) return;
 
-    pageNum++;
-
-    queueRenderPage(pageNum);
+  queueRenderPage(pageNum + 1);
 
 }
 
 
+/* =========================
+   PAGE COUNTER
+========================= */
+
+function updatePageCounter() {
+
+  if (!pdfDoc) return;
+
+  const current =
+    String(pageNum).padStart(2, "0");
+
+  const total =
+    String(pdfDoc.numPages).padStart(2, "0");
+
+  pageCounterElement.textContent =
+    `${current} / ${total}`;
+
+}
+
+
+/* =========================
+   BUTTON STATE
+========================= */
+
+function updateButtons() {
+
+  if (!pdfDoc) return;
+
+  previousButton.disabled =
+    pageNum <= 1;
+
+  nextButton.disabled =
+    pageNum >= pdfDoc.numPages;
+
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+function showError(message) {
+
+  loadingElement.classList.add("hidden");
+
+  errorMessageElement.textContent = message;
+
+  errorElement.classList.add("visible");
+
+}
+
+
+/* =========================
+   BUTTON EVENTS
+========================= */
+
 previousButton.addEventListener(
-    "click",
-    previousPage
+  "click",
+  previousPage
 );
 
 nextButton.addEventListener(
-    "click",
-    nextPage
+  "click",
+  nextPage
 );
 
 
-document.addEventListener(
-    "keydown",
-    function (event) {
+/* =========================
+   CLOSE
+========================= */
 
-        if (event.key === "ArrowLeft") {
+closeButton.addEventListener(
+  "click",
+  function () {
 
-            previousPage();
+    if (window.history.length > 1) {
 
-        }
+      window.history.back();
 
-        if (event.key === "ArrowRight") {
+    } else {
 
-            nextPage();
-
-        }
-
-        if (event.key === "Escape") {
-
-            window.history.back();
-
-        }
+      window.location.href = "index.html";
 
     }
+
+  }
+);
+
+
+/* =========================
+   KEYBOARD
+========================= */
+
+document.addEventListener(
+  "keydown",
+  function (event) {
+
+    if (event.key === "ArrowLeft") {
+
+      previousPage();
+
+    }
+
+    if (event.key === "ArrowRight") {
+
+      nextPage();
+
+    }
+
+    if (event.key === "Escape") {
+
+      if (window.history.length > 1) {
+
+        window.history.back();
+
+      } else {
+
+        window.location.href = "index.html";
+
+      }
+
+    }
+
+  }
 );
