@@ -39,44 +39,77 @@ const books = {
 
 
 /* =========================
-   GET BOOK FROM URL
+   GET BOOK
 ========================= */
 
-const params = new URLSearchParams(window.location.search);
-const bookKey = params.get("book");
-const book = books[bookKey];
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
+
+const bookKey =
+  params.get("book");
+
+const book =
+  books[bookKey];
 
 
 /* =========================
    ELEMENTS
 ========================= */
 
-const canvas = document.getElementById("pdf-canvas");
-const context = canvas.getContext("2d");
+const canvas =
+  document.getElementById(
+    "pdf-canvas"
+  );
+
+const context =
+  canvas.getContext("2d");
 
 const titleElement =
-  document.getElementById("book-title");
+  document.getElementById(
+    "book-title"
+  );
 
 const pageCounterElement =
-  document.getElementById("page-counter");
+  document.getElementById(
+    "page-counter"
+  );
 
 const loadingElement =
-  document.getElementById("loading");
+  document.getElementById(
+    "loading"
+  );
 
 const errorElement =
-  document.getElementById("error");
+  document.getElementById(
+    "error"
+  );
 
 const errorMessageElement =
-  document.getElementById("error-message");
+  document.getElementById(
+    "error-message"
+  );
 
 const previousButton =
-  document.getElementById("previous-button");
+  document.getElementById(
+    "previous-button"
+  );
 
 const nextButton =
-  document.getElementById("next-button");
+  document.getElementById(
+    "next-button"
+  );
 
 const closeButton =
-  document.getElementById("close-button");
+  document.getElementById(
+    "close-button"
+  );
+
+const bookStage =
+  document.getElementById(
+    "book-stage"
+  );
 
 
 /* =========================
@@ -84,9 +117,29 @@ const closeButton =
 ========================= */
 
 let pdfDoc = null;
+
 let pageNum = 1;
+
 let rendering = false;
+
 let pendingPage = null;
+
+let currentRenderTask = null;
+
+
+/* =========================
+   DRAG STATE
+========================= */
+
+let isDragging = false;
+
+let dragStartX = 0;
+
+let dragCurrentX = 0;
+
+let dragDistance = 0;
+
+let dragDirection = 0;
 
 
 /* =========================
@@ -95,11 +148,14 @@ let pendingPage = null;
 
 if (!book) {
 
-  showError("This book could not be found.");
+  showError(
+    "This book could not be found."
+  );
 
 } else {
 
-  titleElement.textContent = book.title;
+  titleElement.textContent =
+    book.title;
 
   loadPDF(book.pdf);
 
@@ -120,7 +176,9 @@ async function loadPDF(url) {
     pdfDoc =
       await loadingTask.promise;
 
-    loadingElement.classList.add("hidden");
+    loadingElement.classList.add(
+      "hidden"
+    );
 
     updatePageCounter();
 
@@ -130,7 +188,10 @@ async function loadPDF(url) {
 
   } catch (error) {
 
-    console.error("PDF Error:", error);
+    console.error(
+      "PDF Error:",
+      error
+    );
 
     showError(
       "The book could not be loaded. Please check the PDF file."
@@ -206,7 +267,7 @@ async function renderPage(num) {
 
 
     /* =========================
-       CLEAR CANVAS
+       CLEAR
     ========================= */
 
     context.clearRect(
@@ -218,32 +279,40 @@ async function renderPage(num) {
 
 
     /* =========================
-       RENDER PDF
+       RENDER
     ========================= */
 
-    await page.render({
+    currentRenderTask =
+      page.render({
 
-      canvasContext: context,
+        canvasContext:
+          context,
 
-      viewport: viewport,
+        viewport:
+          viewport,
 
-      transform:
-        devicePixelRatio !== 1
-          ? [
-              devicePixelRatio,
-              0,
-              0,
-              devicePixelRatio,
-              0,
-              0
-            ]
-          : null
+        transform:
+          devicePixelRatio !== 1
+            ? [
+                devicePixelRatio,
+                0,
+                0,
+                devicePixelRatio,
+                0,
+                0
+              ]
+            : null
 
-    }).promise;
+      });
+
+
+    await currentRenderTask.promise;
+
+    currentRenderTask = null;
 
 
     /* =========================
-       UPDATE STATE
+       UPDATE
     ========================= */
 
     pageNum = num;
@@ -252,13 +321,19 @@ async function renderPage(num) {
 
     updateButtons();
 
-
   } catch (error) {
 
-    console.error(
-      "Render Error:",
-      error
-    );
+    if (
+      error?.name !==
+      "RenderingCancelledException"
+    ) {
+
+      console.error(
+        "Render Error:",
+        error
+      );
+
+    }
 
   }
 
@@ -267,10 +342,12 @@ async function renderPage(num) {
 
 
   /* =========================
-     RENDER QUEUED PAGE
+     QUEUED PAGE
   ========================= */
 
-  if (pendingPage !== null) {
+  if (
+    pendingPage !== null
+  ) {
 
     const nextPageNum =
       pendingPage;
@@ -291,6 +368,16 @@ async function renderPage(num) {
 ========================= */
 
 function queueRenderPage(num) {
+
+  if (!pdfDoc) return;
+
+  if (num < 1) return;
+
+  if (
+    num >
+    pdfDoc.numPages
+  ) return;
+
 
   if (rendering) {
 
@@ -315,8 +402,8 @@ function previousPage() {
 
   if (pageNum <= 1) return;
 
-  queueRenderPage(
-    pageNum - 1
+  animatePageTurn(
+    "previous"
   );
 
 }
@@ -335,8 +422,107 @@ function nextPage() {
     pdfDoc.numPages
   ) return;
 
-  queueRenderPage(
-    pageNum + 1
+  animatePageTurn(
+    "next"
+  );
+
+}
+
+
+/* =========================
+   PAGE TURN ANIMATION
+========================= */
+
+function animatePageTurn(
+  direction
+) {
+
+  if (rendering) return;
+
+
+  const distance =
+    direction === "next"
+      ? -120
+      : 120;
+
+  const rotation =
+    direction === "next"
+      ? -4
+      : 4;
+
+
+  canvas.style.transform =
+    `
+      translateX(${distance}px)
+      rotateY(${rotation}deg)
+    `;
+
+
+  canvas.style.opacity =
+    "0.15";
+
+
+  setTimeout(
+    () => {
+
+      const targetPage =
+        direction === "next"
+          ? pageNum + 1
+          : pageNum - 1;
+
+
+      queueRenderPage(
+        targetPage
+      );
+
+
+      canvas.style.transition =
+        "none";
+
+      canvas.style.transform =
+        `
+          translateX(${
+            direction === "next"
+              ? 120
+              : -120
+          }px)
+          rotateY(${
+            direction === "next"
+              ? 4
+              : -4
+          }deg)
+        `;
+
+      canvas.style.opacity =
+        "0";
+
+
+      requestAnimationFrame(
+        () => {
+
+          requestAnimationFrame(
+            () => {
+
+              canvas.style.transition =
+                "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease";
+
+              canvas.style.transform =
+                `
+                  translateX(0)
+                  rotateY(0deg)
+                `;
+
+              canvas.style.opacity =
+                "1";
+
+            }
+          );
+
+        }
+      );
+
+    },
+    180
   );
 
 }
@@ -376,7 +562,8 @@ function updateButtons() {
     pageNum <= 1;
 
   nextButton.disabled =
-    pageNum >= pdfDoc.numPages;
+    pageNum >=
+    pdfDoc.numPages;
 
 }
 
@@ -417,28 +604,215 @@ nextButton.addEventListener(
 
 
 /* =========================
-   CLOSE
+   DRAG START
 ========================= */
 
-closeButton.addEventListener(
-  "click",
-  function () {
+bookStage.addEventListener(
+  "pointerdown",
+  (event) => {
+
+    if (!pdfDoc) return;
+
+    if (rendering) return;
+
+
+    isDragging = true;
+
+    dragStartX =
+      event.clientX;
+
+    dragCurrentX =
+      event.clientX;
+
+    dragDistance = 0;
+
+    dragDirection = 0;
+
+
+    bookStage.classList.add(
+      "dragging"
+    );
+
+    canvas.classList.add(
+      "dragging"
+    );
+
+
+    bookStage.setPointerCapture(
+      event.pointerId
+    );
+
+  }
+);
+
+
+/* =========================
+   DRAG MOVE
+========================= */
+
+bookStage.addEventListener(
+  "pointermove",
+  (event) => {
+
+    if (!isDragging) return;
+
+
+    dragCurrentX =
+      event.clientX;
+
+
+    dragDistance =
+      dragCurrentX -
+      dragStartX;
+
+
+    dragDirection =
+      dragDistance < 0
+        ? 1
+        : -1;
+
+
+    /* =========================
+       RESISTANCE
+    ========================= */
+
+    const resistance =
+      Math.abs(dragDistance) >
+      100
+        ? 0.55
+        : 0.75;
+
+
+    const visualDistance =
+      dragDistance *
+      resistance;
+
+
+    const rotation =
+      visualDistance /
+      35;
+
+
+    canvas.style.transform =
+      `
+        translateX(${visualDistance}px)
+        rotateY(${rotation}deg)
+      `;
+
+
+    const opacity =
+      Math.max(
+        0.72,
+        1 -
+        Math.abs(
+          visualDistance
+        ) / 600
+      );
+
+
+    canvas.style.opacity =
+      opacity;
+
+  }
+);
+
+
+/* =========================
+   DRAG END
+========================= */
+
+bookStage.addEventListener(
+  "pointerup",
+  finishDrag
+);
+
+bookStage.addEventListener(
+  "pointercancel",
+  finishDrag
+);
+
+bookStage.addEventListener(
+  "lostpointercapture",
+  finishDrag
+);
+
+
+function finishDrag() {
+
+  if (!isDragging) return;
+
+
+  isDragging = false;
+
+
+  bookStage.classList.remove(
+    "dragging"
+  );
+
+  canvas.classList.remove(
+    "dragging"
+  );
+
+
+  const threshold = 110;
+
+
+  /* =========================
+     TURN PAGE
+  ========================= */
+
+  if (
+    Math.abs(dragDistance) >=
+    threshold
+  ) {
 
     if (
-      window.history.length > 1
+      dragDistance < 0 &&
+      pageNum < pdfDoc.numPages
     ) {
 
-      window.history.back();
+      animatePageTurn(
+        "next"
+      );
 
-    } else {
+      return;
 
-      window.location.href =
-        "index.html";
+    }
+
+
+    if (
+      dragDistance > 0 &&
+      pageNum > 1
+    ) {
+
+      animatePageTurn(
+        "previous"
+      );
+
+      return;
 
     }
 
   }
-);
+
+
+  /* =========================
+     RETURN
+  ========================= */
+
+  canvas.style.transition =
+    "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease";
+
+  canvas.style.transform =
+    `
+      translateX(0)
+      rotateY(0deg)
+    `;
+
+  canvas.style.opacity =
+    "1";
+
+}
 
 
 /* =========================
@@ -447,7 +821,7 @@ closeButton.addEventListener(
 
 document.addEventListener(
   "keydown",
-  function (event) {
+  (event) => {
 
     if (
       event.key ===
@@ -472,20 +846,37 @@ document.addEventListener(
       "Escape"
     ) {
 
-      if (
-        window.history.length > 1
-      ) {
-
-        window.history.back();
-
-      } else {
-
-        window.location.href =
-          "index.html";
-
-      }
+      closeReader();
 
     }
 
   }
 );
+
+
+/* =========================
+   CLOSE
+========================= */
+
+closeButton.addEventListener(
+  "click",
+  closeReader
+);
+
+
+function closeReader() {
+
+  if (
+    window.history.length > 1
+  ) {
+
+    window.history.back();
+
+  } else {
+
+    window.location.href =
+      "index.html";
+
+  }
+
+}
