@@ -66,49 +66,58 @@ const canvas =
 const context =
   canvas.getContext("2d");
 
+
 const titleElement =
   document.getElementById(
     "book-title"
   );
+
 
 const pageCounterElement =
   document.getElementById(
     "page-counter"
   );
 
+
 const loadingElement =
   document.getElementById(
     "loading"
   );
+
 
 const errorElement =
   document.getElementById(
     "error"
   );
 
+
 const errorMessageElement =
   document.getElementById(
     "error-message"
   );
+
 
 const previousButton =
   document.getElementById(
     "previous-button"
   );
 
+
 const nextButton =
   document.getElementById(
     "next-button"
   );
+
 
 const closeButton =
   document.getElementById(
     "close-button"
   );
 
-const bookStage =
+
+const pageWrapper =
   document.getElementById(
-    "book-stage"
+    "page-wrapper"
   );
 
 
@@ -131,15 +140,13 @@ let currentRenderTask = null;
    DRAG STATE
 ========================= */
 
-let isDragging = false;
+let dragging = false;
 
-let dragStartX = 0;
+let startX = 0;
 
-let dragCurrentX = 0;
+let currentX = 0;
 
 let dragDistance = 0;
-
-let dragDirection = 0;
 
 
 /* =========================
@@ -176,9 +183,11 @@ async function loadPDF(url) {
     pdfDoc =
       await loadingTask.promise;
 
+
     loadingElement.classList.add(
       "hidden"
     );
+
 
     updatePageCounter();
 
@@ -210,7 +219,9 @@ async function renderPage(num) {
 
   if (!pdfDoc) return;
 
+
   rendering = true;
+
 
   try {
 
@@ -219,10 +230,82 @@ async function renderPage(num) {
 
 
     /* =========================
-       DISPLAY SCALE
+       PAGE SIZE
     ========================= */
 
-    const scale = 1.8;
+    const bookArea =
+      document.getElementById(
+        "book-area"
+      );
+
+
+    const areaWidth =
+      bookArea.clientWidth;
+
+
+    const areaHeight =
+      bookArea.clientHeight;
+
+
+    const paddingX =
+      window.innerWidth <= 700
+        ? 32
+        : 160;
+
+
+    const paddingY =
+      window.innerWidth <= 700
+        ? 36
+        : 64;
+
+
+    const availableWidth =
+      Math.max(
+        100,
+        areaWidth - paddingX
+      );
+
+
+    const availableHeight =
+      Math.max(
+        100,
+        areaHeight - paddingY
+      );
+
+
+    /* =========================
+       BASE VIEWPORT
+    ========================= */
+
+    const baseViewport =
+      page.getViewport({
+        scale: 1
+      });
+
+
+    const scaleByWidth =
+      availableWidth /
+      baseViewport.width;
+
+
+    const scaleByHeight =
+      availableHeight /
+      baseViewport.height;
+
+
+    /*
+      Always fit the COMPLETE
+      PDF page inside the available
+      space while preserving the
+      original aspect ratio.
+    */
+
+    const scale =
+      Math.min(
+        scaleByWidth,
+        scaleByHeight
+      );
+
 
     const viewport =
       page.getViewport({
@@ -239,7 +322,7 @@ async function renderPage(num) {
 
 
     /* =========================
-       HIGH RESOLUTION CANVAS
+       HIGH DPI CANVAS
     ========================= */
 
     canvas.width =
@@ -247,6 +330,7 @@ async function renderPage(num) {
         viewport.width *
         devicePixelRatio
       );
+
 
     canvas.height =
       Math.floor(
@@ -262,8 +346,21 @@ async function renderPage(num) {
     canvas.style.width =
       `${viewport.width}px`;
 
+
     canvas.style.height =
       `${viewport.height}px`;
+
+
+    /* =========================
+       RESET TRANSFORM
+    ========================= */
+
+    canvas.style.transform =
+      "translateX(0)";
+
+
+    canvas.style.opacity =
+      "1";
 
 
     /* =========================
@@ -308,6 +405,7 @@ async function renderPage(num) {
 
     await currentRenderTask.promise;
 
+
     currentRenderTask = null;
 
 
@@ -320,6 +418,7 @@ async function renderPage(num) {
     updatePageCounter();
 
     updateButtons();
+
 
   } catch (error) {
 
@@ -349,13 +448,13 @@ async function renderPage(num) {
     pendingPage !== null
   ) {
 
-    const nextPageNum =
+    const queuedPage =
       pendingPage;
 
     pendingPage = null;
 
     renderPage(
-      nextPageNum
+      queuedPage
     );
 
   }
@@ -371,7 +470,9 @@ function queueRenderPage(num) {
 
   if (!pdfDoc) return;
 
+
   if (num < 1) return;
+
 
   if (
     num >
@@ -393,73 +494,80 @@ function queueRenderPage(num) {
 
 
 /* =========================
-   PREVIOUS PAGE
-========================= */
-
-function previousPage() {
-
-  if (!pdfDoc) return;
-
-  if (pageNum <= 1) return;
-
-  animatePageTurn(
-    "previous"
-  );
-
-}
-
-
-/* =========================
-   NEXT PAGE
+   NEXT
 ========================= */
 
 function nextPage() {
 
   if (!pdfDoc) return;
 
+
   if (
     pageNum >=
     pdfDoc.numPages
   ) return;
 
-  animatePageTurn(
-    "next"
-  );
+
+  turnPage("next");
 
 }
 
 
 /* =========================
-   PAGE TURN ANIMATION
+   PREVIOUS
 ========================= */
 
-function animatePageTurn(
-  direction
-) {
+function previousPage() {
+
+  if (!pdfDoc) return;
+
+
+  if (pageNum <= 1) return;
+
+
+  turnPage("previous");
+
+}
+
+
+/* =========================
+   PAGE TURN
+========================= */
+
+function turnPage(direction) {
 
   if (rendering) return;
 
 
   const distance =
     direction === "next"
-      ? -120
-      : 120;
+      ? -80
+      : 80;
 
-  const rotation =
-    direction === "next"
-      ? -4
-      : 4;
+
+  canvas.style.transition =
+    `
+      transform
+      0.35s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      ),
+      opacity
+      0.25s ease
+    `;
 
 
   canvas.style.transform =
     `
       translateX(${distance}px)
-      rotateY(${rotation}deg)
     `;
 
 
   canvas.style.opacity =
-    "0.15";
+    "0.35";
 
 
   setTimeout(
@@ -479,19 +587,16 @@ function animatePageTurn(
       canvas.style.transition =
         "none";
 
+
       canvas.style.transform =
         `
           translateX(${
             direction === "next"
-              ? 120
-              : -120
+              ? 80
+              : -80
           }px)
-          rotateY(${
-            direction === "next"
-              ? 4
-              : -4
-          }deg)
         `;
+
 
       canvas.style.opacity =
         "0";
@@ -504,13 +609,23 @@ function animatePageTurn(
             () => {
 
               canvas.style.transition =
-                "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease";
+                `
+                  transform
+                  0.45s
+                  cubic-bezier(
+                    0.22,
+                    1,
+                    0.36,
+                    1
+                  ),
+                  opacity
+                  0.35s ease
+                `;
+
 
               canvas.style.transform =
-                `
-                  translateX(0)
-                  rotateY(0deg)
-                `;
+                "translateX(0)";
+
 
               canvas.style.opacity =
                 "1";
@@ -522,7 +637,7 @@ function animatePageTurn(
       );
 
     },
-    180
+    170
   );
 
 }
@@ -536,13 +651,16 @@ function updatePageCounter() {
 
   if (!pdfDoc) return;
 
+
   const current =
     String(pageNum)
       .padStart(2, "0");
 
+
   const total =
     String(pdfDoc.numPages)
       .padStart(2, "0");
+
 
   pageCounterElement.textContent =
     `${current} / ${total}`;
@@ -558,8 +676,10 @@ function updateButtons() {
 
   if (!pdfDoc) return;
 
+
   previousButton.disabled =
     pageNum <= 1;
+
 
   nextButton.disabled =
     pageNum >=
@@ -578,12 +698,234 @@ function showError(message) {
     "hidden"
   );
 
+
   errorMessageElement.textContent =
     message;
+
 
   errorElement.classList.add(
     "visible"
   );
+
+}
+
+
+/* =========================
+   POINTER DOWN
+========================= */
+
+pageWrapper.addEventListener(
+  "pointerdown",
+  (event) => {
+
+    if (!pdfDoc) return;
+
+    if (rendering) return;
+
+
+    dragging = true;
+
+    startX =
+      event.clientX;
+
+    currentX =
+      event.clientX;
+
+    dragDistance = 0;
+
+
+    pageWrapper.classList.add(
+      "dragging"
+    );
+
+
+    canvas.classList.add(
+      "dragging"
+    );
+
+
+    pageWrapper.setPointerCapture(
+      event.pointerId
+    );
+
+  }
+);
+
+
+/* =========================
+   POINTER MOVE
+========================= */
+
+pageWrapper.addEventListener(
+  "pointermove",
+  (event) => {
+
+    if (!dragging) return;
+
+
+    currentX =
+      event.clientX;
+
+
+    dragDistance =
+      currentX -
+      startX;
+
+
+    /*
+      Subtle resistance.
+      The page should feel
+      physical, but not exaggerated.
+    */
+
+    const resistance =
+      0.65;
+
+
+    const movement =
+      dragDistance *
+      resistance;
+
+
+    canvas.style.transform =
+      `
+        translateX(${movement}px)
+      `;
+
+
+    const fade =
+      Math.min(
+        Math.abs(movement) / 500,
+        0.22
+      );
+
+
+    canvas.style.opacity =
+      String(
+        1 - fade
+      );
+
+  }
+);
+
+
+/* =========================
+   POINTER UP
+========================= */
+
+pageWrapper.addEventListener(
+  "pointerup",
+  finishDrag
+);
+
+
+pageWrapper.addEventListener(
+  "pointercancel",
+  finishDrag
+);
+
+
+pageWrapper.addEventListener(
+  "lostpointercapture",
+  finishDrag
+);
+
+
+/* =========================
+   FINISH DRAG
+========================= */
+
+function finishDrag() {
+
+  if (!dragging) return;
+
+
+  dragging = false;
+
+
+  pageWrapper.classList.remove(
+    "dragging"
+  );
+
+
+  canvas.classList.remove(
+    "dragging"
+  );
+
+
+  const threshold = 90;
+
+
+  /* =========================
+     NEXT
+  ========================= */
+
+  if (
+    dragDistance <
+    -threshold
+  ) {
+
+    if (
+      pageNum <
+      pdfDoc.numPages
+    ) {
+
+      turnPage("next");
+
+      return;
+
+    }
+
+  }
+
+
+  /* =========================
+     PREVIOUS
+  ========================= */
+
+  if (
+    dragDistance >
+    threshold
+  ) {
+
+    if (
+      pageNum > 1
+    ) {
+
+      turnPage("previous");
+
+      return;
+
+    }
+
+  }
+
+
+  /* =========================
+     SNAP BACK
+  ========================= */
+
+  canvas.style.transition =
+    `
+      transform
+      0.4s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      ),
+      opacity
+      0.3s ease
+    `;
+
+
+  canvas.style.transform =
+    "translateX(0)";
+
+
+  canvas.style.opacity =
+    "1";
 
 }
 
@@ -597,260 +939,10 @@ previousButton.addEventListener(
   previousPage
 );
 
+
 nextButton.addEventListener(
   "click",
   nextPage
-);
-
-
-/* =========================
-   DRAG START
-========================= */
-
-bookStage.addEventListener(
-  "pointerdown",
-  (event) => {
-
-    if (!pdfDoc) return;
-
-    if (rendering) return;
-
-
-    isDragging = true;
-
-    dragStartX =
-      event.clientX;
-
-    dragCurrentX =
-      event.clientX;
-
-    dragDistance = 0;
-
-    dragDirection = 0;
-
-
-    bookStage.classList.add(
-      "dragging"
-    );
-
-    canvas.classList.add(
-      "dragging"
-    );
-
-
-    bookStage.setPointerCapture(
-      event.pointerId
-    );
-
-  }
-);
-
-
-/* =========================
-   DRAG MOVE
-========================= */
-
-bookStage.addEventListener(
-  "pointermove",
-  (event) => {
-
-    if (!isDragging) return;
-
-
-    dragCurrentX =
-      event.clientX;
-
-
-    dragDistance =
-      dragCurrentX -
-      dragStartX;
-
-
-    dragDirection =
-      dragDistance < 0
-        ? 1
-        : -1;
-
-
-    /* =========================
-       RESISTANCE
-    ========================= */
-
-    const resistance =
-      Math.abs(dragDistance) >
-      100
-        ? 0.55
-        : 0.75;
-
-
-    const visualDistance =
-      dragDistance *
-      resistance;
-
-
-    const rotation =
-      visualDistance /
-      35;
-
-
-    canvas.style.transform =
-      `
-        translateX(${visualDistance}px)
-        rotateY(${rotation}deg)
-      `;
-
-
-    const opacity =
-      Math.max(
-        0.72,
-        1 -
-        Math.abs(
-          visualDistance
-        ) / 600
-      );
-
-
-    canvas.style.opacity =
-      opacity;
-
-  }
-);
-
-
-/* =========================
-   DRAG END
-========================= */
-
-bookStage.addEventListener(
-  "pointerup",
-  finishDrag
-);
-
-bookStage.addEventListener(
-  "pointercancel",
-  finishDrag
-);
-
-bookStage.addEventListener(
-  "lostpointercapture",
-  finishDrag
-);
-
-
-function finishDrag() {
-
-  if (!isDragging) return;
-
-
-  isDragging = false;
-
-
-  bookStage.classList.remove(
-    "dragging"
-  );
-
-  canvas.classList.remove(
-    "dragging"
-  );
-
-
-  const threshold = 110;
-
-
-  /* =========================
-     TURN PAGE
-  ========================= */
-
-  if (
-    Math.abs(dragDistance) >=
-    threshold
-  ) {
-
-    if (
-      dragDistance < 0 &&
-      pageNum < pdfDoc.numPages
-    ) {
-
-      animatePageTurn(
-        "next"
-      );
-
-      return;
-
-    }
-
-
-    if (
-      dragDistance > 0 &&
-      pageNum > 1
-    ) {
-
-      animatePageTurn(
-        "previous"
-      );
-
-      return;
-
-    }
-
-  }
-
-
-  /* =========================
-     RETURN
-  ========================= */
-
-  canvas.style.transition =
-    "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease";
-
-  canvas.style.transform =
-    `
-      translateX(0)
-      rotateY(0deg)
-    `;
-
-  canvas.style.opacity =
-    "1";
-
-}
-
-
-/* =========================
-   KEYBOARD
-========================= */
-
-document.addEventListener(
-  "keydown",
-  (event) => {
-
-    if (
-      event.key ===
-      "ArrowLeft"
-    ) {
-
-      previousPage();
-
-    }
-
-    if (
-      event.key ===
-      "ArrowRight"
-    ) {
-
-      nextPage();
-
-    }
-
-    if (
-      event.key ===
-      "Escape"
-    ) {
-
-      closeReader();
-
-    }
-
-  }
 );
 
 
@@ -880,3 +972,79 @@ function closeReader() {
   }
 
 }
+
+
+/* =========================
+   KEYBOARD
+========================= */
+
+document.addEventListener(
+  "keydown",
+  (event) => {
+
+    if (
+      event.key ===
+      "ArrowLeft"
+    ) {
+
+      previousPage();
+
+    }
+
+
+    if (
+      event.key ===
+      "ArrowRight"
+    ) {
+
+      nextPage();
+
+    }
+
+
+    if (
+      event.key ===
+      "Escape"
+    ) {
+
+      closeReader();
+
+    }
+
+  }
+);
+
+
+/* =========================
+   RESIZE
+========================= */
+
+let resizeTimer = null;
+
+window.addEventListener(
+  "resize",
+  () => {
+
+    clearTimeout(
+      resizeTimer
+    );
+
+
+    resizeTimer =
+      setTimeout(
+        () => {
+
+          if (pdfDoc) {
+
+            renderPage(
+              pageNum
+            );
+
+          }
+
+        },
+        150
+      );
+
+  }
+);
