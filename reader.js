@@ -1,618 +1,213 @@
-import * as pdfjsLib from
-  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";
-
-
-/* =========================
-   PDF.JS WORKER
-========================= */
+import * as pdfjsLib from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
-  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";
 
-
-/* =========================
-   BOOK DATABASE
-========================= */
 
 const books = {
 
-  saliyah: {
-    title: "Saliyah Layu Melulu",
-    file: "books/saliyah-layu-melulu.pdf"
-  },
+    saliyah: {
+        title: "Saliyah Layu Melulu",
+        pdf: "books/saliyah-layu-melulu.pdf"
+    },
 
-  kita: {
-    title: "Kita di Antara Kata",
-    file: "books/kita-di-antara-kata.pdf"
-  },
+    kita: {
+        title: "Kita di Antara Kata",
+        pdf: "books/kita-di-antara-kata.pdf"
+    },
 
-  kesepian: {
-    title: "Kesepian Modern",
-    file: "books/kesepian-modern.pdf"
-  },
+    kesepian: {
+        title: "Kesepian Modern",
+        pdf: "books/kesepian-modern.pdf"
+    },
 
-  cinta: {
-    title: "Kalau Nanti Jatuh Cinta Lagi",
-    file: "books/kalau-nanti-jatuh-cinta-lagi.pdf"
-  },
+    jatuhcinta: {
+        title: "Kalau Nanti Jatuh Cinta Lagi",
+        pdf: "books/kalau-nanti-jatuh-cinta-lagi.pdf"
+    },
 
-  tumbuh: {
-    title: "Kerja, Belajar, dan Tumbuh",
-    file: "books/kerja-belajar-dan-tumbuh.pdf"
-  },
-
-  pengabdian: {
-    title: "Tentang Pengabdian Masyarakat",
-    file: "books/tentang-pengabdian-masyarakat.pdf"
-  },
-
-  keuangan: {
-    title: "Manajemen Keuangan Kecil-Kecilan",
-    file: "books/manajemen-keuangan-kecil-kecilan.pdf"
-  }
+    keuangan: {
+        title: "Manajemen Keuangan Kecil-Kecilan",
+        pdf: "books/manajemen-keuangan-kecil-kecilan.pdf"
+    }
 
 };
 
 
-/* =========================
-   ELEMENTS
-========================= */
+const params = new URLSearchParams(window.location.search);
+const bookKey = params.get("book");
 
-const canvas =
-  document.getElementById("pdf-canvas");
-
-const context =
-  canvas.getContext("2d");
-
-const bookTitle =
-  document.getElementById("book-title");
-
-const pageCounter =
-  document.getElementById("page-counter");
-
-const previousButton =
-  document.getElementById("previous-button");
-
-const nextButton =
-  document.getElementById("next-button");
-
-const closeButton =
-  document.getElementById("close-button");
-
-const loading =
-  document.getElementById("loading");
-
-const error =
-  document.getElementById("error");
-
-const errorMessage =
-  document.getElementById("error-message");
-
-const bookArea =
-  document.getElementById("book-area");
+const book = books[bookKey];
 
 
-/* =========================
-   STATE
-========================= */
+const canvas = document.getElementById("pdf-canvas");
+const context = canvas.getContext("2d");
 
-let pdfDocument = null;
+const titleElement = document.getElementById("book-title");
+const pageNumberElement = document.getElementById("page-number");
+const totalPagesElement = document.getElementById("total-pages");
+const loadingElement = document.getElementById("loading");
+const errorElement = document.getElementById("error");
 
-let currentPage = 1;
+const previousButton = document.getElementById("prev");
+const nextButton = document.getElementById("next");
 
+
+let pdfDoc = null;
+let pageNum = 1;
 let rendering = false;
-
 let pendingPage = null;
 
 
-/* =========================
-   GET BOOK FROM URL
-========================= */
+if (!book) {
 
-const parameters =
-  new URLSearchParams(window.location.search);
+    loadingElement.style.display = "none";
+    errorElement.textContent = "Book not found.";
+    errorElement.style.display = "block";
 
-const bookKey =
-  parameters.get("book") || "saliyah";
+} else {
 
+    titleElement.textContent = book.title;
 
-/* =========================
-   OPEN BOOK
-========================= */
-
-async function openBook() {
-
-  const book =
-    books[bookKey];
-
-  if (!book) {
-
-    showError(
-      "The requested book does not exist."
-    );
-
-    return;
-  }
-
-
-  bookTitle.textContent =
-    book.title;
-
-
-  try {
-
-    pdfDocument =
-      await pdfjsLib.getDocument(
-        book.file
-      ).promise;
-
-
-    updatePageCounter();
-
-    updateButtons();
-
-    await renderPage(currentPage);
-
-
-    loading.classList.add("hidden");
-
-  }
-
-  catch (error) {
-
-    console.error(error);
-
-    showError(
-      "Make sure the PDF exists inside the books folder and that the website is being opened through a web server."
-    );
-
-  }
+    loadPDF(book.pdf);
 
 }
 
 
-/* =========================
-   RENDER PAGE
-========================= */
+async function loadPDF(url) {
 
-async function renderPage(pageNumber) {
+    try {
 
-  if (!pdfDocument) {
-    return;
-  }
+        const loadingTask = pdfjsLib.getDocument(url);
 
+        pdfDoc = await loadingTask.promise;
 
-  if (rendering) {
+        totalPagesElement.textContent = pdfDoc.numPages;
 
-    pendingPage =
-      pageNumber;
+        loadingElement.style.display = "none";
 
-    return;
-  }
+        renderPage(pageNum);
 
+    } catch (error) {
 
-  rendering = true;
+        console.error(error);
 
+        loadingElement.style.display = "none";
 
-  try {
+        errorElement.textContent =
+            "Unable to load this book.";
 
-    const page =
-      await pdfDocument.getPage(
-        pageNumber
-      );
+        errorElement.style.display = "block";
 
+    }
 
-    const viewport =
-      page.getViewport({
-        scale: 1
-      });
+}
 
 
-    const containerWidth =
-      bookArea.clientWidth;
+async function renderPage(num) {
 
+    rendering = true;
 
-    const containerHeight =
-      bookArea.clientHeight;
+    const page = await pdfDoc.getPage(num);
 
+    const viewport = page.getViewport({
+        scale: 1.5
+    });
 
-    const horizontalPadding =
-      window.innerWidth <= 700
-        ? 24
-        : 80;
+    canvas.height = viewport.height;
+    canvas.width = viewport.width;
 
+    await page.render({
+        canvasContext: context,
+        viewport: viewport
+    }).promise;
 
-    const verticalPadding =
-      window.innerWidth <= 700
-        ? 40
-        : 80;
-
-
-    const availableWidth =
-      containerWidth -
-      horizontalPadding;
-
-
-    const availableHeight =
-      containerHeight -
-      verticalPadding;
-
-
-    const scaleByWidth =
-      availableWidth /
-      viewport.width;
-
-
-    const scaleByHeight =
-      availableHeight /
-      viewport.height;
-
-
-    let scale =
-      Math.min(
-        scaleByWidth,
-        scaleByHeight
-      );
-
-
-    /*
-      Prevent the page from becoming
-      unnecessarily huge on large screens.
-    */
-
-    scale =
-      Math.min(scale, 1.8);
-
-
-    const scaledViewport =
-      page.getViewport({
-        scale
-      });
-
-
-    const outputScale =
-      window.devicePixelRatio || 1;
-
-
-    canvas.width =
-      Math.floor(
-        scaledViewport.width *
-        outputScale
-      );
-
-
-    canvas.height =
-      Math.floor(
-        scaledViewport.height *
-        outputScale
-      );
-
-
-    canvas.style.width =
-      `${scaledViewport.width}px`;
-
-
-    canvas.style.height =
-      `${scaledViewport.height}px`;
-
-
-    const transform =
-      outputScale !== 1
-        ? [
-            outputScale,
-            0,
-            0,
-            outputScale,
-            0,
-            0
-          ]
-        : null;
-
-
-    const renderContext = {
-
-      canvasContext:
-        context,
-
-      transform,
-
-      viewport:
-        scaledViewport
-
-    };
-
-
-    await page.render(
-      renderContext
-    ).promise;
-
-
-    currentPage =
-      pageNumber;
-
-
-    updatePageCounter();
-
-    updateButtons();
-
-  }
-
-  catch (error) {
-
-    console.error(
-      "Page rendering error:",
-      error
-    );
-
-  }
-
-  finally {
+    pageNumberElement.textContent = num;
 
     rendering = false;
 
-
     if (pendingPage !== null) {
 
-      const nextPage =
-        pendingPage;
+        renderPage(pendingPage);
 
-      pendingPage = null;
-
-      renderPage(nextPage);
+        pendingPage = null;
 
     }
 
-  }
-
 }
 
 
-/* =========================
-   PAGE COUNTER
-========================= */
+function queueRenderPage(num) {
 
-function updatePageCounter() {
+    if (rendering) {
 
-  if (!pdfDocument) {
-    return;
-  }
+        pendingPage = num;
 
+    } else {
 
-  const current =
-    String(currentPage)
-      .padStart(2, "0");
+        renderPage(num);
 
-
-  const total =
-    String(pdfDocument.numPages)
-      .padStart(2, "0");
-
-
-  pageCounter.textContent =
-    `${current} / ${total}`;
+    }
 
 }
 
-
-/* =========================
-   BUTTONS
-========================= */
-
-function updateButtons() {
-
-  if (!pdfDocument) {
-    return;
-  }
-
-
-  previousButton.disabled =
-    currentPage <= 1;
-
-
-  nextButton.disabled =
-    currentPage >=
-    pdfDocument.numPages;
-
-}
-
-
-/* =========================
-   NEXT PAGE
-========================= */
-
-function nextPage() {
-
-  if (!pdfDocument) {
-    return;
-  }
-
-
-  if (
-    currentPage <
-    pdfDocument.numPages
-  ) {
-
-    renderPage(
-      currentPage + 1
-    );
-
-  }
-
-}
-
-
-/* =========================
-   PREVIOUS PAGE
-========================= */
 
 function previousPage() {
 
-  if (!pdfDocument) {
-    return;
-  }
+    if (pageNum <= 1) return;
 
+    pageNum--;
 
-  if (currentPage > 1) {
-
-    renderPage(
-      currentPage - 1
-    );
-
-  }
+    queueRenderPage(pageNum);
 
 }
 
 
-/* =========================
-   CLOSE
-========================= */
+function nextPage() {
 
-function closeReader() {
+    if (!pdfDoc) return;
 
-  if (
-    document.referrer &&
-    document.referrer !==
-    window.location.href
-  ) {
+    if (pageNum >= pdfDoc.numPages) return;
 
-    window.history.back();
+    pageNum++;
 
-  }
-
-  else {
-
-    window.location.href =
-      "index.html";
-
-  }
+    queueRenderPage(pageNum);
 
 }
-
-
-/* =========================
-   ERROR
-========================= */
-
-function showError(message) {
-
-  loading.classList.add(
-    "hidden"
-  );
-
-  document
-    .getElementById("reader")
-    .style.display = "none";
-
-  error.classList.add(
-    "visible"
-  );
-
-  errorMessage.textContent =
-    message;
-
-}
-
-
-/* =========================
-   BUTTON EVENTS
-========================= */
-
-nextButton.addEventListener(
-  "click",
-  nextPage
-);
 
 
 previousButton.addEventListener(
-  "click",
-  previousPage
+    "click",
+    previousPage
 );
 
-
-closeButton.addEventListener(
-  "click",
-  closeReader
+nextButton.addEventListener(
+    "click",
+    nextPage
 );
 
-
-/* =========================
-   KEYBOARD
-========================= */
 
 document.addEventListener(
-  "keydown",
-  event => {
+    "keydown",
+    function (event) {
 
-    if (
-      event.key ===
-      "ArrowRight"
-    ) {
+        if (event.key === "ArrowLeft") {
 
-      nextPage();
+            previousPage();
 
-    }
+        }
 
+        if (event.key === "ArrowRight") {
 
-    if (
-      event.key ===
-      "ArrowLeft"
-    ) {
+            nextPage();
 
-      previousPage();
+        }
 
-    }
+        if (event.key === "Escape") {
 
+            window.history.back();
 
-    if (
-      event.key ===
-      "Escape"
-    ) {
-
-      closeReader();
+        }
 
     }
-
-  }
 );
-
-
-/* =========================
-   RESIZE
-========================= */
-
-let resizeTimeout;
-
-window.addEventListener(
-  "resize",
-  () => {
-
-    clearTimeout(
-      resizeTimeout
-    );
-
-
-    resizeTimeout =
-      setTimeout(
-        () => {
-
-          if (pdfDocument) {
-
-            renderPage(
-              currentPage
-            );
-
-          }
-
-        },
-        150
-      );
-
-  }
-);
-
-
-/* =========================
-   START
-========================= */
-
-openBook();
