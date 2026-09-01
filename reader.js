@@ -66,58 +66,54 @@ const canvas =
 const context =
   canvas.getContext("2d");
 
-
 const titleElement =
   document.getElementById(
     "book-title"
   );
-
 
 const pageCounterElement =
   document.getElementById(
     "page-counter"
   );
 
-
 const loadingElement =
   document.getElementById(
     "loading"
   );
-
 
 const errorElement =
   document.getElementById(
     "error"
   );
 
-
 const errorMessageElement =
   document.getElementById(
     "error-message"
   );
-
 
 const previousButton =
   document.getElementById(
     "previous-button"
   );
 
-
 const nextButton =
   document.getElementById(
     "next-button"
   );
-
 
 const closeButton =
   document.getElementById(
     "close-button"
   );
 
-
 const pageWrapper =
   document.getElementById(
     "page-wrapper"
+  );
+
+const bookArea =
+  document.getElementById(
+    "book-area"
   );
 
 
@@ -230,51 +226,61 @@ async function renderPage(num) {
 
 
     /* =========================
-       PAGE SIZE
+       AVAILABLE SPACE
     ========================= */
-
-    const bookArea =
-      document.getElementById(
-        "book-area"
-      );
-
 
     const areaWidth =
       bookArea.clientWidth;
-
 
     const areaHeight =
       bookArea.clientHeight;
 
 
-    const paddingX =
-      window.innerWidth <= 700
+    const isMobile =
+      window.innerWidth <= 700;
+
+
+    /*
+      Safe margins.
+
+      Desktop:
+      leave enough space for
+      navigation arrows.
+
+      Mobile:
+      preserve the current
+      comfortable layout.
+    */
+
+    const horizontalMargin =
+      isMobile
         ? 32
-        : 160;
+        : 150;
 
-
-    const paddingY =
-      window.innerWidth <= 700
+    const verticalMargin =
+      isMobile
         ? 36
-        : 64;
+        : 50;
 
 
     const availableWidth =
       Math.max(
         100,
-        areaWidth - paddingX
+        areaWidth -
+        horizontalMargin
       );
 
 
     const availableHeight =
       Math.max(
         100,
-        areaHeight - paddingY
+        areaHeight -
+        verticalMargin
       );
 
 
     /* =========================
-       BASE VIEWPORT
+       ORIGINAL PDF SIZE
     ========================= */
 
     const baseViewport =
@@ -283,29 +289,69 @@ async function renderPage(num) {
       });
 
 
-    const scaleByWidth =
+    /* =========================
+       FIT WIDTH
+    ========================= */
+
+    const widthScale =
       availableWidth /
       baseViewport.width;
 
 
-    const scaleByHeight =
+    /* =========================
+       FIT HEIGHT
+    ========================= */
+
+    const heightScale =
       availableHeight /
       baseViewport.height;
 
 
     /*
-      Always fit the COMPLETE
-      PDF page inside the available
-      space while preserving the
-      original aspect ratio.
+      Choose whichever is smaller.
+
+      This guarantees the entire
+      page fits inside the reader.
     */
 
-    const scale =
+    let scale =
       Math.min(
-        scaleByWidth,
-        scaleByHeight
+        widthScale,
+        heightScale
       );
 
+
+    /* =========================
+       SCALE LIMITS
+    ========================= */
+
+    /*
+      Prevent extremely tiny
+      pages on unusual screens.
+    */
+
+    scale =
+      Math.max(
+        scale,
+        0.5
+      );
+
+
+    /*
+      Prevent unnecessarily huge
+      rendering on very large screens.
+    */
+
+    scale =
+      Math.min(
+        scale,
+        2
+      );
+
+
+    /* =========================
+       VIEWPORT
+    ========================= */
 
     const viewport =
       page.getViewport({
@@ -322,7 +368,7 @@ async function renderPage(num) {
 
 
     /* =========================
-       HIGH DPI CANVAS
+       CANVAS INTERNAL SIZE
     ========================= */
 
     canvas.width =
@@ -340,7 +386,7 @@ async function renderPage(num) {
 
 
     /* =========================
-       VISUAL SIZE
+       CANVAS VISUAL SIZE
     ========================= */
 
     canvas.style.width =
@@ -352,20 +398,15 @@ async function renderPage(num) {
 
 
     /* =========================
-       RESET TRANSFORM
+       RESET
     ========================= */
 
     canvas.style.transform =
       "translateX(0)";
 
-
     canvas.style.opacity =
       "1";
 
-
-    /* =========================
-       CLEAR
-    ========================= */
 
     context.clearRect(
       0,
@@ -470,9 +511,7 @@ function queueRenderPage(num) {
 
   if (!pdfDoc) return;
 
-
   if (num < 1) return;
-
 
   if (
     num >
@@ -494,19 +533,17 @@ function queueRenderPage(num) {
 
 
 /* =========================
-   NEXT
+   NEXT PAGE
 ========================= */
 
 function nextPage() {
 
   if (!pdfDoc) return;
 
-
   if (
     pageNum >=
     pdfDoc.numPages
   ) return;
-
 
   turnPage("next");
 
@@ -514,16 +551,14 @@ function nextPage() {
 
 
 /* =========================
-   PREVIOUS
+   PREVIOUS PAGE
 ========================= */
 
 function previousPage() {
 
   if (!pdfDoc) return;
 
-
   if (pageNum <= 1) return;
-
 
   turnPage("previous");
 
@@ -541,14 +576,14 @@ function turnPage(direction) {
 
   const distance =
     direction === "next"
-      ? -80
-      : 80;
+      ? -70
+      : 70;
 
 
   canvas.style.transition =
     `
       transform
-      0.35s
+      0.32s
       cubic-bezier(
         0.22,
         1,
@@ -567,7 +602,7 @@ function turnPage(direction) {
 
 
   canvas.style.opacity =
-    "0.35";
+    "0.45";
 
 
   setTimeout(
@@ -592,8 +627,8 @@ function turnPage(direction) {
         `
           translateX(${
             direction === "next"
-              ? 80
-              : -80
+              ? 70
+              : -70
           }px)
         `;
 
@@ -637,7 +672,7 @@ function turnPage(direction) {
       );
 
     },
-    170
+    160
   );
 
 }
@@ -711,7 +746,7 @@ function showError(message) {
 
 
 /* =========================
-   POINTER DOWN
+   DRAG START
 ========================= */
 
 pageWrapper.addEventListener(
@@ -753,7 +788,7 @@ pageWrapper.addEventListener(
 
 
 /* =========================
-   POINTER MOVE
+   DRAG MOVE
 ========================= */
 
 pageWrapper.addEventListener(
@@ -772,14 +807,8 @@ pageWrapper.addEventListener(
       startX;
 
 
-    /*
-      Subtle resistance.
-      The page should feel
-      physical, but not exaggerated.
-    */
-
     const resistance =
-      0.65;
+      0.6;
 
 
     const movement =
@@ -795,8 +824,9 @@ pageWrapper.addEventListener(
 
     const fade =
       Math.min(
-        Math.abs(movement) / 500,
-        0.22
+        Math.abs(movement) /
+        500,
+        0.16
       );
 
 
@@ -810,7 +840,7 @@ pageWrapper.addEventListener(
 
 
 /* =========================
-   POINTER UP
+   DRAG END
 ========================= */
 
 pageWrapper.addEventListener(
@@ -818,22 +848,16 @@ pageWrapper.addEventListener(
   finishDrag
 );
 
-
 pageWrapper.addEventListener(
   "pointercancel",
   finishDrag
 );
-
 
 pageWrapper.addEventListener(
   "lostpointercapture",
   finishDrag
 );
 
-
-/* =========================
-   FINISH DRAG
-========================= */
 
 function finishDrag() {
 
@@ -856,10 +880,6 @@ function finishDrag() {
   const threshold = 90;
 
 
-  /* =========================
-     NEXT
-  ========================= */
-
   if (
     dragDistance <
     -threshold
@@ -879,10 +899,6 @@ function finishDrag() {
   }
 
 
-  /* =========================
-     PREVIOUS
-  ========================= */
-
   if (
     dragDistance >
     threshold
@@ -900,10 +916,6 @@ function finishDrag() {
 
   }
 
-
-  /* =========================
-     SNAP BACK
-  ========================= */
 
   canvas.style.transition =
     `
