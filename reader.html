@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Reading — HESA</title>
+
+  <meta
+    name="description"
+    content="A Small Archive of Being."
+  >
+
+  <style>
+
+    /* =========================
+       BASE
+    ========================= */
+
+    :root {
+      --paper: #f6f4ef;
+      --ink: #171717;
+      --muted: #77736c;
+      --line: #d9d5cd;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+
+      font-family: Arial, Helvetica, sans-serif;
+
+      -webkit-font-smoothing: antialiased;
+
+      overflow: hidden;
+    }
+
+    button {
+      font: inherit;
+    }
+
+
+    /* =========================
+       READER
+    ========================= */
+
+    .reader {
+      position: fixed;
+      inset: 0;
+
+      display: flex;
+      flex-direction: column;
+
+      background: var(--paper);
+    }
+
+
+    /* =========================
+       TOP BAR
+    ========================= */
+
+    .reader-header {
+      height: 70px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 32px;
+
+      border-bottom: 1px solid var(--line);
+
+      flex-shrink: 0;
+    }
+
+    .reader-title {
+      font-family: Georgia, "Times New Roman", serif;
+
+      font-size: 15px;
+
+      letter-spacing: 0.04em;
+    }
+
+    .reader-page {
+      font-size: 10px;
+
+      letter-spacing: 0.12em;
+
+      color: var(--muted);
+
+      text-transform: uppercase;
+    }
+
+    .close-button {
+      border: none;
+      background: none;
+
+      color: var(--muted);
+
+      font-size: 11px;
+
+      letter-spacing: 0.12em;
+
+      text-transform: uppercase;
+
+      cursor: pointer;
+
+      padding: 8px 0;
+
+      transition: color 0.25s ease;
+    }
+
+    .close-button:hover {
+      color: var(--ink);
+    }
+
+
+    /* =========================
+       BOOK AREA
+    ========================= */
+
+    .book-area {
+      position: relative;
+
+      flex: 1;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      overflow: auto;
+
+      padding: 40px;
+    }
+
+
+    /* =========================
+       CANVAS
+    ========================= */
+
+    #pdf-canvas {
+      display: block;
+
+      max-width: 100%;
+      height: auto;
+
+      background: white;
+
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.08);
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    .nav-button {
+      position: fixed;
+
+      top: 50%;
+      transform: translateY(-50%);
+
+      width: 54px;
+      height: 54px;
+
+      border: 1px solid var(--line);
+
+      background: rgba(246, 244, 239, 0.9);
+
+      color: var(--ink);
+
+      cursor: pointer;
+
+      font-size: 18px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        opacity 0.25s ease;
+    }
+
+    .nav-button:hover {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--paper);
+    }
+
+    .nav-button:disabled {
+      opacity: 0.25;
+      cursor: default;
+    }
+
+    .previous {
+      left: 24px;
+    }
+
+    .next {
+      right: 24px;
+    }
+
+
+    /* =========================
+       BOTTOM BAR
+    ========================= */
+
+    .reader-footer {
+      height: 58px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-top: 1px solid var(--line);
+
+      flex-shrink: 0;
+    }
+
+    .hint {
+      font-size: 9px;
+
+      letter-spacing: 0.12em;
+
+      color: var(--muted);
+
+      text-transform: uppercase;
+    }
+
+
+    /* =========================
+       LOADING
+    ========================= */
+
+    .loading {
+      position: fixed;
+      inset: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: var(--paper);
+
+      z-index: 10;
+
+      transition: opacity 0.4s ease;
+    }
+
+    .loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loading-text {
+      font-family: Georgia, "Times New Roman", serif;
+
+      font-size: 18px;
+
+      font-style: italic;
+
+      color: var(--muted);
+    }
+
+
+    /* =========================
+       ERROR
+    ========================= */
+
+    .error {
+      position: fixed;
+      inset: 0;
+
+      display: none;
+
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      padding: 30px;
+    }
+
+    .error.visible {
+      display: flex;
+    }
+
+    .error-inner {
+      max-width: 420px;
+    }
+
+    .error-title {
+      font-family: Georgia, "Times New Roman", serif;
+
+      font-size: 28px;
+
+      font-weight: normal;
+
+      margin-bottom: 15px;
+    }
+
+    .error-text {
+      font-size: 11px;
+
+      line-height: 1.7;
+
+      color: var(--muted);
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      .reader-header {
+        height: 58px;
+
+        padding: 0 18px;
+      }
+
+      .reader-title {
+        font-size: 13px;
+
+        max-width: 55%;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+      }
+
+      .reader-page {
+        display: none;
+      }
+
+      .close-button {
+        font-size: 9px;
+      }
+
+
+      .book-area {
+        padding: 20px 12px;
+      }
+
+
+      #pdf-canvas {
+        width: 100%;
+        height: auto;
+      }
+
+
+      .nav-button {
+        width: 40px;
+        height: 40px;
+
+        background: rgba(246, 244, 239, 0.95);
+
+        font-size: 15px;
+      }
+
+      .previous {
+        left: 10px;
+      }
+
+      .next {
+        right: 10px;
+      }
+
+
+      .reader-footer {
+        height: 45px;
+      }
+
+      .hint {
+        font-size: 8px;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       LOADING
+  ========================== -->
+
+  <div class="loading" id="loading">
+
+    <div class="loading-text">
+      Opening book...
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================
+       ERROR
+  ========================== -->
+
+  <div class="error" id="error">
+
+    <div class="error-inner">
+
+      <div class="error-title">
+        This book could not be opened.
+      </div>
+
+      <div class="error-text" id="error-message">
+        Something went wrong while opening the book.
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================
+       READER
+  ========================== -->
+
+  <main class="reader" id="reader">
+
+
+    <!-- HEADER -->
+
+    <header class="reader-header">
+
+      <div class="reader-title" id="book-title">
+        HESA
+      </div>
+
+      <div class="reader-page" id="page-counter">
+        01 / 01
+      </div>
+
+      <button
+        class="close-button"
+        id="close-button"
+        type="button"
+      >
+        Close ×
+      </button>
+
+    </header>
+
+
+
+    <!-- BOOK -->
+
+    <div class="book-area" id="book-area">
+
+      <canvas id="pdf-canvas"></canvas>
+
+    </div>
+
+
+
+    <!-- PREVIOUS -->
+
+    <button
+      class="nav-button previous"
+      id="previous-button"
+      type="button"
+      aria-label="Previous page"
+    >
+      ←
+    </button>
+
+
+
+    <!-- NEXT -->
+
+    <button
+      class="nav-button next"
+      id="next-button"
+      type="button"
+      aria-label="Next page"
+    >
+      →
+    </button>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="reader-footer">
+
+      <div class="hint">
+        ← → to navigate · Esc to close
+      </div>
+
+    </footer>
+
+
+  </main>
+
+
+
+  <!-- =========================
+       PDF.JS
+  ========================== -->
+
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs"
+    type="module"
+  ></script>
+
+
+  <!-- =========================
+       READER SCRIPT
+  ========================== -->
+
+  <script
+    src="reader.js"
+    type="module"
+  ></script>
+
+
+</body>
+</html>
