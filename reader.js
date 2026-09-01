@@ -11,27 +11,27 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
 const books = {
 
   saliyah: {
-    title: "Saliyah Layu Melulu",
+    title: "saliyah-layu-melulu.pdf",
     pdf: "books/saliyah-layu-melulu.pdf"
   },
 
   kita: {
-    title: "Kita di Antara Kata",
+    title: "kita-di-antara-kata.pdf",
     pdf: "books/kita-di-antara-kata.pdf"
   },
 
   kesepian: {
-    title: "Kesepian Modern",
+    title: "esepian-modern.pdf",
     pdf: "books/kesepian-modern.pdf"
   },
 
   jatuhcinta: {
-    title: "Kalau Nanti Jatuh Cinta Lagi",
+    title: "kalau-nanti-jatuh-cinta-lagi.pdf",
     pdf: "books/kalau-nanti-jatuh-cinta-lagi.pdf"
   },
 
   keuangan: {
-    title: "Manajemen Keuangan Kecil-Kecilan",
+    title: "manajemen-keuangan-kecil-kecilan.pdf",
     pdf: "books/manajemen-keuangan-kecil-kecilan.pdf"
   }
 
