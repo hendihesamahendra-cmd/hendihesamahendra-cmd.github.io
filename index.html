@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hesa — Writings & Things Left Unsaid</title>
+
+    <meta name="description" content="A personal archive of writings, poems, and things left unsaid by Hesa.">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f7f5f0;
+            color: #1b1b1b;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ---------- HEADER ---------- */
+
+        header {
+            width: 100%;
+            padding: 28px 7vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 20px;
+            letter-spacing: 0.08em;
+        }
+
+        nav {
+            display: flex;
+            gap: 28px;
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        nav a {
+            opacity: 0.55;
+            transition: opacity 0.3s ease;
+        }
+
+        nav a:hover {
+            opacity: 1;
+        }
+
+        /* ---------- HERO ---------- */
+
+        .hero {
+            min-height: 78vh;
+            padding: 12vh 7vw 10vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .eyebrow {
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.45;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: normal;
+            font-size: clamp(52px, 10vw, 120px);
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+            max-width: 900px;
+        }
+
+        .hero-description {
+            margin-top: 40px;
+            max-width: 430px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 18px;
+            line-height: 1.7;
+            opacity: 0.65;
+        }
+
+        .scroll {
+            margin-top: 70px;
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            opacity: 0.4;
+        }
+
+        /* ---------- CONTENT ---------- */
+
+        main {
+            padding: 0 7vw 100px;
+        }
+
+        section {
+            max-width: 1000px;
+            margin: 0 auto 130px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px solid rgba(0,0,0,0.18);
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .section-number {
+            font-size: 10px;
+            opacity: 0.4;
+        }
+
+        /* ---------- WORK ITEM ---------- */
+
+        .work {
+            border-bottom: 1px solid rgba(0,0,0,0.12);
+            transition: padding 0.35s ease;
+        }
+
+        .work a {
+            display: grid;
+            grid-template-columns: 55px 1fr 35px;
+            gap: 20px;
+            align-items: center;
+            padding: 28px 0;
+            transition: padding 0.35s ease;
+        }
+
+        .work:hover a {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+
+        .number {
+            font-size: 11px;
+            opacity: 0.4;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .title {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(21px, 3vw, 31px);
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            display: block;
+            margin-top: 6px;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0.42;
+        }
+
+        .arrow {
+            font-size: 20px;
+            opacity: 0.35;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .work:hover .arrow {
+            transform: translateX(5px);
+            opacity: 1;
+        }
+
+        /* ---------- ABOUT ---------- */
+
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 70px;
+        }
+
+        .about-label {
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.45;
+        }
+
+        .about-text {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 22px;
+            line-height: 1.65;
+        }
+
+        .about-text em {
+            opacity: 0.6;
+        }
+
+        /* ---------- FOOTER ---------- */
+
+        footer {
+            border-top: 1px solid rgba(0,0,0,0.15);
+            padding: 35px 7vw;
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0.5;
+        }
+
+        /* ---------- MOBILE ---------- */
+
+        @media (max-width: 650px) {
+
+            header {
+                padding: 24px 6vw;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            .hero {
+                min-height: 75vh;
+                padding: 10vh 6vw 8vh;
+            }
+
+            h1 {
+                font-size: clamp(58px, 18vw, 100px);
+            }
+
+            .hero-description {
+                font-size: 16px;
+                max-width: 330px;
+            }
+
+            main {
+                padding: 0 6vw 70px;
+            }
+
+            section {
+                margin-bottom: 90px;
+            }
+
+            .work a {
+                grid-template-columns: 35px 1fr 25px;
+                gap: 12px;
+                padding: 22px 0;
+            }
+
+            .title {
+                font-size: 21px;
+            }
+
+            .subtitle {
+                font-size: 9px;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .about-text {
+                font-size: 19px;
+            }
+
+            footer {
+                padding: 28px 6vw;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+        <a href="#" class="logo">HESA</a>
+
+        <nav>
+            <a href="#works">Works</a>
+            <a href="#about">About</a>
+        </nav>
+    </header>
+
+
+    <!-- HERO -->
+
+    <div class="hero">
+
+        <div class="eyebrow">
+            Personal Archive · 2026
+        </div>
+
+        <h1>
+            Things<br>
+            Left<br>
+            Unsaid.
+        </h1>
+
+        <p class="hero-description">
+            Writings, poems, thoughts, and fragments
+            collected somewhere along the way.
+        </p>
+
+        <div class="scroll">
+            ↓ &nbsp; Explore the archive
+        </div>
+
+    </div>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main id="works">
+
+        <!-- BOOKS -->
+
+        <section>
+
+            <div class="section-header">
+                <div class="section-title">Books</div>
+                <div class="section-number">02</div>
+            </div>
+
+
+            <div class="work">
+
+                <a href="https://online.fliphtml5.com/qgmkl/agdf/"
+                   target="_blank"
+                   rel="noopener">
+
+                    <div class="number">01</div>
+
+                    <div>
+                        <div class="title">
+                            Saliyah Layu Melulu
+                        </div>
+
+                        <span class="subtitle">
+                            First Book · Poetry Collection
+                        </span>
+                    </div>
+
+                    <div class="arrow">→</div>
+
+                </a>
+
+            </div>
+
+
+            <div class="work">
+
+                <a href="https://online.fliphtml5.com/qgmkl/ppsi/"
+                   target="_blank"
+                   rel="noopener">
+
+                    <div class="number">02</div>
+
+                    <div>
+                        <div class="title">
+                            Kita di Antara Kata
+                        </div>
+
+                        <span class="subtitle">
+                            Second Book · Poetry Collection
+                        </span>
+                    </div>
+
+                    <div class="arrow">→</div>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- WRITINGS -->
+
+        <section>
+
+            <div class="section-header">
+                <div class="section-title">Writings</div>
+                <div class="section-number">05</div>
+            </div>
+
+
+            <div class="work">
+
+                <a href="https://online.fliphtml5.com/qgmkl/qsct/"
+                   target="_blank"
+                   rel="noopener">
+
+                    <div class="number">03</div>
+
+                    <div>
+                        <div class="title">
+                            Kesepian Modern
+                        </div>
+
+                        <span class="subtitle">
+                            Essay
+                        </span>
+                    </div>
+
+                    <div class="arrow">→</div>
+
+                </a>
+
+            </div>
+
+
+            <div class="work">
+
+                <a href="https://online.fliphtml5.com/oqlum/eyrf/"
+                   target="_blank"
+                   rel="noopener">
+
+                    <div class="number">04</div>
+
+                    <div>
+                        <div class="title">
+                            Kalau Nanti Jatuh Cinta Lagi
+                        </div>
+
+                        <span class="subtitle">
+                            Reflection
+                        </span>
+                    </div>
+
+                    <div class="arrow">→</div>
+
+                </a>
+
+            </div>
+
+
+            <div class="work">
+
+                <a href="https://online.fliphtml5.com/qgmkl/pnfe"
+                   target="_blank"
+                   rel="noopener">
+
+                    <div class="number">05</div>
+
+                    <div>
+                        <div class="title">
+                            Kerja, Belajar, dan Tumbuh
+                        </div>
+
+                        <span class="subtitle">
+                            Personal Writing
+                        </span>
+                    </div>
+
+                    <div class="arrow">→</div>
+
+                </a>
+
+            </div>
+
+
+            <div class="work">
+
+                <a href="https://online.fliphtml5.com/qgmkl/dfkh"
+                   target="_blank"
+                   rel="noopener">
+
+                    <div class="number">06</div>
+
+                    <div>
+                        <div class="title">
+                            Tentang Pengabdian Masyarakat
+                        </div>
+
+                        <span class="subtitle">
+                            Reflection
+                        </span>
+                    </div>
+
+                    <div class="arrow">→</div>
+
+                </a>
+
+            </div>
+
+
+            <div class="work">
+
+                <a href="https://online.fliphtml5.com/qgmkl/jjjk/"
+                   target="_blank"
+                   rel="noopener">
+
+                    <div class="number">07</div>
+
+                    <div>
+                        <div class="title">
+                            Manajemen Keuangan Kecil-Kecilan
+                        </div>
+
+                        <span class="subtitle">
+                            Personal Writing
+                        </span>
+                    </div>
+
+                    <div class="arrow">→</div>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- ABOUT -->
+
+        <section id="about">
+
+            <div class="about">
+
+                <div class="about-label">
+                    About
+                </div>
+
+                <div class="about-text">
+                    An archive of things I have written,
+                    thought about, and perhaps never said aloud.
+
+                    <br><br>
+
+                    <em>
+                        Somewhere along the way,
+                        words became a place to keep things.
+                    </em>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div>
+            Hesa
+        </div>
+
+        <div>
+            © 2026
+        </div>
+
+    </footer>
+
+</body>
+</html>
