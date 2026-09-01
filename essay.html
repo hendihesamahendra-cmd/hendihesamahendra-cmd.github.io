@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>A Small Archive of Being.</title>
+
+  <style>
+    :root {
+      --paper: #f6f4ef;
+      --ink: #171717;
+      --muted: #77736c;
+      --line: #d9d5cd;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      height: 72px;
+      padding: 0 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .site-name {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .back-link {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--ink);
+    }
+
+    /* =========================
+       ESSAY CONTAINER
+    ========================= */
+
+    .essay-container {
+      width: min(760px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 105px 0 120px;
+    }
+
+    /* =========================
+       HEADER ESSAY
+    ========================= */
+
+    .essay-header {
+      margin-bottom: 52px;
+    }
+
+    .essay-meta {
+      margin-bottom: 20px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9px;
+      line-height: 1.5;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .essay-title {
+      margin: 0;
+      max-width: 720px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(38px, 6vw, 62px);
+      font-weight: 400;
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+    }
+
+    .essay-subtitle {
+      max-width: 620px;
+      margin: 28px 0 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .essay-rule {
+      width: 100%;
+      height: 1px;
+      margin-top: 50px;
+      background: var(--line);
+    }
+
+    /* =========================
+       ESSAY CONTENT
+    ========================= */
+
+    .essay-content {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
+      line-height: 1.95;
+    }
+
+    .essay-content p {
+      margin: 0 0 28px;
+    }
+
+    .essay-content .byline {
+      margin-bottom: 42px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9px;
+      line-height: 1.6;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* =========================
+       QUOTES
+    ========================= */
+
+    .essay-content .quote {
+      margin: 48px 0;
+      padding-left: 28px;
+      border-left: 1px solid var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 19px;
+      line-height: 1.75;
+      font-style: italic;
+    }
+
+    .essay-content .quote span {
+      font-size: 0.75em;
+      font-style: normal;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+    }
+
+    /* =========================
+       LEAD PARAGRAPH
+    ========================= */
+
+    .essay-content .lead {
+      margin-top: 38px;
+      margin-bottom: 38px;
+      font-size: 20px;
+      line-height: 1.85;
+    }
+
+    .essay-content .final-line {
+      margin-top: 55px;
+      margin-bottom: 0;
+      font-size: 22px;
+      line-height: 1.6;
+    }
+
+    /* =========================
+       SIGNATURE
+    ========================= */
+
+    .essay-signature {
+      margin-top: 70px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9px;
+      line-height: 1.6;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .essay-signature span:first-child {
+      color: var(--ink);
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    .essay-footer {
+      margin-top: 110px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8px;
+      line-height: 1.6;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* =========================
+       LOADING / ERROR
+    ========================= */
+
+    .essay-loading,
+    .essay-error {
+      padding: 80px 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      header {
+        height: 58px;
+        padding: 0 20px;
+      }
+
+      .site-name {
+        font-size: 8px;
+        letter-spacing: 0.13em;
+      }
+
+      .back-link {
+        font-size: 8px;
+        letter-spacing: 0.1em;
+      }
+
+      .essay-container {
+        width: calc(100% - 40px);
+        padding: 70px 0 80px;
+      }
+
+      .essay-header {
+        margin-bottom: 42px;
+      }
+
+      .essay-meta {
+        margin-bottom: 16px;
+        font-size: 8px;
+      }
+
+      .essay-title {
+        font-size: clamp(36px, 11vw, 50px);
+        line-height: 1.06;
+      }
+
+      .essay-subtitle {
+        margin-top: 22px;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .essay-rule {
+        margin-top: 38px;
+      }
+
+      .essay-content {
+        font-size: 17px;
+        line-height: 1.9;
+      }
+
+      .essay-content p {
+        margin-bottom: 25px;
+      }
+
+      .essay-content .byline {
+        margin-bottom: 34px;
+        font-size: 8px;
+      }
+
+      .essay-content .quote {
+        margin: 38px 0;
+        padding-left: 20px;
+        font-size: 17px;
+        line-height: 1.7;
+      }
+
+      .essay-content .lead {
+        margin-top: 32px;
+        margin-bottom: 32px;
+        font-size: 18px;
+        line-height: 1.8;
+      }
+
+      .essay-content .final-line {
+        margin-top: 48px;
+        font-size: 20px;
+      }
+
+      .essay-signature {
+        margin-top: 55px;
+        font-size: 8px;
+      }
+
+      .essay-footer {
+        margin-top: 80px;
+        font-size: 7px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="index.html" class="site-name">
+      HENDI HESA MAHENDRA
+    </a>
+
+    <a href="index.html" class="back-link">
+      ← Archive
+    </a>
+  </header>
+
+
+  <main class="essay-container">
+
+    <section class="essay-header">
+
+      <div id="essay-meta" class="essay-meta"></div>
+
+      <h1 id="essay-title" class="essay-title">
+        Loading…
+      </h1>
+
+      <p id="essay-subtitle" class="essay-subtitle"></p>
+
+      <div class="essay-rule"></div>
+
+    </section>
+
+
+    <article id="essay-content" class="essay-content">
+
+      <div class="essay-loading">
+        Loading essay…
+      </div>
+
+    </article>
+
+
+    <footer class="essay-footer">
+      <span>A Small Archive of Being.</span>
+      <span>© 2026 HENDI HESA MAHENDRA</span>
+    </footer>
+
+  </main>
+
+
+  <script src="essay.js"></script>
+
+</body>
+</html>
