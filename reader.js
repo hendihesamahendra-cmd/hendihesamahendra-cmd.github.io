@@ -54,13 +54,20 @@ const book = books[bookKey];
 const canvas = document.getElementById("pdf-canvas");
 const context = canvas.getContext("2d");
 
-const titleElement = document.getElementById("book-title");
-const pageCounterElement = document.getElementById("page-counter");
+const titleElement =
+  document.getElementById("book-title");
 
-const loadingElement = document.getElementById("loading");
+const pageCounterElement =
+  document.getElementById("page-counter");
 
-const errorElement = document.getElementById("error");
-const errorMessageElement = document.getElementById("error-message");
+const loadingElement =
+  document.getElementById("loading");
+
+const errorElement =
+  document.getElementById("error");
+
+const errorMessageElement =
+  document.getElementById("error-message");
 
 const previousButton =
   document.getElementById("previous-button");
@@ -107,9 +114,11 @@ async function loadPDF(url) {
 
   try {
 
-    const loadingTask = pdfjsLib.getDocument(url);
+    const loadingTask =
+      pdfjsLib.getDocument(url);
 
-    pdfDoc = await loadingTask.promise;
+    pdfDoc =
+      await loadingTask.promise;
 
     loadingElement.classList.add("hidden");
 
@@ -142,35 +151,135 @@ async function renderPage(num) {
 
   rendering = true;
 
-  const page = await pdfDoc.getPage(num);
+  try {
 
-  const viewport = page.getViewport({
-    scale: 1.5
-  });
+    const page =
+      await pdfDoc.getPage(num);
 
-  canvas.width = viewport.width;
-  canvas.height = viewport.height;
 
-  await page.render({
-    canvasContext: context,
-    viewport: viewport
-  }).promise;
+    /* =========================
+       DISPLAY SCALE
+    ========================= */
 
-  pageNum = num;
+    const scale = 1.8;
 
-  updatePageCounter();
+    const viewport =
+      page.getViewport({
+        scale: scale
+      });
 
-  updateButtons();
+
+    /* =========================
+       DEVICE PIXEL RATIO
+    ========================= */
+
+    const devicePixelRatio =
+      window.devicePixelRatio || 1;
+
+
+    /* =========================
+       HIGH RESOLUTION CANVAS
+    ========================= */
+
+    canvas.width =
+      Math.floor(
+        viewport.width *
+        devicePixelRatio
+      );
+
+    canvas.height =
+      Math.floor(
+        viewport.height *
+        devicePixelRatio
+      );
+
+
+    /* =========================
+       VISUAL SIZE
+    ========================= */
+
+    canvas.style.width =
+      `${viewport.width}px`;
+
+    canvas.style.height =
+      `${viewport.height}px`;
+
+
+    /* =========================
+       CLEAR CANVAS
+    ========================= */
+
+    context.clearRect(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+
+    /* =========================
+       RENDER PDF
+    ========================= */
+
+    await page.render({
+
+      canvasContext: context,
+
+      viewport: viewport,
+
+      transform:
+        devicePixelRatio !== 1
+          ? [
+              devicePixelRatio,
+              0,
+              0,
+              devicePixelRatio,
+              0,
+              0
+            ]
+          : null
+
+    }).promise;
+
+
+    /* =========================
+       UPDATE STATE
+    ========================= */
+
+    pageNum = num;
+
+    updatePageCounter();
+
+    updateButtons();
+
+
+  } catch (error) {
+
+    console.error(
+      "Render Error:",
+      error
+    );
+
+  }
+
 
   rendering = false;
 
+
+  /* =========================
+     RENDER QUEUED PAGE
+  ========================= */
+
   if (pendingPage !== null) {
 
-    const nextPageNum = pendingPage;
+    const nextPageNum =
+      pendingPage;
 
     pendingPage = null;
 
-    renderPage(nextPageNum);
+    renderPage(
+      nextPageNum
+    );
 
   }
 
@@ -206,7 +315,9 @@ function previousPage() {
 
   if (pageNum <= 1) return;
 
-  queueRenderPage(pageNum - 1);
+  queueRenderPage(
+    pageNum - 1
+  );
 
 }
 
@@ -219,9 +330,14 @@ function nextPage() {
 
   if (!pdfDoc) return;
 
-  if (pageNum >= pdfDoc.numPages) return;
+  if (
+    pageNum >=
+    pdfDoc.numPages
+  ) return;
 
-  queueRenderPage(pageNum + 1);
+  queueRenderPage(
+    pageNum + 1
+  );
 
 }
 
@@ -235,10 +351,12 @@ function updatePageCounter() {
   if (!pdfDoc) return;
 
   const current =
-    String(pageNum).padStart(2, "0");
+    String(pageNum)
+      .padStart(2, "0");
 
   const total =
-    String(pdfDoc.numPages).padStart(2, "0");
+    String(pdfDoc.numPages)
+      .padStart(2, "0");
 
   pageCounterElement.textContent =
     `${current} / ${total}`;
@@ -269,11 +387,16 @@ function updateButtons() {
 
 function showError(message) {
 
-  loadingElement.classList.add("hidden");
+  loadingElement.classList.add(
+    "hidden"
+  );
 
-  errorMessageElement.textContent = message;
+  errorMessageElement.textContent =
+    message;
 
-  errorElement.classList.add("visible");
+  errorElement.classList.add(
+    "visible"
+  );
 
 }
 
@@ -301,13 +424,16 @@ closeButton.addEventListener(
   "click",
   function () {
 
-    if (window.history.length > 1) {
+    if (
+      window.history.length > 1
+    ) {
 
       window.history.back();
 
     } else {
 
-      window.location.href = "index.html";
+      window.location.href =
+        "index.html";
 
     }
 
@@ -323,27 +449,39 @@ document.addEventListener(
   "keydown",
   function (event) {
 
-    if (event.key === "ArrowLeft") {
+    if (
+      event.key ===
+      "ArrowLeft"
+    ) {
 
       previousPage();
 
     }
 
-    if (event.key === "ArrowRight") {
+    if (
+      event.key ===
+      "ArrowRight"
+    ) {
 
       nextPage();
 
     }
 
-    if (event.key === "Escape") {
+    if (
+      event.key ===
+      "Escape"
+    ) {
 
-      if (window.history.length > 1) {
+      if (
+        window.history.length > 1
+      ) {
 
         window.history.back();
 
       } else {
 
-        window.location.href = "index.html";
+        window.location.href =
+          "index.html";
 
       }
 
