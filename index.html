@@ -36,11 +36,6 @@
       --max: 1380px;
     }
 
-
-    /* =========================================================
-       RESET
-    ========================================================= */
-
     * {
       box-sizing: border-box;
     }
@@ -53,12 +48,9 @@
       margin: 0;
       background: var(--paper);
       color: var(--ink);
-
       font-family: Helvetica, Arial, sans-serif;
-
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
-
       overflow-x: hidden;
     }
 
@@ -81,7 +73,6 @@
       color: white;
     }
 
-
     /* =========================================================
        HEADER
     ========================================================= */
@@ -89,33 +80,24 @@
     .site-header {
       position: absolute;
       z-index: 20;
-
       top: 0;
       left: 0;
-
       width: 100%;
       height: 82px;
-
       padding: 0 5vw;
-
       display: flex;
       align-items: center;
       justify-content: space-between;
-
       color: white;
     }
 
     .site-name {
       position: relative;
-
       font-size: 10px;
       font-weight: 500;
-
       letter-spacing: 0.24em;
       text-transform: uppercase;
-
       opacity: 0.9;
-
       transition: opacity 0.3s ease;
     }
 
@@ -131,13 +113,10 @@
 
     .nav a {
       position: relative;
-
       font-size: 9px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-
       opacity: 0.72;
-
       transition:
         opacity 0.3s ease,
         color 0.3s ease;
@@ -145,17 +124,12 @@
 
     .nav a::after {
       content: "";
-
       position: absolute;
-
       left: 0;
       bottom: -8px;
-
       width: 0;
       height: 1px;
-
       background: var(--blue-light);
-
       transition: width 0.35s ease;
     }
 
@@ -171,15 +145,11 @@
     .nav-dot {
       width: 5px;
       height: 5px;
-
       border-radius: 50%;
-
       background: var(--blue-light);
-
       box-shadow:
         0 0 0 4px rgba(130, 193, 255, 0.05);
     }
-
 
     /* =========================================================
        HERO
@@ -187,33 +157,25 @@
 
     .hero {
       position: relative;
-
       min-height: 820px;
       height: 100vh;
-
       background: var(--black);
       color: white;
-
       overflow: hidden;
     }
 
     .hero-image {
       position: absolute;
       inset: 0;
-
       width: 100%;
       height: 100%;
-
       object-fit: cover;
       object-position: center center;
-
       filter:
         saturate(0.78)
         contrast(1.08)
         brightness(0.7);
-
       transform: scale(1.02);
-
       animation: heroImage 1.8s ease forwards;
     }
 
@@ -231,12 +193,9 @@
 
     .hero::before {
       content: "";
-
       position: absolute;
       z-index: 1;
-
       inset: 0;
-
       background:
         linear-gradient(
           90deg,
@@ -249,12 +208,9 @@
 
     .hero::after {
       content: "";
-
       position: absolute;
       z-index: 2;
-
       inset: 0;
-
       background:
         linear-gradient(
           180deg,
@@ -268,18 +224,13 @@
     .hero-grid {
       position: relative;
       z-index: 5;
-
       width: min(var(--max), 90vw);
       height: 100%;
-
       margin: 0 auto;
-
       display: grid;
-
       grid-template-columns:
         minmax(0, 1fr)
         minmax(320px, 0.8fr);
-
       align-items: center;
     }
 
@@ -288,24 +239,14 @@
       padding-top: 65px;
     }
 
-
-    /* =========================================================
-       HERO TITLE
-    ========================================================= */
-
     .hero-title {
       max-width: 760px;
-
       margin: 0;
-
       font-size: clamp(58px, 8vw, 126px);
       font-weight: 700;
-
       line-height: 0.86;
       letter-spacing: -0.068em;
-
       text-transform: uppercase;
-
       animation: fadeUp 1s 0.15s both ease;
     }
 
@@ -315,19 +256,13 @@
 
     .hero-description {
       max-width: 390px;
-
       margin: 39px 0 0;
       padding-left: 19px;
-
       border-left: 1px solid var(--blue-light);
-
       font-size: 12px;
       line-height: 1.85;
-
       letter-spacing: 0.035em;
-
       color: rgba(255,255,255,0.7);
-
       animation: fadeUp 1s 0.3s both ease;
     }
 
@@ -335,25 +270,18 @@
       display: inline-flex;
       align-items: center;
       gap: 15px;
-
       margin-top: 37px;
-
       font-size: 8px;
       letter-spacing: 0.23em;
-
       text-transform: uppercase;
-
       color: rgba(255,255,255,0.82);
-
       animation: fadeUp 1s 0.45s both ease;
     }
 
     .hero-enter-line {
       width: 54px;
       height: 1px;
-
       background: rgba(255,255,255,0.8);
-
       transition:
         width 0.35s ease,
         background 0.35s ease;
@@ -371,13 +299,10 @@
     .hero-index {
       position: absolute;
       z-index: 8;
-
       right: 5vw;
       bottom: 43px;
-
       font-size: 8px;
       letter-spacing: 0.25em;
-
       color: rgba(255,255,255,0.42);
     }
 
@@ -388,28 +313,21 @@
     .scroll-cue {
       position: absolute;
       z-index: 8;
-
       left: 5vw;
       bottom: 40px;
-
       display: flex;
       align-items: center;
       gap: 14px;
-
       font-size: 7px;
       letter-spacing: 0.25em;
-
       text-transform: uppercase;
-
       color: rgba(255,255,255,0.42);
-
       animation: fadeUp 1s 0.7s both ease;
     }
 
     .scroll-line {
       width: 48px;
       height: 1px;
-
       background: rgba(255,255,255,0.35);
     }
 
@@ -417,7 +335,6 @@
       color: var(--blue-light);
       font-size: 13px;
     }
-
 
     /* =========================================================
        MAIN
@@ -432,7 +349,6 @@
       margin: 0 auto;
     }
 
-
     /* =========================================================
        WORKS
     ========================================================= */
@@ -443,11 +359,9 @@
 
     .works-grid {
       display: grid;
-
       grid-template-columns:
         0.85fr
         1.15fr;
-
       gap: 9vw;
     }
 
@@ -455,9 +369,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-
       padding-bottom: 16px;
-
       border-bottom: 1px solid var(--line);
     }
 
@@ -469,15 +381,11 @@
 
     .section-title {
       margin: 0;
-
       font-size: 15px;
       font-weight: 600;
-
       letter-spacing: 0.19em;
-
       text-transform: uppercase;
     }
-
 
     /* =========================================================
        WORK LIST
@@ -489,22 +397,15 @@
 
     .work {
       position: relative;
-
       display: grid;
-
       grid-template-columns:
         44px
         minmax(0, 1fr)
         28px;
-
       align-items: center;
-
       min-height: 86px;
-
       padding: 0;
-
       border-bottom: 1px solid var(--line);
-
       transition:
         padding 0.35s ease,
         background 0.35s ease;
@@ -512,17 +413,12 @@
 
     .work::before {
       content: "";
-
       position: absolute;
-
       left: 0;
       bottom: -1px;
-
       width: 0;
       height: 1px;
-
       background: var(--blue);
-
       transition: width 0.45s ease;
     }
 
@@ -537,12 +433,9 @@
 
     .work-number {
       align-self: center;
-
       font-family: "Courier New", monospace;
-
       font-size: 9px;
       letter-spacing: 0.08em;
-
       color: var(--blue);
     }
 
@@ -552,15 +445,11 @@
 
     .work-title {
       margin: 0;
-
       font-size: 13px;
       font-weight: 500;
-
       line-height: 1.35;
       letter-spacing: 0.085em;
-
       text-transform: uppercase;
-
       transition: color 0.3s ease;
     }
 
@@ -570,25 +459,18 @@
 
     .work-meta {
       margin-top: 7px;
-
       font-family: "Courier New", monospace;
-
       font-size: 8px;
       line-height: 1.4;
-
       letter-spacing: 0.02em;
-
       color: var(--muted);
     }
 
     .work-arrow {
       font-size: 17px;
       font-weight: 300;
-
       text-align: right;
-
       color: rgba(255,255,255,0.48);
-
       transition:
         transform 0.35s ease,
         color 0.35s ease;
@@ -599,37 +481,29 @@
       transform: translateX(5px);
     }
 
-
     /* =========================================================
        JOURNAL / FIELD NOTE
     ========================================================= */
 
     .journal-stack {
       position: relative;
-
       margin-top: 49px;
-
       padding: 14px 18px 23px;
     }
 
     .journal-stack::before,
     .journal-stack::after {
       content: "";
-
       position: absolute;
       inset: 0;
-
       background: #f1efe8;
-
       border: 1px solid rgba(17,19,22,0.1);
-
       box-shadow:
         0 15px 32px rgba(0,0,0,0.38);
     }
 
     .journal-stack::before {
       z-index: 0;
-
       transform:
         rotate(-3.1deg)
         translate(-9px, 7px);
@@ -637,25 +511,19 @@
 
     .journal-stack::after {
       z-index: 0;
-
       transform:
         rotate(2.5deg)
         translate(10px, -5px);
-
       background: #e9e6dc;
     }
 
     .journal-image {
       position: relative;
       z-index: 1;
-
       padding: 14px 14px 19px;
-
       background: var(--paper-white);
-
       box-shadow:
         0 15px 30px rgba(8,10,12,0.34);
-
       transition:
         transform 0.5s ease,
         box-shadow 0.5s ease;
@@ -665,27 +533,21 @@
       transform:
         translateY(-4px)
         rotate(-0.25deg);
-
       box-shadow:
         0 20px 38px rgba(8,10,12,0.42);
     }
 
     .journal-photo {
       position: relative;
-
       overflow: hidden;
-
       aspect-ratio: 16 / 9;
     }
 
     .journal-photo::after {
       content: "";
-
       position: absolute;
       inset: 0;
-
       pointer-events: none;
-
       background:
         linear-gradient(
           135deg,
@@ -696,16 +558,12 @@
 
     .journal-photo img {
       display: block;
-
       width: 100%;
       height: 100%;
-
       object-fit: cover;
-
       filter:
         saturate(0.62)
         contrast(1.06);
-
       transition:
         transform 0.8s ease,
         filter 0.8s ease;
@@ -713,7 +571,6 @@
 
     .journal-image:hover .journal-photo img {
       transform: scale(1.04);
-
       filter:
         saturate(0.84)
         contrast(1.05);
@@ -721,38 +578,25 @@
 
     .journal-caption {
       max-width: 90%;
-
       margin: 15px auto 0;
-
       text-align: center;
-
       font-family: "Courier New", monospace;
-
       font-style: italic;
-
       font-size: 10px;
       line-height: 1.65;
-
       letter-spacing: 0.005em;
-
       color: #3d4043;
     }
 
     .journal-note {
       margin-top: 9px;
-
       text-align: center;
-
       font-family: "Courier New", monospace;
-
       font-size: 7px;
       letter-spacing: 0.18em;
-
       text-transform: uppercase;
-
       color: #777a7c;
     }
-
 
     /* =========================================================
        MAP / MADING
@@ -764,18 +608,14 @@
 
     .mading-board {
       position: relative;
-
       margin-top: 40px;
       padding: 64px 6vw 74px;
-
       background:
         radial-gradient(rgba(0, 0, 0, 0.16) 1px, transparent 1.6px) 0 0 / 15px 15px,
         radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1.6px) 7px 7px / 15px 15px,
         linear-gradient(160deg, #8a6a4d 0%, #6f5138 75%);
-
       border: 10px solid #46341f;
       border-radius: 3px;
-
       box-shadow:
         inset 0 0 70px rgba(0, 0, 0, 0.4),
         0 26px 54px rgba(0, 0, 0, 0.42);
@@ -783,19 +623,13 @@
 
     .map-frame {
       position: relative;
-
       max-width: 780px;
-
       margin: 0 auto;
       padding: 34px 34px 30px;
-
       background: var(--paper-white);
       border-radius: 2px;
-
       box-shadow: 0 22px 44px rgba(0, 0, 0, 0.42);
-
       transform: rotate(-0.6deg);
-
       transition:
         transform 0.5s ease,
         box-shadow 0.5s ease;
@@ -803,22 +637,17 @@
 
     .map-frame:hover {
       transform: rotate(-0.6deg) translateY(-4px);
-
       box-shadow:
         0 28px 52px rgba(0, 0, 0, 0.48);
     }
 
     .map-tape {
       position: absolute;
-
       top: -15px;
-
       width: 72px;
       height: 26px;
-
       background: rgba(244, 244, 240, 0.55);
       border: 1px solid rgba(255, 255, 255, 0.35);
-
       box-shadow:
         0 3px 6px rgba(0, 0, 0, 0.28);
     }
@@ -839,20 +668,16 @@
 
     .indonesia-map-img {
       display: block;
-
       width: 100%;
       height: auto;
-
       filter: saturate(0.9);
     }
 
     .mading-pin {
       position: absolute;
-
       width: 15px;
       height: 15px;
       padding: 0;
-
       background:
         radial-gradient(
           circle at 34% 30%,
@@ -860,18 +685,13 @@
           #d81f1f 62%,
           #8c1212 100%
         );
-
       border: none;
       border-radius: 50%;
-
       box-shadow:
         0 2px 4px rgba(0, 0, 0, 0.5),
         0 0 0 2px rgba(255, 255, 255, 0.55);
-
       transform: translate(-50%, -50%);
-
       cursor: pointer;
-
       transition:
         transform 0.25s ease,
         box-shadow 0.25s ease;
@@ -882,7 +702,6 @@
       transform:
         translate(-50%, -50%)
         scale(1.4);
-
       box-shadow:
         0 3px 7px rgba(0, 0, 0, 0.55),
         0 0 0 2px rgba(255, 255, 255, 0.75);
@@ -890,34 +709,21 @@
 
     .mading-pin::after {
       content: attr(data-caption);
-
       position: absolute;
-
       bottom: 135%;
       left: 50%;
-
       white-space: nowrap;
-
       transform: translateX(-50%);
-
       font-family: "Courier New", monospace;
-
       font-size: 8px;
       letter-spacing: 0.08em;
-
       text-transform: uppercase;
-
       color: #16181a;
-
       background: rgba(244, 244, 240, 0.94);
-
       padding: 4px 8px;
-
       border-radius: 2px;
-
       opacity: 0;
       pointer-events: none;
-
       transition: opacity 0.25s ease;
     }
 
@@ -928,33 +734,23 @@
 
     .map-caption {
       display: flex;
-
       align-items: center;
       justify-content: center;
-
       gap: 11px;
-
       margin-top: 28px;
-
       font-family: "Courier New", monospace;
-
       font-size: 9px;
       letter-spacing: 0.14em;
-
       text-transform: uppercase;
-
       color: rgba(244, 244, 240, 0.75);
     }
 
     .map-caption-dot {
       width: 5px;
       height: 5px;
-
       border-radius: 50%;
-
       background: #d81f1f;
     }
-
 
     /* =========================================================
        ABOUT
@@ -962,26 +758,19 @@
 
     .about-section {
       position: relative;
-
       min-height: 580px;
-
       background: var(--paper-light);
-
       overflow: hidden;
     }
 
     .about-image-full {
       position: absolute;
       inset: 0;
-
       width: 100%;
       height: 100%;
-
       display: block;
-
       object-fit: cover;
       object-position: center 30%;
-
       filter:
         saturate(0.82)
         contrast(1.05);
@@ -989,10 +778,8 @@
 
     .about-section::after {
       content: "";
-
       position: absolute;
       inset: 0;
-
       background:
         linear-gradient(
           90deg,
@@ -1007,19 +794,15 @@
     .about-grid {
       position: relative;
       z-index: 2;
-
       width: min(var(--max), 90vw);
       min-height: 580px;
-
       margin: 0 auto;
-
       display: flex;
       align-items: center;
     }
 
     .about-copy {
       max-width: 470px;
-
       padding: 80px 0;
     }
 
@@ -1027,39 +810,28 @@
       display: flex;
       align-items: center;
       gap: 14px;
-
       margin-bottom: 31px;
-
       font-size: 8px;
       letter-spacing: 0.25em;
-
       text-transform: uppercase;
-
       color: #17191b;
     }
 
     .about-label::after {
       content: "";
-
       width: 45px;
       height: 1px;
-
       background: var(--blue);
     }
 
     .about-title {
       max-width: 470px;
-
       margin: 0;
-
       font-size: clamp(27px, 3.4vw, 45px);
       font-weight: 500;
-
       line-height: 1.16;
       letter-spacing: -0.035em;
-
       text-transform: uppercase;
-
       color: #111316;
     }
 
@@ -1067,23 +839,17 @@
       display: inline-flex;
       align-items: center;
       gap: 15px;
-
       margin-top: 35px;
-
       font-size: 8px;
       letter-spacing: 0.22em;
-
       text-transform: uppercase;
-
       color: #111316;
     }
 
     .about-link span {
       width: 43px;
       height: 1px;
-
       background: #111316;
-
       transition:
         width 0.35s ease,
         background 0.35s ease;
@@ -1094,28 +860,20 @@
       background: var(--blue);
     }
 
-
     /* =========================================================
        MADING PHOTO MODAL
     ========================================================= */
 
     .mading-modal {
       position: fixed;
-
       z-index: 100;
-
       inset: 0;
-
       display: flex;
-
       align-items: center;
       justify-content: center;
-
       padding: 24px;
-
       visibility: hidden;
       opacity: 0;
-
       transition:
         opacity 0.3s ease,
         visibility 0.3s ease;
@@ -1129,29 +887,21 @@
     .mading-modal-backdrop {
       position: absolute;
       inset: 0;
-
       background: rgba(5, 6, 8, 0.87);
     }
 
     .mading-modal-card {
       position: relative;
-
       z-index: 1;
-
       width: 100%;
       max-width: 400px;
-
       padding: 18px 18px 24px;
-
       background: var(--paper-white);
-
       box-shadow:
         0 32px 60px rgba(0, 0, 0, 0.55);
-
       transform:
         translateY(14px)
         rotate(-1deg);
-
       transition:
         transform 0.35s ease;
     }
@@ -1164,15 +914,11 @@
 
     .mading-modal-card::before {
       content: "";
-
       position: absolute;
-
       top: -8px;
       left: 50%;
-
       width: 15px;
       height: 15px;
-
       background:
         radial-gradient(
           circle at 34% 30%,
@@ -1180,61 +926,43 @@
           #d81f1f 62%,
           #8c1212 100%
         );
-
       border-radius: 50%;
-
       box-shadow:
         0 2px 5px rgba(0, 0, 0, 0.5);
-
       transform: translateX(-50%);
     }
 
     .mading-modal-close {
       position: absolute;
-
       top: -14px;
       right: -14px;
-
       width: 30px;
       height: 30px;
-
       display: flex;
-
       align-items: center;
       justify-content: center;
-
       font-size: 16px;
       line-height: 1;
-
       color: white;
-
       background: #111417;
-
       border: none;
       border-radius: 50%;
-
       box-shadow:
         0 6px 14px rgba(0, 0, 0, 0.4);
-
       cursor: pointer;
     }
 
     .mading-modal-photo {
       overflow: hidden;
-
       aspect-ratio: 4 / 5;
-
       background: #ddd8ce;
     }
 
     .mading-modal-photo img {
       display: block;
-
       width: 100%;
       height: 100%;
-
       object-fit: cover;
-
       filter:
         saturate(0.75)
         contrast(1.05);
@@ -1242,20 +970,14 @@
 
     .mading-modal-caption {
       margin: 15px 4px 0;
-
       font-family: "Courier New", monospace;
       font-style: italic;
-
       font-size: 11px;
       line-height: 1.55;
-
       letter-spacing: 0.02em;
-
       color: #3d4043;
-
       text-align: center;
     }
-
 
     /* =========================================================
        FOOTER
@@ -1264,31 +986,23 @@
     footer {
       background: #0a0d10;
       color: white;
-
       padding: 43px 5vw 39px;
     }
 
     .footer-inner {
       width: min(var(--max), 90vw);
-
       margin: 0 auto;
-
       display: flex;
-
       align-items: flex-end;
       justify-content: space-between;
-
       gap: 40px;
     }
 
     .footer-location {
       font-family: "Courier New", monospace;
-
       font-size: 8px;
       line-height: 1.9;
-
       letter-spacing: 0.12em;
-
       color: rgba(255,255,255,0.45);
     }
 
@@ -1298,14 +1012,10 @@
 
     .footer-right {
       text-align: right;
-
       font-size: 8px;
       line-height: 1.9;
-
       letter-spacing: 0.17em;
-
       text-transform: uppercase;
-
       color: rgba(255,255,255,0.42);
     }
 
@@ -1321,7 +1031,6 @@
     .footer-mark span {
       color: var(--blue-light);
     }
-
 
     /* =========================================================
        REVEAL
@@ -1351,7 +1060,6 @@
       }
     }
 
-
     /* =========================================================
        MOBILE
     ========================================================= */
@@ -1380,7 +1088,6 @@
       .nav-dot {
         display: none;
       }
-
 
       /* HERO */
 
@@ -1416,12 +1123,9 @@
 
       .hero-grid {
         width: calc(100% - 44px);
-
         display: flex;
-
         flex-direction: column;
         justify-content: flex-end;
-
         padding-top: 0;
         padding-bottom: 94px;
       }
@@ -1433,26 +1137,21 @@
 
       .hero-title {
         max-width: 95%;
-
         font-size: clamp(38px, 12vw, 92px);
-
         line-height: 0.91;
         letter-spacing: -0.065em;
       }
 
       .hero-description {
         max-width: 290px;
-
         margin-top: 28px;
         padding-left: 14px;
-
         font-size: 10px;
         line-height: 1.75;
       }
 
       .hero-enter {
         margin-top: 27px;
-
         font-size: 7px;
         letter-spacing: 0.2em;
       }
@@ -1464,23 +1163,19 @@
       .hero-index {
         right: 22px;
         bottom: 27px;
-
         font-size: 7px;
       }
 
       .scroll-cue {
         left: 22px;
         bottom: 27px;
-
         gap: 10px;
-
         font-size: 6px;
       }
 
       .scroll-line {
         width: 34px;
       }
-
 
       /* WORKS */
 
@@ -1514,7 +1209,6 @@
           34px
           minmax(0, 1fr)
           23px;
-
         min-height: 76px;
       }
 
@@ -1536,12 +1230,10 @@
         font-size: 15px;
       }
 
-
       /* JOURNAL */
 
       .journal-stack {
         margin-top: 33px;
-
         padding: 10px 12px 17px;
       }
 
@@ -1555,7 +1247,6 @@
 
       .journal-caption {
         margin-top: 13px;
-
         font-size: 9px;
         line-height: 1.7;
       }
@@ -1563,7 +1254,6 @@
       .journal-note {
         font-size: 6px;
       }
-
 
       /* MAP */
 
@@ -1573,9 +1263,7 @@
 
       .mading-board {
         margin-top: 30px;
-
         padding: 42px 5vw 48px;
-
         border-width: 7px;
       }
 
@@ -1595,18 +1283,14 @@
 
       .map-caption {
         margin-top: 20px;
-
         font-size: 8px;
-
         text-align: center;
       }
 
       .mading-modal-card {
         max-width: 320px;
-
         padding: 14px 14px 20px;
       }
-
 
       /* ABOUT */
 
@@ -1632,11 +1316,8 @@
 
       .about-grid {
         width: 100%;
-
         display: block;
-
         min-height: 500px;
-
         padding: 68px 22px 42px;
       }
 
@@ -1647,9 +1328,7 @@
 
       .about-label {
         margin-bottom: 28px;
-
         font-size: 7px;
-
         color: #17191b;
       }
 
@@ -1659,25 +1338,20 @@
 
       .about-title {
         max-width: 100%;
-
         font-size: 26px;
         line-height: 1.22;
-
         color: #111316;
       }
 
       .about-link {
         margin-top: 31px;
-
         font-size: 7px;
-
         color: #111316;
       }
 
       .about-link span {
         background: #111316;
       }
-
 
       /* FOOTER */
 
@@ -1687,11 +1361,8 @@
 
       .footer-inner {
         width: 100%;
-
         align-items: flex-start;
-
         flex-direction: column;
-
         gap: 27px;
       }
 
@@ -1704,7 +1375,6 @@
         font-size: 7px;
       }
     }
-
 
     /* =========================================================
        SMALL PHONES
@@ -1733,7 +1403,6 @@
       }
     }
 
-
     /* =========================================================
        REDUCED MOTION
     ========================================================= */
@@ -1755,9 +1424,7 @@
   </style>
 </head>
 
-
 <body>
-
 
   <!-- =======================================================
        HEADER
@@ -1798,7 +1465,6 @@
     </nav>
 
   </header>
-
 
   <!-- =======================================================
        HERO
@@ -1843,11 +1509,9 @@
 
     </div>
 
-
     <div class="hero-index">
       ARCHIVE <span>001</span>
     </div>
-
 
     <div class="scroll-cue">
 
@@ -1865,13 +1529,11 @@
 
   </section>
 
-
   <!-- =======================================================
        MAIN
   ======================================================== -->
 
   <main id="works">
-
 
     <!-- =====================================================
          WORKS
@@ -1880,7 +1542,6 @@
     <section class="section works-section">
 
       <div class="works-grid">
-
 
         <!-- ================= BOOKS ================= -->
 
@@ -1897,7 +1558,6 @@
             </div>
 
           </div>
-
 
           <div class="work-list">
 
@@ -1931,7 +1591,6 @@
 
             </a>
 
-
             <a
               href="reader.html?book=kita"
               class="work"
@@ -1964,7 +1623,6 @@
 
           </div>
 
-
           <!-- ================= PAPER ================= -->
 
           <div class="journal-stack">
@@ -1995,7 +1653,6 @@
 
         </div>
 
-
         <!-- ================= WRITINGS ================= -->
 
         <div class="works-column">
@@ -2011,7 +1668,6 @@
             </div>
 
           </div>
-
 
           <div class="work-list">
 
@@ -2045,7 +1701,6 @@
 
             </a>
 
-
             <a
               href="reader.html?book=jatuhcinta"
               class="work"
@@ -2075,7 +1730,6 @@
               </span>
 
             </a>
-
 
             <a
               href="essay.html?work=kerja"
@@ -2107,7 +1761,6 @@
 
             </a>
 
-
             <a
               href="essay.html?work=pengabdian"
               class="work"
@@ -2137,7 +1790,6 @@
               </span>
 
             </a>
-
 
             <a
               href="reader.html?book=keuangan"
@@ -2177,10 +1829,8 @@
 
     </section>
 
-
     <!-- =====================================================
          MAP / MADING
-         DIPINDAHKAN SEBELUM ABOUT
     ====================================================== -->
 
     <section
@@ -2200,7 +1850,6 @@
 
       </div>
 
-
       <div class="mading-board">
 
         <div class="map-frame">
@@ -2215,7 +1864,6 @@
             aria-hidden="true"
           ></span>
 
-
           <div class="map-image-wrap">
 
             <img
@@ -2224,11 +1872,11 @@
               class="indonesia-map-img"
             />
 
-
             <!-- ============================================
                  PINS
             ============================================= -->
 
+            <!-- JOGJA -->
             <button
               type="button"
               class="mading-pin"
@@ -2238,7 +1886,7 @@
               aria-label="Lihat foto: Jogja"
             ></button>
 
-
+            <!-- KERAYAAN BECCU -->
             <button
               type="button"
               class="mading-pin"
@@ -2248,10 +1896,49 @@
               aria-label="Lihat foto: Kerayaan Beccu, Kalimantan Selatan"
             ></button>
 
+            <!-- GUNUNG PRAU — WONOSOBO -->
+            <button
+              type="button"
+              class="mading-pin"
+              style="left: 30%; top: 73%;"
+              data-image="gunung-prau.jpg"
+              data-caption="Gunung Prau, Wonosobo"
+              aria-label="Lihat foto: Gunung Prau, Wonosobo"
+            ></button>
+
+            <!-- GUNUNG BATUR — BALI -->
+            <button
+              type="button"
+              class="mading-pin"
+              style="left: 36%; top: 80%;"
+              data-image="gunung-batur.jpg"
+              data-caption="Gunung Batur, Bali"
+              aria-label="Lihat foto: Gunung Batur, Bali"
+            ></button>
+
+            <!-- GUNUNG HAUK — KALIMANTAN SELATAN -->
+            <button
+              type="button"
+              class="mading-pin"
+              style="left: 46%; top: 52%;"
+              data-image="gunung-hauk.jpg"
+              data-caption="Gunung Hauk, Kalimantan Selatan"
+              aria-label="Lihat foto: Gunung Hauk, Kalimantan Selatan"
+            ></button>
+
+            <!-- GUNUNG KAHUNG — KALIMANTAN SELATAN -->
+            <button
+              type="button"
+              class="mading-pin"
+              style="left: 45%; top: 57%;"
+              data-image="gunung-kahung.jpg"
+              data-caption="Gunung Kahung, Kalimantan Selatan"
+              aria-label="Lihat foto: Gunung Kahung, Kalimantan Selatan"
+            ></button>
+
           </div>
 
         </div>
-
 
         <div class="map-caption">
 
@@ -2264,7 +1951,6 @@
       </div>
 
     </section>
-
 
     <!-- =====================================================
          ABOUT
@@ -2281,7 +1967,6 @@
         class="about-image-full"
       />
 
-
       <div class="about-grid">
 
         <div class="about-copy">
@@ -2290,13 +1975,11 @@
             About this archive
           </div>
 
-
           <h2 class="about-title">
             A place for things written,
             remembered, questioned,
             and left behind along the way.
           </h2>
-
 
           <a
             href="#works"
@@ -2319,7 +2002,6 @@
 
   </main>
 
-
   <!-- =======================================================
        MADING PHOTO MODAL
   ======================================================== -->
@@ -2335,7 +2017,6 @@
       data-mading-close
     ></div>
 
-
     <div class="mading-modal-card">
 
       <button
@@ -2347,7 +2028,6 @@
         ×
       </button>
 
-
       <div class="mading-modal-photo">
 
         <img
@@ -2358,7 +2038,6 @@
 
       </div>
 
-
       <p
         id="madingModalCaption"
         class="mading-modal-caption"
@@ -2367,7 +2046,6 @@
     </div>
 
   </div>
-
 
   <script>
     (function () {
@@ -2380,7 +2058,6 @@
 
       var modalCaption =
         document.getElementById("madingModalCaption");
-
 
       function openMading(src, caption) {
 
@@ -2397,7 +2074,6 @@
         );
       }
 
-
       function closeMading() {
 
         modal.classList.remove("is-open");
@@ -2407,7 +2083,6 @@
           "true"
         );
       }
-
 
       document
         .querySelectorAll(".mading-pin")
@@ -2427,7 +2102,6 @@
 
         });
 
-
       modal
         .querySelectorAll("[data-mading-close]")
         .forEach(function (el) {
@@ -2438,7 +2112,6 @@
           );
 
         });
-
 
       document.addEventListener(
         "keydown",
@@ -2454,7 +2127,6 @@
     })();
   </script>
 
-
   <!-- =======================================================
        FOOTER
   ======================================================== -->
@@ -2462,7 +2134,6 @@
   <footer>
 
     <div class="footer-inner">
-
 
       <div class="footer-location">
 
@@ -2476,13 +2147,11 @@
 
       </div>
 
-
       <div class="footer-right">
 
         <strong>
           A Small Archive of Being.
         </strong>
-
 
         <div class="footer-mark">
 
@@ -2499,7 +2168,6 @@
     </div>
 
   </footer>
-
 
 </body>
 </html>
