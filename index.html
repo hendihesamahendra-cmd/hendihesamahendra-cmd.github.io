@@ -6,10 +6,50 @@
 
   <title>HENDI HESA MAHENDRA</title>
 
+  <meta
+    name="description"
+    content="A Small Archive of Being."
+  />
+
+  <!-- LEAFLET MAP -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIINfQ3Y2jR5h3L9R2G4kK9Qw6n5Q8W8VQ="
+    crossorigin=""
+  />
+
   <style>
+    :root {
+      --black: #07090b;
+      --black-soft: #0d1013;
+
+      --paper: #111417;
+      --paper-light: #e8e6df;
+      --paper-white: #f5f3ed;
+
+      --white: #f4f4f0;
+      --ink: #eeeeea;
+
+      --muted: #858b91;
+      --muted-dark: #646a70;
+
+      --line: rgba(244, 244, 240, 0.12);
+      --line-strong: rgba(244, 244, 240, 0.2);
+
+      --blue: #3d8fe8;
+      --blue-light: #82c1ff;
+      --blue-faint: rgba(61, 143, 232, 0.09);
+
+      --max: 1380px;
+    }
+
+
+    /* =========================
+       RESET
+    ========================= */
+
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
     }
 
@@ -18,11 +58,17 @@
     }
 
     body {
-      background: #000;
-      color: #f2f2f2;
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: 300;
-      line-height: 1.6;
+      margin: 0;
+      background: var(--black);
+      color: var(--ink);
+      font-family: Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
     }
 
     a {
@@ -30,56 +76,108 @@
       text-decoration: none;
     }
 
-    img {
-      display: block;
-      max-width: 100%;
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
     }
+
+    ::selection {
+      background: var(--blue);
+      color: white;
+    }
+
 
     /* =========================
        HEADER
     ========================= */
 
-    header {
+    .site-header {
       position: absolute;
+      z-index: 20;
       top: 0;
       left: 0;
       width: 100%;
-      padding: 32px 6vw;
+      height: 82px;
+      padding: 0 5vw;
+
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
-      z-index: 10;
+
+      color: white;
     }
 
-    .logo {
-      font-size: 11px;
-      letter-spacing: 0.2em;
+    .site-name {
+      position: relative;
+
+      font-size: 10px;
       font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+
+      opacity: 0.9;
+
+      transition: opacity 0.3s ease;
     }
 
-    nav {
+    .site-name:hover {
+      opacity: 1;
+    }
+
+    .nav {
       display: flex;
       align-items: center;
-      gap: 34px;
+      gap: 38px;
     }
 
-    nav a {
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      color: #999;
-      transition: color 0.3s ease;
+    .nav a {
+      position: relative;
+
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+
+      opacity: 0.72;
+
+      transition:
+        opacity 0.3s ease,
+        color 0.3s ease;
     }
 
-    nav a:hover {
-      color: #6ea8ff;
+    .nav a::after {
+      content: "";
+
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+
+      width: 0;
+      height: 1px;
+
+      background: var(--blue-light);
+
+      transition: width 0.35s ease;
+    }
+
+    .nav a:hover {
+      opacity: 1;
+      color: white;
+    }
+
+    .nav a:hover::after {
+      width: 100%;
     }
 
     .nav-dot {
       width: 5px;
       height: 5px;
-      background: #6ea8ff;
+
       border-radius: 50%;
-      display: block;
+
+      background: var(--blue-light);
+
+      box-shadow:
+        0 0 0 4px rgba(130, 193, 255, 0.05);
     }
 
 
@@ -88,80 +186,260 @@
     ========================= */
 
     .hero {
-      min-height: 100vh;
       position: relative;
-      display: flex;
-      align-items: flex-end;
-      padding: 0 6vw 9vh;
+
+      min-height: 820px;
+      height: 100vh;
+
+      background: var(--black);
+      color: white;
+
       overflow: hidden;
+    }
+
+    .hero-image {
+      position: absolute;
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+      object-position: center center;
+
+      filter:
+        saturate(0.78)
+        contrast(1.08)
+        brightness(0.7);
+
+      transform: scale(1.02);
+
+      animation:
+        heroImage 1.8s ease forwards;
+    }
+
+    @keyframes heroImage {
+      from {
+        opacity: 0;
+        transform: scale(1.07);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1.02);
+      }
+    }
+
+    .hero::before {
+      content: "";
+
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+
       background:
         linear-gradient(
-          to bottom,
-          rgba(0, 0, 0, 0.15),
-          rgba(0, 0, 0, 0.7)
-        ),
-        url("hero.jpg") center / cover no-repeat;
+          90deg,
+          rgba(4, 7, 10, 0.94) 0%,
+          rgba(4, 7, 10, 0.78) 26%,
+          rgba(4, 7, 10, 0.28) 61%,
+          rgba(4, 7, 10, 0.48) 100%
+        );
     }
 
     .hero::after {
       content: "";
+
       position: absolute;
+      z-index: 2;
       inset: 0;
+
       background:
         linear-gradient(
-          90deg,
-          rgba(0,0,0,0.45),
-          transparent 65%
+          180deg,
+          rgba(0, 0, 0, 0.44) 0%,
+          transparent 27%,
+          transparent 68%,
+          rgba(0, 0, 0, 0.78) 100%
         );
-      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 5;
+
+      width: min(var(--max), 90vw);
+      height: 100%;
+
+      margin: 0 auto;
+
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        minmax(320px, 0.8fr);
+
+      align-items: center;
     }
 
     .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 950px;
-    }
-
-    .hero-description {
-      max-width: 400px;
-      margin-bottom: 42px;
-      color: #d0d0d0;
-      font-size: 14px;
-      line-height: 1.9;
-      letter-spacing: 0.01em;
+      max-width: 720px;
+      padding-top: 65px;
     }
 
     .hero-title {
-      font-family: "Times New Roman", Times, serif;
-      font-size: clamp(70px, 12vw, 170px);
-      line-height: 0.82;
-      letter-spacing: -0.055em;
-      font-weight: 400;
+      max-width: 760px;
+
+      margin: 0;
+
+      font-size: clamp(58px, 8vw, 126px);
+
+      font-weight: 700;
+
+      line-height: 0.86;
+
+      letter-spacing: -0.068em;
+
       text-transform: uppercase;
+
+      animation:
+        fadeUp 1s 0.15s both ease;
     }
 
     .hero-title span {
-      display: block;
+      color: var(--blue-light);
+    }
+
+    .hero-description {
+      max-width: 390px;
+
+      margin: 39px 0 0;
+
+      padding-left: 19px;
+
+      border-left: 1px solid var(--blue-light);
+
+      font-size: 12px;
+      line-height: 1.85;
+
+      letter-spacing: 0.035em;
+
+      color: rgba(255,255,255,0.7);
+
+      animation:
+        fadeUp 1s 0.3s both ease;
+    }
+
+    .hero-enter {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 15px;
+
+      margin-top: 37px;
+
+      font-size: 8px;
+
+      letter-spacing: 0.23em;
+
+      text-transform: uppercase;
+
+      color: rgba(255,255,255,0.82);
+
+      animation:
+        fadeUp 1s 0.45s both ease;
+    }
+
+    .hero-enter-line {
+      width: 54px;
+      height: 1px;
+
+      background: rgba(255,255,255,0.8);
+
+      transition:
+        width 0.35s ease,
+        background 0.35s ease;
+    }
+
+    .hero-enter:hover {
+      color: white;
+    }
+
+    .hero-enter:hover .hero-enter-line {
+      width: 82px;
+      background: var(--blue-light);
+    }
+
+    .hero-index {
+      position: absolute;
+
+      z-index: 8;
+
+      right: 5vw;
+      bottom: 43px;
+
+      font-size: 8px;
+
+      letter-spacing: 0.25em;
+
+      color: rgba(255,255,255,0.42);
+    }
+
+    .hero-index span {
+      color: var(--blue-light);
+    }
+
+    .scroll-cue {
+      position: absolute;
+
+      z-index: 8;
+
+      left: 5vw;
+      bottom: 40px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 14px;
+
+      font-size: 7px;
+
+      letter-spacing: 0.25em;
+
+      text-transform: uppercase;
+
+      color: rgba(255,255,255,0.42);
+
+      animation:
+        fadeUp 1s 0.7s both ease;
+    }
+
+    .scroll-line {
+      width: 48px;
+      height: 1px;
+
+      background: rgba(255,255,255,0.35);
+    }
+
+    .scroll-arrow {
+      color: var(--blue-light);
+      font-size: 13px;
     }
 
 
     /* =========================
-       GENERAL SECTION
+       MAIN
     ========================= */
 
-    section {
-      position: relative;
+    main {
+      background: var(--black);
     }
 
-    .section-inner {
-      padding: 150px 8vw;
-    }
-
-    .section-label {
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      color: #6ea8ff;
-      margin-bottom: 28px;
+    .section {
+      width: min(var(--max), 90vw);
+      margin: 0 auto;
     }
 
 
@@ -169,226 +447,752 @@
        WORKS
     ========================= */
 
-    .works {
-      background: #000;
-      padding: 160px 8vw;
+    .works-section {
+      padding: 112px 0 130px;
     }
 
-    .works-header {
-      margin-bottom: 90px;
+    .works-grid {
+      display: grid;
+
+      grid-template-columns:
+        0.85fr
+        1.15fr;
+
+      gap: 9vw;
     }
 
-    .works-header h2 {
-      font-family: "Times New Roman", Times, serif;
-      font-weight: 400;
-      font-size: clamp(52px, 8vw, 100px);
-      line-height: 0.9;
-      letter-spacing: -0.045em;
+    .section-heading {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      padding-bottom: 16px;
+
+      border-bottom: 1px solid var(--line);
     }
 
-    .work-category {
-      margin-bottom: 100px;
+    .section-heading-left {
+      display: flex;
+
+      align-items: center;
+
+      gap: 18px;
     }
 
-    .category-title {
-      font-family: "Times New Roman", Times, serif;
-      font-size: 30px;
-      font-weight: 400;
-      margin-bottom: 32px;
+    .section-title {
+      margin: 0;
+
+      font-size: 15px;
+
+      font-weight: 600;
+
+      letter-spacing: 0.19em;
+
+      text-transform: uppercase;
     }
 
     .work-list {
-      border-top: 1px solid #202020;
+      margin-top: 9px;
     }
 
-    .work-item {
+    .work {
+      position: relative;
+
       display: grid;
-      grid-template-columns: 55px 1fr auto;
+
+      grid-template-columns:
+        44px
+        minmax(0, 1fr)
+        28px;
+
       align-items: center;
-      gap: 25px;
-      padding: 25px 0;
-      border-bottom: 1px solid #202020;
-      transition: padding 0.3s ease;
+
+      min-height: 86px;
+
+      padding: 0;
+
+      border-bottom: 1px solid var(--line);
+
+      transition:
+        padding 0.35s ease,
+        background 0.35s ease;
     }
 
-    .work-item:hover {
-      padding-left: 8px;
-      padding-right: 8px;
+    .work::before {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      bottom: -1px;
+
+      width: 0;
+      height: 1px;
+
+      background: var(--blue);
+
+      transition:
+        width 0.45s ease;
+    }
+
+    .work:hover {
+      padding-left: 13px;
+
+      background:
+        var(--blue-faint);
+    }
+
+    .work:hover::before {
+      width: 100%;
     }
 
     .work-number {
-      font-family: "Times New Roman", Times, serif;
-      font-size: 18px;
-      color: #555;
+      align-self: center;
+
+      font-family:
+        "Courier New",
+        monospace;
+
+      font-size: 9px;
+
+      letter-spacing: 0.08em;
+
+      color: var(--blue);
     }
 
-    .work-name {
-      font-family: "Times New Roman", Times, serif;
-      font-size: 24px;
-      font-weight: 400;
+    .work-info {
+      min-width: 0;
+    }
+
+    .work-title {
+      margin: 0;
+
+      font-size: 13px;
+
+      font-weight: 500;
+
+      line-height: 1.35;
+
+      letter-spacing: 0.085em;
+
+      text-transform: uppercase;
+
+      transition:
+        color 0.3s ease;
+    }
+
+    .work:hover .work-title {
+      color: white;
     }
 
     .work-meta {
-      font-size: 9px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #666;
+      margin-top: 7px;
+
+      font-family:
+        "Courier New",
+        monospace;
+
+      font-size: 8px;
+
+      line-height: 1.4;
+
+      letter-spacing: 0.02em;
+
+      color: var(--muted);
+    }
+
+    .work-arrow {
+      font-size: 17px;
+
+      font-weight: 300;
+
       text-align: right;
+
+      color:
+        rgba(255,255,255,0.48);
+
+      transition:
+        transform 0.35s ease,
+        color 0.35s ease;
+    }
+
+    .work:hover .work-arrow {
+      color: var(--blue-light);
+
+      transform:
+        translateX(5px);
     }
 
 
     /* =========================
-       JOURNAL / PAPER
+       PAPER / JOURNAL
     ========================= */
 
-    .journal {
-      padding: 100px 8vw 180px;
-      display: flex;
-      justify-content: center;
-      background: #000;
-    }
-
-    .paper {
+    .journal-stack {
       position: relative;
-      width: min(650px, 90vw);
-      background: #e8e5dc;
-      color: #161616;
-      padding: 22px 22px 45px;
-      transform: rotate(-1.5deg);
-      box-shadow:
-        0 35px 70px rgba(0, 0, 0, 0.5);
+
+      margin-top: 49px;
+
+      padding:
+        14px
+        18px
+        23px;
     }
 
-    .paper::before {
+    .journal-stack::before,
+    .journal-stack::after {
       content: "";
+
       position: absolute;
+
+      inset: 0;
+
+      background:
+        #f1efe8;
+
+      border:
+        1px solid
+        rgba(17,19,22,0.1);
+
+      box-shadow:
+        0 15px 32px
+        rgba(0,0,0,0.38);
+    }
+
+    .journal-stack::before {
+      z-index: 0;
+
+      transform:
+        rotate(-3.1deg)
+        translate(-9px, 7px);
+    }
+
+    .journal-stack::after {
+      z-index: 0;
+
+      transform:
+        rotate(2.5deg)
+        translate(10px, -5px);
+
+      background:
+        #e9e6dc;
+    }
+
+    .journal-image {
+      position: relative;
+
+      z-index: 1;
+
+      padding:
+        14px
+        14px
+        19px;
+
+      background:
+        var(--paper-white);
+
+      box-shadow:
+        0 15px 30px
+        rgba(8,10,12,0.34);
+
+      transition:
+        transform 0.5s ease,
+        box-shadow 0.5s ease;
+    }
+
+    .journal-stack:hover .journal-image {
+      transform:
+        translateY(-4px)
+        rotate(-0.25deg);
+
+      box-shadow:
+        0 20px 38px
+        rgba(8,10,12,0.42);
+    }
+
+    .journal-photo {
+      position: relative;
+
+      overflow: hidden;
+
+      aspect-ratio:
+        16 / 9;
+    }
+
+    .journal-photo::after {
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,0.07),
+          transparent 50%
+        );
+    }
+
+    .journal-photo img {
+      display: block;
+
       width: 100%;
       height: 100%;
-      left: 10px;
-      top: 10px;
-      background: #d8d4c9;
-      z-index: -1;
-      transform: rotate(2deg);
-    }
 
-    .paper-photo {
-      width: 100%;
-      aspect-ratio: 4 / 3;
       object-fit: cover;
-      filter: saturate(0.85);
+
+      filter:
+        saturate(0.62)
+        contrast(1.06);
+
+      transition:
+        transform 0.8s ease,
+        filter 0.8s ease;
     }
 
-    .paper-caption {
-      padding: 28px 15px 0;
+    .journal-image:hover .journal-photo img {
+      transform:
+        scale(1.04);
+
+      filter:
+        saturate(0.84)
+        contrast(1.05);
     }
 
-    .paper-quote {
-      font-family: "Times New Roman", Times, serif;
-      font-size: 23px;
-      line-height: 1.25;
-      margin-bottom: 18px;
+    .journal-caption {
+      max-width: 90%;
+
+      margin:
+        15px auto 0;
+
+      text-align: center;
+
+      font-family:
+        "Courier New",
+        monospace;
+
+      font-style: italic;
+
+      font-size: 10px;
+
+      line-height: 1.65;
+
+      letter-spacing: 0.005em;
+
+      color:
+        #3d4043;
     }
 
-    .paper-note {
-      font-size: 9px;
-      text-transform: uppercase;
+    .journal-note {
+      margin-top: 9px;
+
+      text-align: center;
+
+      font-family:
+        "Courier New",
+        monospace;
+
+      font-size: 7px;
+
       letter-spacing: 0.18em;
-      color: #666;
+
+      text-transform: uppercase;
+
+      color:
+        #777a7c;
     }
 
 
     /* =========================
-       PLACES / INDONESIA MAP
+       PLACES / MAP
     ========================= */
 
-    .places {
-      background: #000;
-      color: #fff;
-      padding: 160px 8vw 180px;
-      overflow: hidden;
+    .places-section {
+      position: relative;
+
+      padding:
+        115px 0
+        125px;
+
+      background:
+        var(--black-soft);
+
+      border-top:
+        1px solid var(--line);
+
+      border-bottom:
+        1px solid var(--line);
     }
 
-    .places-intro {
-      max-width: 620px;
-      margin-bottom: 90px;
+    .places-header {
+      display: flex;
+
+      align-items: flex-end;
+      justify-content: space-between;
+
+      gap: 40px;
+
+      margin-bottom: 42px;
     }
 
-    .places h2 {
-      font-family: "Times New Roman", Times, serif;
-      font-size: clamp(48px, 7vw, 92px);
-      font-weight: 400;
-      line-height: 0.95;
-      letter-spacing: -0.04em;
-      margin: 0 0 38px;
+    .places-heading {
+      max-width: 520px;
+    }
+
+    .places-label {
+      display: flex;
+
+      align-items: center;
+
+      gap: 14px;
+
+      margin-bottom: 20px;
+
+      font-size: 8px;
+
+      letter-spacing: 0.25em;
+
+      text-transform: uppercase;
+
+      color: var(--blue-light);
+    }
+
+    .places-label::after {
+      content: "";
+
+      width: 45px;
+      height: 1px;
+
+      background:
+        var(--blue);
+    }
+
+    .places-title {
+      margin: 0;
+
+      font-size:
+        clamp(28px, 4vw, 52px);
+
+      font-weight: 500;
+
+      line-height: 1.05;
+
+      letter-spacing:
+        -0.045em;
+
+      text-transform: uppercase;
     }
 
     .places-description {
-      max-width: 470px;
-      color: #8c8c8c;
-      font-size: 14px;
-      line-height: 1.9;
-      font-weight: 300;
+      max-width: 320px;
+
+      margin: 0;
+
+      font-size: 10px;
+
+      line-height: 1.8;
+
+      letter-spacing: 0.035em;
+
+      color:
+        var(--muted);
     }
 
-    .indonesia-map {
+    .map-frame {
+      position: relative;
+
       width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
+
+      height: 560px;
+
+      overflow: hidden;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.12);
+
+      background:
+        #11171c;
+
+      box-shadow:
+        0 25px 60px
+        rgba(0,0,0,0.35);
     }
 
-    .indonesia-map svg {
+    #archive-map {
+      width: 100%;
+      height: 100%;
+    }
+
+
+    /* =========================
+       CUSTOM LEAFLET STYLE
+    ========================= */
+
+    .leaflet-container {
+      background:
+        #11171c;
+
+      font-family:
+        Helvetica,
+        Arial,
+        sans-serif;
+    }
+
+    .leaflet-control-zoom {
+      border:
+        1px solid
+        rgba(255,255,255,0.12) !important;
+
+      box-shadow:
+        none !important;
+    }
+
+    .leaflet-control-zoom a {
+      width: 30px !important;
+      height: 30px !important;
+
+      line-height: 28px !important;
+
+      background:
+        rgba(7,9,11,0.9) !important;
+
+      color:
+        rgba(255,255,255,0.7) !important;
+
+      border-bottom:
+        1px solid
+        rgba(255,255,255,0.1) !important;
+    }
+
+    .leaflet-control-zoom a:hover {
+      background:
+        #11171c !important;
+
+      color:
+        var(--blue-light) !important;
+    }
+
+    .leaflet-control-attribution {
+      background:
+        rgba(7,9,11,0.82) !important;
+
+      color:
+        rgba(255,255,255,0.35) !important;
+
+      font-size: 8px !important;
+    }
+
+    .leaflet-control-attribution a {
+      color:
+        rgba(130,193,255,0.65) !important;
+    }
+
+    .archive-marker {
+      position: relative;
+
+      width: 18px;
+      height: 18px;
+
+      border-radius: 50%;
+
+      background:
+        var(--blue-light);
+
+      border:
+        3px solid
+        rgba(255,255,255,0.95);
+
+      box-shadow:
+        0 0 0 5px
+        rgba(130,193,255,0.15),
+
+        0 4px 15px
+        rgba(0,0,0,0.5);
+    }
+
+    .archive-marker::after {
+      content: "";
+
+      position: absolute;
+
+      inset: 3px;
+
+      border-radius: 50%;
+
+      background:
+        var(--blue);
+    }
+
+
+    /* =========================
+       MAP POPUP
+    ========================= */
+
+    .leaflet-popup-content-wrapper {
+      padding: 0 !important;
+
+      overflow: hidden;
+
+      border-radius: 0 !important;
+
+      background:
+        #f5f3ed;
+
+      color:
+        #111316;
+
+      box-shadow:
+        0 18px 45px
+        rgba(0,0,0,0.42);
+    }
+
+    .leaflet-popup-content {
+      width: 270px !important;
+
+      margin: 0 !important;
+    }
+
+    .leaflet-popup-tip {
+      background:
+        #f5f3ed;
+    }
+
+    .leaflet-popup-close-button {
+      z-index: 10;
+
+      top: 8px !important;
+      right: 8px !important;
+
+      width: 26px !important;
+      height: 26px !important;
+
+      font-size: 18px !important;
+
+      color:
+        white !important;
+
+      background:
+        rgba(0,0,0,0.4) !important;
+
+      border-radius: 50%;
+
+      text-align: center !important;
+      line-height: 25px !important;
+    }
+
+    .place-popup {
+      width: 270px;
+
+      background:
+        #f5f3ed;
+    }
+
+    .place-popup-image {
+      width: 100%;
+      height: 155px;
+
+      overflow: hidden;
+
+      background:
+        #d9d7d0;
+    }
+
+    .place-popup-image img {
       display: block;
+
       width: 100%;
-      height: auto;
-      overflow: visible;
+      height: 100%;
+
+      object-fit: cover;
     }
 
-    .island {
-      fill: #111;
-      stroke: #6ea8ff;
-      stroke-width: 1.2;
-      stroke-linejoin: round;
-      transition:
-        fill 0.4s ease,
-        stroke 0.4s ease;
+    .place-popup-content {
+      padding:
+        17px
+        18px
+        19px;
     }
 
-    .island:hover {
-      fill: #151f2d;
-      stroke: #8bbaff;
-    }
+    .place-popup-kicker {
+      margin-bottom: 8px;
 
-    .island.small {
-      stroke-width: 1;
-    }
+      font-family:
+        "Courier New",
+        monospace;
 
-    .map-label {
-      fill: #666;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 9px;
+      font-size: 7px;
+
       letter-spacing: 0.18em;
-      pointer-events: none;
+
+      text-transform: uppercase;
+
+      color:
+        #6d7174;
     }
 
-    .small-label {
-      font-size: 6px;
-      letter-spacing: 0.12em;
+    .place-popup-title {
+      margin: 0;
+
+      font-size: 17px;
+
+      font-weight: 500;
+
+      line-height: 1.1;
+
+      letter-spacing:
+        -0.025em;
+
+      text-transform: uppercase;
+
+      color:
+        #111316;
     }
 
-    .map-caption {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid #1d1d1d;
-      margin-top: 30px;
-      padding-top: 18px;
+    .place-popup-location {
+      margin-top: 8px;
+
+      font-family:
+        "Courier New",
+        monospace;
+
+      font-size: 8px;
+
+      letter-spacing: 0.04em;
+
+      color:
+        #6d7174;
+    }
+
+    .place-popup-description {
+      margin:
+        14px 0 0;
+
+      font-family:
+        "Courier New",
+        monospace;
+
       font-size: 9px;
-      letter-spacing: 0.18em;
-      color: #555;
+
+      line-height: 1.65;
+
+      color:
+        #45484b;
     }
 
-    .map-caption span:first-child {
-      color: #6ea8ff;
+    .place-popup-line {
+      width: 35px;
+
+      height: 1px;
+
+      margin-top: 15px;
+
+      background:
+        var(--blue);
     }
 
 
@@ -396,48 +1200,164 @@
        ABOUT
     ========================= */
 
-    .about {
-      padding: 180px 8vw;
-      background: #000;
+    .about-section {
+      position: relative;
+
+      min-height: 580px;
+
+      background:
+        var(--paper-light);
+
+      overflow: hidden;
+    }
+
+    .about-image-full {
+      position: absolute;
+
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      display: block;
+
+      object-fit: cover;
+
+      object-position:
+        center 30%;
+
+      filter:
+        saturate(0.82)
+        contrast(1.05);
+    }
+
+    .about-section::after {
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(232,230,223,0.97) 0%,
+          rgba(232,230,223,0.86) 25%,
+          rgba(232,230,223,0.43) 45%,
+          rgba(232,230,223,0.08) 62%,
+          transparent 75%
+        );
     }
 
     .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10vw;
+      position: relative;
+
+      z-index: 2;
+
+      width:
+        min(var(--max), 90vw);
+
+      min-height: 580px;
+
+      margin: 0 auto;
+
+      display: flex;
+
       align-items: center;
     }
 
-    .about-image {
-      width: 100%;
-      max-width: 560px;
+    .about-copy {
+      max-width: 470px;
+
+      padding: 80px 0;
     }
 
-    .about-image img {
-      width: 100%;
-      aspect-ratio: 4 / 5;
-      object-fit: cover;
-      filter: grayscale(20%);
+    .about-label {
+      display: flex;
+
+      align-items: center;
+
+      gap: 14px;
+
+      margin-bottom: 31px;
+
+      font-size: 8px;
+
+      letter-spacing: 0.25em;
+
+      text-transform: uppercase;
+
+      color:
+        #17191b;
     }
 
-    .about-content {
-      max-width: 500px;
+    .about-label::after {
+      content: "";
+
+      width: 45px;
+      height: 1px;
+
+      background:
+        var(--blue);
     }
 
-    .about-content h2 {
-      font-family: "Times New Roman", Times, serif;
-      font-size: clamp(45px, 6vw, 75px);
-      line-height: 0.95;
-      font-weight: 400;
-      letter-spacing: -0.04em;
-      margin-bottom: 40px;
+    .about-title {
+      max-width: 470px;
+
+      margin: 0;
+
+      font-size:
+        clamp(27px, 3.4vw, 45px);
+
+      font-weight: 500;
+
+      line-height: 1.16;
+
+      letter-spacing:
+        -0.035em;
+
+      text-transform: uppercase;
+
+      color:
+        #111316;
     }
 
-    .about-content p {
-      color: #888;
-      font-size: 14px;
-      line-height: 2;
-      max-width: 430px;
+    .about-link {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 15px;
+
+      margin-top: 35px;
+
+      font-size: 8px;
+
+      letter-spacing: 0.22em;
+
+      text-transform: uppercase;
+
+      color:
+        #111316;
+    }
+
+    .about-link span {
+      width: 43px;
+      height: 1px;
+
+      background:
+        #111316;
+
+      transition:
+        width 0.35s ease,
+        background 0.35s ease;
+    }
+
+    .about-link:hover span {
+      width: 68px;
+
+      background:
+        var(--blue);
     }
 
 
@@ -446,287 +1366,696 @@
     ========================= */
 
     footer {
-      padding: 90px 8vw 45px;
-      border-top: 1px solid #181818;
-      background: #000;
+      background:
+        #0a0d10;
+
+      color: white;
+
+      padding:
+        43px
+        5vw
+        39px;
     }
 
-    .footer-top {
+    .footer-inner {
+      width:
+        min(var(--max), 90vw);
+
+      margin: 0 auto;
+
       display: flex;
+
+      align-items: flex-end;
+
       justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 100px;
+
+      gap: 40px;
     }
 
-    .coordinates {
-      font-family: "Times New Roman", Times, serif;
-      font-size: 18px;
-      line-height: 1.5;
-    }
+    .footer-location {
+      font-family:
+        "Courier New",
+        monospace;
 
-    .location {
-      font-size: 9px;
-      letter-spacing: 0.18em;
-      color: #555;
-      margin-top: 8px;
-    }
-
-    .footer-title {
-      font-family: "Times New Roman", Times, serif;
-      font-size: 25px;
-    }
-
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      color: #444;
       font-size: 8px;
-      letter-spacing: 0.15em;
+
+      line-height: 1.9;
+
+      letter-spacing: 0.12em;
+
+      color:
+        rgba(255,255,255,0.45);
+    }
+
+    .footer-location span {
+      color:
+        var(--blue-light);
+    }
+
+    .footer-right {
+      text-align: right;
+
+      font-size: 8px;
+
+      line-height: 1.9;
+
+      letter-spacing: 0.17em;
+
       text-transform: uppercase;
+
+      color:
+        rgba(255,255,255,0.42);
+    }
+
+    .footer-right strong {
+      color: white;
+
+      font-weight: 400;
+    }
+
+    .footer-mark {
+      margin-top: 7px;
+    }
+
+    .footer-mark span {
+      color:
+        var(--blue-light);
     }
 
 
     /* =========================
-       MOBILE
+       ANIMATIONS
     ========================= */
 
-    @media (max-width: 700px) {
+    .works-column {
+      animation:
+        reveal 0.9s both ease;
+    }
 
-      header {
-        padding: 25px 6vw;
+    .works-column:nth-child(2) {
+      animation-delay:
+        0.12s;
+    }
+
+    .about-copy {
+      animation:
+        reveal 1s both ease;
+    }
+
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform:
+          translateY(24px);
       }
 
-      nav {
-        gap: 18px;
+      to {
+        opacity: 1;
+        transform:
+          translateY(0);
       }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform:
+          translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform:
+          translateY(0);
+      }
+    }
+
+
+    /* =========================
+       TABLET / MOBILE
+    ========================= */
+
+    @media (max-width: 850px) {
+
+      .site-header {
+        height: 65px;
+        padding: 0 22px;
+      }
+
+      .site-name {
+        font-size: 7px;
+        letter-spacing: 0.2em;
+      }
+
+      .nav {
+        gap: 19px;
+      }
+
+      .nav a {
+        font-size: 7px;
+        letter-spacing: 0.16em;
+      }
+
+      .nav-dot {
+        display: none;
+      }
+
+
+      /* HERO */
 
       .hero {
-        min-height: 90vh;
-        padding: 0 6vw 8vh;
+        min-height: 760px;
+        height: 100svh;
       }
 
-      .hero-description {
-        font-size: 13px;
-        max-width: 320px;
-        margin-bottom: 32px;
+      .hero-image {
+        object-position:
+          60% center;
+      }
+
+      .hero::before {
+        background:
+          linear-gradient(
+            180deg,
+            rgba(4,7,10,0.46) 0%,
+            rgba(4,7,10,0.18) 25%,
+            rgba(4,7,10,0.82) 76%,
+            rgba(4,7,10,0.97) 100%
+          );
+      }
+
+      .hero::after {
+        background:
+          linear-gradient(
+            180deg,
+            rgba(0,0,0,0.25),
+            transparent 35%,
+            rgba(0,0,0,0.65) 100%
+          );
+      }
+
+      .hero-grid {
+        width:
+          calc(100% - 44px);
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: flex-end;
+
+        padding-top: 0;
+
+        padding-bottom: 94px;
+      }
+
+      .hero-content {
+        max-width: 100%;
+
+        padding-top: 0;
       }
 
       .hero-title {
-        font-size: clamp(58px, 17vw, 100px);
+        max-width: 95%;
+
+        font-size:
+          clamp(38px, 12vw, 92px);
+
+        line-height: 0.91;
+
+        letter-spacing:
+          -0.065em;
       }
 
-      .works {
-        padding: 110px 6vw;
+      .hero-description {
+        max-width: 290px;
+
+        margin-top: 28px;
+
+        padding-left: 14px;
+
+        font-size: 10px;
+
+        line-height: 1.75;
       }
 
-      .works-header {
-        margin-bottom: 65px;
+      .hero-enter {
+        margin-top: 27px;
+
+        font-size: 7px;
+
+        letter-spacing: 0.2em;
       }
 
-      .work-category {
-        margin-bottom: 75px;
+      .hero-enter-line {
+        width: 45px;
       }
 
-      .work-item {
-        grid-template-columns: 35px 1fr;
-        gap: 15px;
-        padding: 22px 0;
+      .hero-index {
+        right: 22px;
+        bottom: 27px;
+
+        font-size: 7px;
+      }
+
+      .scroll-cue {
+        left: 22px;
+        bottom: 27px;
+
+        gap: 10px;
+
+        font-size: 6px;
+      }
+
+      .scroll-line {
+        width: 34px;
+      }
+
+
+      /* GENERAL */
+
+      .section {
+        width:
+          calc(100% - 44px);
+      }
+
+
+      /* WORKS */
+
+      .works-section {
+        padding:
+          75px 0
+          86px;
+      }
+
+      .works-grid {
+        display: block;
+      }
+
+      .works-column + .works-column {
+        margin-top: 76px;
+      }
+
+      .section-heading {
+        padding-bottom: 14px;
+      }
+
+      .section-title {
+        font-size: 12px;
+
+        letter-spacing:
+          0.15em;
+      }
+
+      .work {
+        grid-template-columns:
+          34px
+          minmax(0,1fr)
+          23px;
+
+        min-height: 76px;
+      }
+
+      .work:hover {
+        padding-left: 8px;
+      }
+
+      .work-title {
+        font-size: 10px;
+
+        letter-spacing:
+          0.065em;
       }
 
       .work-meta {
-        grid-column: 2;
-        text-align: left;
-        margin-top: -10px;
+        margin-top: 6px;
+
+        font-size: 7px;
       }
 
-      .work-name {
-        font-size: 21px;
-      }
-
-      .journal {
-        padding: 60px 5vw 120px;
-      }
-
-      .paper {
-        width: 92vw;
-      }
-
-      .paper-quote {
-        font-size: 19px;
+      .work-arrow {
+        font-size: 15px;
       }
 
 
-      /* MAP MOBILE */
+      /* JOURNAL */
 
-      .places {
-        padding: 110px 6vw 120px;
+      .journal-stack {
+        margin-top: 33px;
+
+        padding:
+          10px
+          12px
+          17px;
       }
 
-      .places-intro {
-        margin-bottom: 55px;
+      .journal-image {
+        padding:
+          10px
+          10px
+          16px;
       }
 
-      .places h2 {
-        font-size: 54px;
+      .journal-photo {
+        aspect-ratio:
+          16 / 9;
+      }
+
+      .journal-caption {
+        margin-top: 13px;
+
+        font-size: 9px;
+
+        line-height: 1.7;
+      }
+
+      .journal-note {
+        font-size: 6px;
+      }
+
+
+      /* PLACES */
+
+      .places-section {
+        padding:
+          75px 0
+          85px;
+      }
+
+      .places-header {
+        display: block;
+
+        margin-bottom: 30px;
+      }
+
+      .places-heading {
+        max-width: 100%;
+      }
+
+      .places-label {
+        margin-bottom: 18px;
+
+        font-size: 7px;
+      }
+
+      .places-title {
+        font-size:
+          clamp(28px, 9vw, 48px);
       }
 
       .places-description {
-        font-size: 13px;
+        max-width: 290px;
+
+        margin-top: 22px;
+
+        font-size: 9px;
+
+        line-height: 1.8;
       }
 
-      .indonesia-map {
-        width: 125%;
-        margin-left: -12.5%;
+      .map-frame {
+        height: 450px;
       }
 
-      .map-caption {
-        width: 80%;
-        margin-left: 10%;
+
+      /* ABOUT */
+
+      .about-section {
+        min-height: 500px;
+
+        background:
+          var(--paper-light);
+      }
+
+      .about-image-full {
+        object-position:
+          70% center;
+      }
+
+      .about-section::after {
+        background:
+          linear-gradient(
+            180deg,
+            rgba(232,230,223,0.97) 0%,
+            rgba(232,230,223,0.9) 40%,
+            rgba(232,230,223,0.52) 67%,
+            rgba(232,230,223,0.05) 100%
+          );
+      }
+
+      .about-grid {
+        width: 100%;
+
+        display: block;
+
+        min-height: 500px;
+
+        padding:
+          68px
+          22px
+          42px;
+      }
+
+      .about-copy {
+        max-width: 100%;
+
+        padding: 0;
+      }
+
+      .about-label {
+        margin-bottom: 28px;
+
+        font-size: 7px;
+
+        color:
+          #17191b;
+      }
+
+      .about-label::after {
+        background:
+          var(--blue);
+      }
+
+      .about-title {
+        max-width: 100%;
+
+        font-size: 26px;
+
+        line-height: 1.22;
+
+        color:
+          #111316;
+      }
+
+      .about-link {
+        margin-top: 31px;
+
+        font-size: 7px;
+
+        color:
+          #111316;
+      }
+
+      .about-link span {
+        background:
+          #111316;
+      }
+
+
+      /* FOOTER */
+
+      footer {
+        padding:
+          31px
+          22px;
+      }
+
+      .footer-inner {
+        width: 100%;
+
+        align-items:
+          flex-start;
+
+        flex-direction:
+          column;
+
+        gap: 27px;
+      }
+
+      .footer-location {
+        font-size: 7px;
+      }
+
+      .footer-right {
+        text-align: left;
+
         font-size: 7px;
       }
 
 
-      /* ABOUT MOBILE */
+      /* POPUP */
 
-      .about {
-        padding: 110px 6vw;
+      .leaflet-popup-content {
+        width: 245px !important;
       }
 
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 65px;
+      .place-popup {
+        width: 245px;
       }
 
-      .about-content h2 {
-        font-size: 55px;
-      }
-
-      .about-content p {
-        font-size: 13px;
-      }
-
-
-      /* FOOTER MOBILE */
-
-      footer {
-        padding: 70px 6vw 35px;
-      }
-
-      .footer-top {
-        flex-direction: column;
-        gap: 60px;
-        margin-bottom: 80px;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-        gap: 12px;
+      .place-popup-image {
+        height: 140px;
       }
     }
+
+
+    @media (max-width: 390px) {
+
+      .hero-title {
+        font-size: 37px;
+      }
+
+      .hero-description {
+        font-size: 9px;
+      }
+
+      .work-title {
+        font-size: 9.5px;
+      }
+
+      .about-title {
+        font-size: 24px;
+      }
+
+      .scroll-cue {
+        display: none;
+      }
+
+      .map-frame {
+        height: 400px;
+      }
+    }
+
+
+    @media (prefers-reduced-motion: reduce) {
+
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration:
+          0.01ms !important;
+
+        animation-iteration-count:
+          1 !important;
+
+        transition-duration:
+          0.01ms !important;
+      }
+    }
+
   </style>
 </head>
 
 
 <body>
 
+
   <!-- =========================
        HEADER
-  ========================== -->
+  ========================= -->
 
-  <header>
-    <div class="logo">
+  <header class="site-header">
+
+    <a
+      href="index.html"
+      class="site-name"
+      aria-label="Hendi Hesa Mahendra"
+    >
       HENDI HESA MAHENDRA
-    </div>
+    </a>
 
-    <nav>
-      <a href="#works">WORKS</a>
-      <a href="#places">PLACES</a>
-      <a href="#about">ABOUT</a>
-      <span class="nav-dot"></span>
+    <nav
+      class="nav"
+      aria-label="Main navigation"
+    >
+
+      <a href="#works">
+        Works
+      </a>
+
+      <a href="#places">
+        Places
+      </a>
+
+      <a href="#about">
+        About
+      </a>
+
+      <span
+        class="nav-dot"
+        aria-hidden="true"
+      ></span>
+
     </nav>
+
   </header>
 
 
   <!-- =========================
        HERO
-  ========================== -->
+  ========================= -->
 
   <section class="hero">
 
-    <div class="hero-content">
+    <img
+      src="hero.jpg"
+      alt="Hendi Hesa Mahendra"
+      class="hero-image"
+    />
 
-      <p class="hero-description">
-        Merekam perjalanan.<br />
-        Mengabadikan kenangan.<br />
-        Meninggalkan jejak.
-      </p>
+    <div class="hero-grid">
 
-      <h1 class="hero-title">
-        <span>A Small</span>
-        <span>Archive</span>
-        <span>of Being.</span>
-      </h1>
+      <div class="hero-content">
 
-    </div>
+        <h1 class="hero-title">
 
-  </section>
+          A SMALL<br />
 
+          ARCHIVE<br />
 
-  <!-- =========================
-       WORKS
-  ========================== -->
+          OF <span>BEING.</span>
 
-  <section class="works" id="works">
-
-    <div class="works-header">
-      <p class="section-label">WORKS</p>
-
-      <h2>
-        Things<br />
-        I've Written.
-      </h2>
-    </div>
+        </h1>
 
 
-    <!-- BOOKS -->
+        <div class="hero-description">
 
-    <div class="work-category">
+          Merekam perjalanan.<br />
 
-      <h3 class="category-title">
-        Books
-      </h3>
+          Mengabadikan kenangan.<br />
 
-      <div class="work-list">
+          Meninggalkan jejak.
 
-        <a
-          class="work-item"
-          href="reader.html?book=saliyah"
-        >
-          <span class="work-number">01</span>
-
-          <span class="work-name">
-            Saliyah Layu Melulu
-          </span>
-
-          <span class="work-meta">
-            Book
-          </span>
-        </a>
+        </div>
 
 
         <a
-          class="work-item"
-          href="reader.html?book=kita"
+          href="#works"
+          class="hero-enter"
         >
-          <span class="work-number">02</span>
 
-          <span class="work-name">
-            Kita di Antara Kata
-          </span>
+          Welcome to my archive
 
-          <span class="work-meta">
-            Book
-          </span>
+          <span
+            class="hero-enter-line"
+          ></span>
+
+          →
+
         </a>
 
       </div>
@@ -734,482 +2063,804 @@
     </div>
 
 
-    <!-- JOURNAL -->
+    <div class="hero-index">
 
-    <div class="journal">
+      ARCHIVE
+      <span>001</span>
 
-      <div class="paper">
+    </div>
 
-        <img
-          src="pendakian-sindoro-sumbing.jpg"
-          alt="Pendakian Sindoro Sumbing"
-          class="paper-photo"
-        />
 
-        <div class="paper-caption">
+    <div class="scroll-cue">
 
-          <p class="paper-quote">
-            "We make a living by what we get,
-            but we make a life by what we give."
-          </p>
+      <span>
+        Scroll to explore
+      </span>
 
-          <p class="paper-note">
-            Field Note
-          </p>
+      <span
+        class="scroll-line"
+      ></span>
+
+      <span
+        class="scroll-arrow"
+      >
+        ↓
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       MAIN
+  ========================= -->
+
+  <main>
+
+
+    <!-- =========================
+         WORKS
+    ========================= -->
+
+    <section
+      id="works"
+      class="section works-section"
+    >
+
+      <div class="works-grid">
+
+
+        <!-- BOOKS -->
+
+        <div class="works-column">
+
+          <div class="section-heading">
+
+            <div class="section-heading-left">
+
+              <h2 class="section-title">
+                Books
+              </h2>
+
+            </div>
+
+          </div>
+
+
+          <div class="work-list">
+
+
+            <a
+              href="reader.html?book=saliyah"
+              class="work"
+            >
+
+              <span class="work-number">
+                01
+              </span>
+
+              <div class="work-info">
+
+                <h3 class="work-title">
+                  Saliyah Layu Melulu
+                </h3>
+
+                <div class="work-meta">
+                  Poetry Collection
+                </div>
+
+              </div>
+
+              <span
+                class="work-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </a>
+
+
+            <a
+              href="reader.html?book=kita"
+              class="work"
+            >
+
+              <span class="work-number">
+                02
+              </span>
+
+              <div class="work-info">
+
+                <h3 class="work-title">
+                  Kita di Antara Kata
+                </h3>
+
+                <div class="work-meta">
+                  Poetry Collection
+                </div>
+
+              </div>
+
+              <span
+                class="work-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </a>
+
+          </div>
+
+
+          <!-- PAPER -->
+
+          <div class="journal-stack">
+
+            <div class="journal-image">
+
+              <div class="journal-photo">
+
+                <img
+                  src="pendakian-sindoro-sumbing.jpg"
+                  alt="Hiking in Sindoro and Sumbing"
+                />
+
+              </div>
+
+
+              <p class="journal-caption">
+
+                "We make a living by what we get,<br />
+
+                but we make a life by what we give."
+
+              </p>
+
+
+              <div class="journal-note">
+                Field Note
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- WRITINGS -->
+
+        <div class="works-column">
+
+          <div class="section-heading">
+
+            <div class="section-heading-left">
+
+              <h2 class="section-title">
+                Writings
+              </h2>
+
+            </div>
+
+          </div>
+
+
+          <div class="work-list">
+
+
+            <a
+              href="reader.html?book=kesepian"
+              class="work"
+            >
+
+              <span class="work-number">
+                03
+              </span>
+
+              <div class="work-info">
+
+                <h3 class="work-title">
+                  Kesepian Modern
+                </h3>
+
+                <div class="work-meta">
+                  Essay · Reflection
+                </div>
+
+              </div>
+
+              <span
+                class="work-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </a>
+
+
+            <a
+              href="reader.html?book=jatuhcinta"
+              class="work"
+            >
+
+              <span class="work-number">
+                04
+              </span>
+
+              <div class="work-info">
+
+                <h3 class="work-title">
+                  Kalau Nanti Jatuh Cinta Lagi
+                </h3>
+
+                <div class="work-meta">
+                  Reflection
+                </div>
+
+              </div>
+
+              <span
+                class="work-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </a>
+
+
+            <a
+              href="essay.html?work=kerja"
+              class="work"
+            >
+
+              <span class="work-number">
+                05
+              </span>
+
+              <div class="work-info">
+
+                <h3 class="work-title">
+                  Kerja, Belajar, dan Tumbuh
+                </h3>
+
+                <div class="work-meta">
+                  Notes · Growth
+                </div>
+
+              </div>
+
+              <span
+                class="work-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </a>
+
+
+            <a
+              href="essay.html?work=pengabdian"
+              class="work"
+            >
+
+              <span class="work-number">
+                06
+              </span>
+
+              <div class="work-info">
+
+                <h3 class="work-title">
+                  Tentang Pengabdian Masyarakat
+                </h3>
+
+                <div class="work-meta">
+                  Notes · Society
+                </div>
+
+              </div>
+
+              <span
+                class="work-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </a>
+
+
+            <a
+              href="reader.html?book=keuangan"
+              class="work"
+            >
+
+              <span class="work-number">
+                07
+              </span>
+
+              <div class="work-info">
+
+                <h3 class="work-title">
+                  Manajemen Keuangan Kecil-Kecilan
+                </h3>
+
+                <div class="work-meta">
+                  Notes · Personal Finance
+                </div>
+
+              </div>
+
+              <span
+                class="work-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </a>
+
+          </div>
 
         </div>
 
       </div>
 
-    </div>
+    </section>
 
 
-    <!-- WRITINGS -->
+    <!-- =========================
+         PLACES / MAP
+    ========================= -->
 
-    <div class="work-category">
+    <section
+      id="places"
+      class="places-section"
+    >
 
-      <h3 class="category-title">
-        Writings
-      </h3>
-
-      <div class="work-list">
-
-        <a
-          class="work-item"
-          href="reader.html?book=kesepian"
-        >
-          <span class="work-number">03</span>
-
-          <span class="work-name">
-            Kesepian Modern
-          </span>
-
-          <span class="work-meta">
-            Essay
-          </span>
-        </a>
+      <div class="section">
 
 
-        <a
-          class="work-item"
-          href="reader.html?book=jatuhcinta"
-        >
-          <span class="work-number">04</span>
-
-          <span class="work-name">
-            Kalau Nanti Jatuh Cinta Lagi
-          </span>
-
-          <span class="work-meta">
-            Essay
-          </span>
-        </a>
+        <div class="places-header">
 
 
-        <a
-          class="work-item"
-          href="essay.html?work=kerja"
-        >
-          <span class="work-number">05</span>
+          <div class="places-heading">
 
-          <span class="work-name">
-            Kerja, Belajar, dan Tumbuh
-          </span>
+            <div class="places-label">
 
-          <span class="work-meta">
-            Essay
-          </span>
-        </a>
+              Places I've Been
+
+            </div>
 
 
-        <a
-          class="work-item"
-          href="essay.html?work=pengabdian"
-        >
-          <span class="work-number">06</span>
+            <h2 class="places-title">
 
-          <span class="work-name">
-            Tentang Pengabdian Masyarakat
-          </span>
+              Somewhere<br />
+              Along the Way.
 
-          <span class="work-meta">
-            Essay
-          </span>
-        </a>
+            </h2>
+
+          </div>
 
 
-        <a
-          class="work-item"
-          href="reader.html?book=keuangan"
-        >
-          <span class="work-number">07</span>
+          <p class="places-description">
 
-          <span class="work-name">
-            Manajemen Keuangan Kecil-Kecilan
-          </span>
+            A map of places that became
+            part of the journey — some
+            remembered by photographs,
+            some simply by the feeling
+            they left behind.
 
-          <span class="work-meta">
-            Essay
-          </span>
-        </a>
+          </p>
+
+        </div>
+
+
+        <div class="map-frame">
+
+          <div
+            id="archive-map"
+          ></div>
+
+        </div>
 
       </div>
 
-    </div>
-
-  </section>
+    </section>
 
 
-  <!-- =========================
-       PLACES
-  ========================== -->
+    <!-- =========================
+         ABOUT
+    ========================= -->
 
-  <section class="places" id="places">
+    <section
+      id="about"
+      class="about-section"
+    >
 
-    <div class="places-intro">
-
-      <p class="section-label">
-        PLACES I'VE BEEN
-      </p>
-
-      <h2>
-        Somewhere<br />
-        Along the Way.
-      </h2>
-
-      <p class="places-description">
-        A map of the country beneath the journey —
-        places visited, memories kept, and moments left
-        somewhere along the way.
-      </p>
-
-    </div>
+      <img
+        src="beach-motorcycle.jpg"
+        alt="Hendi Hesa Mahendra"
+        class="about-image-full"
+      />
 
 
-    <div class="indonesia-map">
+      <div class="about-grid">
 
-      <svg
-        viewBox="0 0 1200 620"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-label="Map of Indonesia"
-      >
-
-        <!-- SUMATRA -->
-
-        <path
-          class="island"
-          d="
-            M118 174
-            C96 191 83 217 76 245
-            C69 273 75 301 91 320
-            C107 340 121 366 133 389
-            C142 407 155 418 169 409
-            C183 399 181 376 171 353
-            C160 329 151 306 145 281
-            C139 256 144 233 158 213
-            C172 193 168 177 151 169
-            C139 163 128 166 118 174Z
-          "
-        />
+        <div class="about-copy">
 
 
-        <!-- JAVA -->
+          <div class="about-label">
 
-        <path
-          class="island"
-          d="
-            M314 408
-            C344 397 383 394 420 400
-            C451 405 479 413 503 421
-            C486 432 458 438 426 438
-            C391 438 355 435 326 428
-            C310 424 303 416 314 408Z
-          "
-        />
+            About this archive
+
+          </div>
 
 
-        <!-- KALIMANTAN -->
+          <h2 class="about-title">
 
-        <path
-          class="island"
-          d="
-            M390 171
-            C420 147 462 132 504 136
-            C542 139 579 157 598 183
-            C614 206 610 238 599 263
-            C587 291 568 319 543 337
-            C519 354 489 356 466 343
-            C442 329 429 303 415 278
-            C401 253 382 231 374 208
-            C367 192 374 180 390 171Z
-          "
-        />
+            A place for things written,
+            remembered, questioned,
+            and left behind along the way.
+
+          </h2>
 
 
-        <!-- SULAWESI -->
+          <a
+            href="#works"
+            class="about-link"
+          >
 
-        <path
-          class="island"
-          d="
-            M664 181
-            C685 170 704 174 717 190
-            C730 206 729 228 715 242
-            C703 254 690 264 688 279
-            C686 295 700 309 716 316
-            C731 323 741 338 737 353
-            C733 369 716 375 703 365
-            C690 354 683 338 670 331
-            C657 324 641 329 631 339
-            C620 350 606 350 598 340
-            C589 329 595 315 607 308
-            C620 300 632 291 634 276
-            C636 261 626 247 614 237
-            C601 226 596 212 604 201
-            C612 190 629 190 642 198
-            C652 204 657 194 664 181Z
-          "
-        />
+            Explore
 
+            <span></span>
 
-        <!-- BALI -->
+            →
 
-        <path
-          class="island"
-          d="
-            M511 441
-            C523 437 538 437 550 442
-            C538 450 523 454 509 451
-            C503 449 505 444 511 441Z
-          "
-        />
+          </a>
 
-
-        <!-- NUSA TENGGARA -->
-
-        <path
-          class="island"
-          d="
-            M559 451
-            C577 447 595 448 611 453
-            C624 457 637 462 648 467
-            C634 474 616 475 599 471
-            C583 468 569 464 557 459
-            C552 456 554 453 559 451Z
-          "
-        />
-
-
-        <!-- MALUKU -->
-
-        <path
-          class="island"
-          d="
-            M782 269
-            C795 257 812 257 823 267
-            C833 276 831 290 821 298
-            C810 307 797 307 786 300
-            C775 293 774 278 782 269Z
-          "
-        />
-
-        <path
-          class="island small"
-          d="
-            M844 323
-            C853 316 865 317 871 325
-            C877 333 873 343 864 347
-            C854 350 844 346 840 338
-            C837 332 839 327 844 323Z
-          "
-        />
-
-
-        <!-- PAPUA -->
-
-        <path
-          class="island"
-          d="
-            M918 247
-            C952 225 993 215 1034 219
-            C1073 223 1101 238 1112 257
-            C1121 274 1115 294 1099 306
-            C1080 321 1054 326 1031 336
-            C1007 346 986 364 964 369
-            C942 374 919 365 909 348
-            C900 332 907 314 918 299
-            C930 282 934 266 918 247Z
-          "
-        />
-
-
-        <!-- LABELS -->
-
-        <text
-          class="map-label"
-          x="91"
-          y="215"
-        >
-          SUMATRA
-        </text>
-
-        <text
-          class="map-label"
-          x="350"
-          y="421"
-        >
-          JAVA
-        </text>
-
-        <text
-          class="map-label"
-          x="448"
-          y="225"
-        >
-          KALIMANTAN
-        </text>
-
-        <text
-          class="map-label"
-          x="641"
-          y="273"
-        >
-          SULAWESI
-        </text>
-
-        <text
-          class="map-label"
-          x="928"
-          y="285"
-        >
-          PAPUA
-        </text>
-
-        <text
-          class="map-label small-label"
-          x="535"
-          y="458"
-        >
-          BALI
-        </text>
-
-        <text
-          class="map-label small-label"
-          x="582"
-          y="488"
-        >
-          NUSA TENGGARA
-        </text>
-
-        <text
-          class="map-label small-label"
-          x="776"
-          y="250"
-        >
-          MALUKU
-        </text>
-
-      </svg>
-
-
-      <div class="map-caption">
-
-        <span>
-          INDONESIA
-        </span>
-
-        <span>
-          MY PLACES · MY MEMORIES
-        </span>
+        </div>
 
       </div>
 
-    </div>
+    </section>
 
-  </section>
-
-
-  <!-- =========================
-       ABOUT
-  ========================== -->
-
-  <section class="about" id="about">
-
-    <div class="about-grid">
-
-      <div class="about-image">
-
-        <img
-          src="beach-motorcycle.jpg"
-          alt="A journey"
-        />
-
-      </div>
-
-
-      <div class="about-content">
-
-        <p class="section-label">
-          ABOUT
-        </p>
-
-        <h2>
-          Things left<br />
-          behind.
-        </h2>
-
-        <p>
-          A place for things written, remembered,
-          questioned, and left behind along the way.
-        </p>
-
-      </div>
-
-    </div>
-
-  </section>
+  </main>
 
 
   <!-- =========================
        FOOTER
-  ========================== -->
+  ========================= -->
 
   <footer>
 
-    <div class="footer-top">
+    <div class="footer-inner">
 
-      <div>
 
-        <div class="coordinates">
+      <div class="footer-location">
+
+        <span>
           03° 52′ S · 115° 12′ E
-        </div>
+        </span>
 
-        <div class="location">
-          KINTAP, SOUTH BORNEO
-        </div>
+        <br />
+
+        KINTAP, SOUTH BORNEO
 
       </div>
 
 
-      <div class="footer-title">
-        A Small Archive of Being.
+      <div class="footer-right">
+
+        <strong>
+          A Small Archive of Being.
+        </strong>
+
+
+        <div class="footer-mark">
+
+          © HENDI HESA MAHENDRA
+
+          <span>·</span>
+
+          PERSONAL ARCHIVE
+
+        </div>
+
       </div>
-
-    </div>
-
-
-    <div class="footer-bottom">
-
-      <span>
-        © HENDI HESA MAHENDRA
-      </span>
-
-      <span>
-        SOMEWHERE ALONG THE WAY
-      </span>
 
     </div>
 
   </footer>
+
+
+  <!-- =========================
+       LEAFLET
+    ========================= -->
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+
+
+  <script>
+
+    /*
+      ============================================
+      ARCHIVE LOCATIONS
+      ============================================
+
+      Untuk menambahkan tempat baru,
+      cukup tambahkan object baru ke array ini.
+
+      Format:
+
+      {
+        name: "Nama Tempat",
+        location: "Kota · Provinsi",
+        lat: -0.00000,
+        lng: 0.00000,
+        image: "nama-foto.jpg",
+        description: "Catatan kecil tentang tempat."
+      }
+    */
+
+
+    const places = [
+
+      {
+        name:
+          "Kerayaan Beccu",
+
+        location:
+          "Kotabaru · South Kalimantan",
+
+        lat:
+          -4.09334,
+
+        lng:
+          116.20636,
+
+        image:
+          "kerayaan-beccu.jpg",
+
+        description:
+          "A small island, a long way from home, and another place left somewhere in memory."
+      }
+
+    ];
+
+
+    /*
+      ============================================
+      MAP
+      ============================================
+    */
+
+    const map =
+      L.map(
+        "archive-map",
+        {
+          zoomControl: true,
+
+          scrollWheelZoom: false,
+
+          attributionControl: true
+        }
+      );
+
+
+    /*
+      OpenStreetMap base map
+    */
+
+    L.tileLayer(
+      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        maxZoom: 19,
+
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }
+    ).addTo(map);
+
+
+    /*
+      Custom marker
+    */
+
+    const archiveIcon =
+      L.divIcon({
+
+        className:
+          "",
+
+        html:
+          '<div class="archive-marker"></div>',
+
+        iconSize:
+          [18, 18],
+
+        iconAnchor:
+          [9, 9],
+
+        popupAnchor:
+          [0, -12]
+
+      });
+
+
+    /*
+      Add locations
+    */
+
+    const markers = [];
+
+
+    places.forEach(
+      function(place) {
+
+
+        const popupContent = `
+
+          <div class="place-popup">
+
+            <div class="place-popup-image">
+
+              <img
+                src="${place.image}"
+                alt="${place.name}"
+                onerror="
+                  this.style.display='none';
+                  this.parentElement.style.background='#d9d7d0';
+                "
+              />
+
+            </div>
+
+
+            <div class="place-popup-content">
+
+              <div class="place-popup-kicker">
+
+                Personal Archive
+
+              </div>
+
+
+              <h3 class="place-popup-title">
+
+                ${place.name}
+
+              </h3>
+
+
+              <div class="place-popup-location">
+
+                ${place.location}
+
+              </div>
+
+
+              <p class="place-popup-description">
+
+                ${place.description}
+
+              </p>
+
+
+              <div class="place-popup-line"></div>
+
+            </div>
+
+          </div>
+
+        `;
+
+
+        const marker =
+          L.marker(
+            [
+              place.lat,
+              place.lng
+            ],
+            {
+              icon:
+                archiveIcon
+            }
+          )
+          .addTo(map)
+          .bindPopup(
+            popupContent,
+            {
+              maxWidth:
+                300,
+
+              closeButton:
+                true,
+
+              autoPan:
+                true
+            }
+          );
+
+
+        markers.push(marker);
+
+      }
+    );
+
+
+    /*
+      ============================================
+      INITIAL MAP POSITION
+      ============================================
+    */
+
+    if (
+      places.length === 1
+    ) {
+
+      map.setView(
+        [
+          places[0].lat,
+          places[0].lng
+        ],
+        10
+      );
+
+    }
+
+
+    /*
+      ============================================
+      ENABLE SCROLL ZOOM AFTER CLICK
+      ============================================
+    */
+
+    map.on(
+      "click",
+      function() {
+
+        map.scrollWheelZoom.enable();
+
+      }
+    );
+
+
+    map.on(
+      "mouseout",
+      function() {
+
+        map.scrollWheelZoom.disable();
+
+      }
+    );
+
+
+    /*
+      Make sure map renders correctly
+      after section becomes visible.
+    */
+
+    setTimeout(
+      function() {
+
+        map.invalidateSize();
+
+      },
+      500
+    );
+
+  </script>
+
 
 </body>
 </html>
