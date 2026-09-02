@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -533,16 +533,46 @@
        JOURNAL IMAGE
     ========================================================= */
 
-    .journal-image {
+    .journal-stack {
       position: relative;
 
       margin-top: 45px;
+      padding: 14px 18px 22px;
+    }
+
+    .journal-stack::before,
+    .journal-stack::after {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background: var(--paper);
+      border: 1px solid rgba(17, 19, 22, 0.12);
+      box-shadow: 0 14px 30px rgba(8, 10, 12, 0.18);
+    }
+
+    .journal-stack::before {
+      z-index: 0;
+      transform: rotate(-3.2deg) translate(-9px, 7px);
+    }
+
+    .journal-stack::after {
+      z-index: 0;
+      transform: rotate(2.6deg) translate(10px, -5px);
+      background: #ece9e0;
+    }
+
+    .journal-image {
+      position: relative;
+      z-index: 1;
 
       overflow: hidden;
 
       aspect-ratio: 1.35 / 1;
 
       background: #15191d;
+      box-shadow: 0 10px 22px rgba(8, 10, 12, 0.22);
     }
 
     .journal-image img {
@@ -953,8 +983,12 @@
         font-size: 8px;
       }
 
-      .journal-image {
+      .journal-stack {
         margin-top: 32px;
+        padding: 10px 12px 16px;
+      }
+
+      .journal-image {
         aspect-ratio: 1.2 / 1;
       }
 
@@ -1047,7 +1081,7 @@
   <section class="hero">
 
     <!--
-      Upload foto kamu ke repository dengan nama:
+      Upload your photo to the repository with the filename:
       hero.jpg
     -->
 
@@ -1074,15 +1108,15 @@
 
         <div class="hero-description">
 
-          Mencatat perjalanan.<br />
-          Merawat ingatan.<br />
-          Meninggalkan jejak.
+          Recording journeys.<br />
+          Preserving memories.<br />
+          Leaving traces.
 
         </div>
 
         <a href="#works" class="hero-enter">
 
-          Selamat datang di arsip saya
+          Welcome to my archive
 
           <span class="hero-enter-line"></span>
 
@@ -1210,25 +1244,29 @@
 
           <!-- JOURNAL IMAGE -->
 
-          <div class="journal-image">
+          <div class="journal-stack">
 
-            <img
-              src="titik-kumpul-pemuda.jpg"
-              alt="Titik Kumpul Pemuda"
-            />
+            <div class="journal-image">
 
-            <div class="journal-overlay">
+              <img
+                src="titik-kumpul-pemuda.jpg"
+                alt="Titik Kumpul Pemuda"
+              />
 
-              <div class="journal-text">
+              <div class="journal-overlay">
 
-                Jalan adalah guru terbaik.
-                Ia tidak banyak bicara,
-                tapi selalu meninggalkan
-                pelajaran.
+                <div class="journal-text">
 
-                <span>
-                  — HHM / FIELD NOTE
-                </span>
+                  The road is the best teacher.
+                  It doesn't say much,
+                  but it always leaves
+                  a lesson.
+
+                  <span>
+                    — HHM / FIELD NOTE
+                  </span>
+
+                </div>
 
               </div>
 
@@ -1430,18 +1468,10 @@
           </div>
 
           <h2 class="about-title">
-            Tempat untuk
-            hal-hal yang
-            pernah hidup.
+            A place for things written,
+            remembered, questioned,
+            and left behind along the way.
           </h2>
-
-          <p class="about-description">
-
-            Tempat untuk hal-hal yang ditulis,
-            diingat, dipertanyakan,
-            dan ditinggalkan sepanjang perjalanan.
-
-          </p>
 
           <a href="#works" class="about-link">
 
