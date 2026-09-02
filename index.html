@@ -18,10 +18,10 @@
     ========================= */
 
     :root {
-      --paper: #f6f4ef;
-      --ink: #171717;
-      --muted: #77736c;
-      --line: #d9d5cd;
+      --paper: #ffffff;
+      --ink: #111111;
+      --muted: #6e6e6e;
+      --line: #d4d4d4;
     }
 
     * {
@@ -112,13 +112,26 @@
       width: 100%;
     }
 
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
     .hero-title {
       font-family: Georgia, "Times New Roman", serif;
       font-weight: normal;
-      font-size: clamp(52px, 8vw, 108px);
+      font-size: clamp(44px, 6.5vw, 92px);
       line-height: 0.98;
       letter-spacing: -0.045em;
-      max-width: 900px;
+    }
+
+    .hero-photo {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      filter: grayscale(100%);
     }
 
     .hero-line {
@@ -327,8 +340,18 @@
         padding: 60px 0 90px;
       }
 
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .hero-photo {
+        max-width: 320px;
+        margin: 0 auto;
+      }
+
       .hero-title {
-        font-size: clamp(48px, 15vw, 76px);
+        font-size: clamp(40px, 12vw, 64px);
         line-height: 0.98;
       }
 
@@ -453,10 +476,20 @@
 
         <div class="hero-inner">
 
-          <h1 class="hero-title">
-            A Small Archive<br>
-            of Being.
-          </h1>
+          <div class="hero-content">
+
+            <h1 class="hero-title">
+              A Small Archive<br>
+              of Being.
+            </h1>
+
+            <img
+              src="profile.jpg"
+              alt="Hendi Hesa Mahendra"
+              class="hero-photo"
+            >
+
+          </div>
 
           <div class="hero-line"></div>
 
