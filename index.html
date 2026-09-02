@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>HENDI HESA MAHENDRA</title>
-
   <meta
     name="description"
     content="A Small Archive of Being."
-  >
+  />
 
   <style>
-
-    /* =========================
-       BASE
-    ========================= */
-
     :root {
-      --paper: #f6f4ef;
-      --ink: #171717;
-      --muted: #77736c;
-      --line: #d9d5cd;
+      --black: #080a0c;
+      --black-soft: #101317;
+      --white: #f4f4f0;
+      --paper: #f3f1eb;
+      --ink: #111316;
+      --muted: #73777b;
+      --line: rgba(17, 19, 22, 0.18);
+      --line-dark: rgba(255, 255, 255, 0.18);
+
+      --blue: #2478d8;
+      --blue-light: #75b7ff;
+
+      --max: 1380px;
     }
 
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
     }
 
@@ -35,11 +36,12 @@
     }
 
     body {
+      margin: 0;
       background: var(--paper);
       color: var(--ink);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
+      font-family: Helvetica, Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     a {
@@ -47,148 +49,443 @@
       text-decoration: none;
     }
 
-
-    /* =========================
-       CONTAINER
-    ========================= */
-
-    .container {
-      width: min(1120px, calc(100% - 48px));
-      margin: 0 auto;
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
     }
 
 
-    /* =========================
+    /* =========================================================
        HEADER
-    ========================= */
+    ========================================================= */
 
-    header {
-      padding: 32px 0;
+    .site-header {
+      position: absolute;
+      z-index: 20;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 82px;
+
+      padding: 0 5vw;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      color: white;
+    }
+
+    .site-name {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
     }
 
     .nav {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      gap: 38px;
     }
 
-    .nav-name {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 15px;
-      letter-spacing: 0.08em;
+    .nav a {
+      position: relative;
+
+      font-size: 10px;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
+
+      opacity: 0.85;
+
+      transition:
+        opacity 0.25s ease,
+        color 0.25s ease;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 30px;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+    .nav a::after {
+      content: "";
+
+      position: absolute;
+      left: 0;
+      bottom: -7px;
+
+      width: 0;
+      height: 1px;
+
+      background: var(--blue-light);
+
+      transition: width 0.3s ease;
     }
 
-    .nav-links a {
-      color: var(--muted);
-      transition: color 0.25s ease;
+    .nav a:hover {
+      opacity: 1;
+      color: white;
     }
 
-    .nav-links a:hover {
-      color: var(--ink);
+    .nav a:hover::after {
+      width: 100%;
+    }
+
+    .nav-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--blue-light);
     }
 
 
-    /* =========================
+    /* =========================================================
        HERO
-    ========================= */
+    ========================================================= */
 
     .hero {
-      min-height: 78vh;
-      display: flex;
-      align-items: center;
-      padding: 80px 0 120px;
+      position: relative;
+
+      min-height: 820px;
+      height: 100vh;
+
+      background: var(--black);
+      color: white;
+
+      overflow: hidden;
     }
 
-    .hero-inner {
+    .hero-image {
+      position: absolute;
+      inset: 0;
+
       width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+      object-position: center center;
+
+      filter:
+        saturate(0.82)
+        contrast(1.08)
+        brightness(0.72);
+
+      transform: scale(1.02);
+
+      animation: heroImage 1.8s ease forwards;
+    }
+
+    @keyframes heroImage {
+      from {
+        opacity: 0;
+        transform: scale(1.06);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1.02);
+      }
+    }
+
+    .hero::before {
+      content: "";
+
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(4, 7, 10, 0.92) 0%,
+          rgba(4, 7, 10, 0.72) 30%,
+          rgba(4, 7, 10, 0.22) 64%,
+          rgba(4, 7, 10, 0.46) 100%
+        );
+    }
+
+    .hero::after {
+      content: "";
+
+      position: absolute;
+      z-index: 2;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(0,0,0,0.38) 0%,
+          transparent 25%,
+          transparent 68%,
+          rgba(0,0,0,0.72) 100%
+        );
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 5;
+
+      width: min(var(--max), 90vw);
+      height: 100%;
+
+      margin: 0 auto;
+
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr);
+
+      align-items: center;
+    }
+
+    .hero-content {
+      padding-top: 70px;
+      max-width: 690px;
+    }
+
+    .archive-label {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+
+      margin-bottom: 30px;
+
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+
+      color: rgba(255,255,255,0.68);
+
+      animation: fadeUp 1s 0.15s both ease;
+    }
+
+    .archive-label::before {
+      content: "";
+
+      width: 30px;
+      height: 1px;
+
+      background: var(--blue-light);
     }
 
     .hero-title {
-      font-family: Georgia, "Times New Roman", serif;
-      font-weight: normal;
-      font-size: clamp(52px, 8vw, 108px);
-      line-height: 0.98;
-      letter-spacing: -0.045em;
-      max-width: 900px;
+      margin: 0;
+
+      max-width: 720px;
+
+      font-size: clamp(58px, 8vw, 126px);
+      font-weight: 700;
+      line-height: 0.87;
+      letter-spacing: -0.065em;
+      text-transform: uppercase;
+
+      animation: fadeUp 1s 0.3s both ease;
     }
 
-    .hero-line {
-      width: 100%;
+    .hero-title span {
+      color: var(--blue-light);
+    }
+
+    .hero-description {
+      max-width: 400px;
+
+      margin: 38px 0 0;
+      padding-left: 20px;
+
+      border-left: 1px solid var(--blue-light);
+
+      font-size: 13px;
+      line-height: 1.8;
+      letter-spacing: 0.03em;
+
+      color: rgba(255,255,255,0.78);
+
+      animation: fadeUp 1s 0.45s both ease;
+    }
+
+    .hero-description strong {
+      display: block;
+
+      margin-bottom: 14px;
+
+      font-size: 10px;
+      font-weight: 500;
+
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+
+      color: white;
+    }
+
+    .hero-enter {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+
+      margin-top: 38px;
+
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+
+      animation: fadeUp 1s 0.6s both ease;
+    }
+
+    .hero-enter-line {
+      width: 55px;
       height: 1px;
-      background: var(--line);
-      margin-top: 70px;
+      background: white;
+
+      transition:
+        width 0.3s ease,
+        background 0.3s ease;
+    }
+
+    .hero-enter:hover .hero-enter-line {
+      width: 80px;
+      background: var(--blue-light);
+    }
+
+    .hero-index {
+      position: absolute;
+
+      right: 0;
+      bottom: 45px;
+
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .hero-index span {
+      color: var(--blue-light);
+    }
+
+    .scroll-cue {
+      position: absolute;
+      z-index: 8;
+
+      left: 5vw;
+      bottom: 42px;
+
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      font-size: 8px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+
+      color: rgba(255,255,255,0.55);
+
+      animation: fadeUp 1s 0.9s both ease;
+    }
+
+    .scroll-line {
+      width: 50px;
+      height: 1px;
+      background: rgba(255,255,255,0.45);
+    }
+
+    .scroll-arrow {
+      color: var(--blue-light);
+      font-size: 14px;
     }
 
 
-    /* =========================
-       SECTIONS
-    ========================= */
+    /* =========================================================
+       MAIN
+    ========================================================= */
 
-    section {
-      padding: 110px 0;
-      border-top: 1px solid var(--line);
+    main {
+      background: var(--paper);
+    }
+
+    .section {
+      width: min(var(--max), 90vw);
+      margin: 0 auto;
+    }
+
+
+    /* =========================================================
+       WORKS
+    ========================================================= */
+
+    .works-section {
+      padding: 105px 0 125px;
+    }
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 9vw;
     }
 
     .section-heading {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 55px;
+
+      padding-bottom: 17px;
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-heading-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .section-number {
+      color: var(--blue);
+      font-size: 10px;
+      letter-spacing: 0.2em;
     }
 
     .section-title {
+      margin: 0;
+
       font-size: 11px;
       font-weight: 500;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.23em;
       text-transform: uppercase;
     }
 
     .section-count {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.08em;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      color: var(--blue);
     }
 
 
-    /* =========================
+    /* =========================================================
        WORK LIST
-    ========================= */
+    ========================================================= */
 
     .work-list {
-      border-top: 1px solid var(--line);
+      margin-top: 10px;
     }
 
     .work {
+      position: relative;
+
       display: grid;
-      grid-template-columns: 70px 1fr auto;
-      gap: 30px;
+      grid-template-columns: 42px 1fr 30px;
       align-items: center;
 
-      padding: 29px 0;
+      min-height: 82px;
 
       border-bottom: 1px solid var(--line);
 
       transition:
-        padding-left 0.3s ease;
+        background 0.3s ease,
+        padding 0.3s ease;
     }
 
     .work:hover {
       padding-left: 12px;
+      background: rgba(36, 120, 216, 0.055);
     }
 
     .work-number {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 14px;
-      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--blue);
     }
 
     .work-info {
@@ -196,23 +493,30 @@
     }
 
     .work-title {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(21px, 2.3vw, 30px);
-      line-height: 1.2;
-      font-weight: normal;
+      margin: 0;
+
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.35;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .work-meta {
       margin-top: 7px;
-      font-size: 10px;
-      letter-spacing: 0.07em;
+
+      font-family: "Courier New", monospace;
+      font-size: 9px;
+      line-height: 1.4;
+
       color: var(--muted);
-      text-transform: uppercase;
     }
 
     .work-arrow {
-      font-size: 19px;
-      color: var(--muted);
+      font-size: 18px;
+      font-weight: 300;
+
+      text-align: right;
 
       transition:
         transform 0.3s ease,
@@ -220,193 +524,495 @@
     }
 
     .work:hover .work-arrow {
-      transform: translateX(6px);
-      color: var(--ink);
+      color: var(--blue);
+      transform: translateX(5px);
     }
 
 
-    /* =========================
-       BOOKS
-    ========================= */
+    /* =========================================================
+       JOURNAL IMAGE
+    ========================================================= */
 
-    .books .work {
-      padding-top: 36px;
-      padding-bottom: 36px;
+    .journal-image {
+      position: relative;
+
+      margin-top: 45px;
+
+      overflow: hidden;
+
+      aspect-ratio: 1.35 / 1;
+
+      background: #15191d;
     }
 
-    .books .work-title {
-      font-size: clamp(24px, 3vw, 38px);
+    .journal-image img {
+      width: 100%;
+      height: 100%;
+
+      display: block;
+
+      object-fit: cover;
+
+      filter:
+        saturate(0.65)
+        contrast(1.05);
+
+      transition:
+        transform 0.7s ease,
+        filter 0.7s ease;
+    }
+
+    .journal-image:hover img {
+      transform: scale(1.035);
+      filter: saturate(0.9) contrast(1.05);
+    }
+
+    .journal-overlay {
+      position: absolute;
+      inset: 0;
+
+      display: flex;
+      align-items: flex-end;
+
+      padding: 25px;
+
+      background:
+        linear-gradient(
+          180deg,
+          transparent 45%,
+          rgba(0,0,0,0.72)
+        );
+
+      color: white;
+    }
+
+    .journal-text {
+      max-width: 330px;
+
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .journal-text span {
+      display: block;
+
+      margin-top: 12px;
+
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      color: var(--blue-light);
     }
 
 
-    /* =========================
+    /* =========================================================
        ABOUT
-    ========================= */
+    ========================================================= */
+
+    .about-section {
+      position: relative;
+
+      background: #e8e6df;
+
+      overflow: hidden;
+    }
 
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 60px;
+      grid-template-columns: 0.75fr 1.25fr;
+      min-height: 420px;
+    }
+
+    .about-copy {
+      padding: 80px 8vw 80px 5vw;
     }
 
     .about-label {
-      font-size: 11px;
-      letter-spacing: 0.16em;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+
+      margin-bottom: 32px;
+
+      font-size: 10px;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--muted);
     }
 
-    .about-text {
-      max-width: 650px;
+    .about-label::after {
+      content: "";
 
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(22px, 3vw, 32px);
-      line-height: 1.45;
+      width: 45px;
+      height: 1px;
 
-      letter-spacing: -0.015em;
+      background: var(--blue);
+    }
+
+    .about-title {
+      max-width: 470px;
+
+      margin: 0;
+
+      font-size: clamp(28px, 4vw, 52px);
+      font-weight: 500;
+      line-height: 1.03;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+
+    .about-description {
+      max-width: 420px;
+
+      margin: 28px 0 0;
+
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      line-height: 1.8;
+
+      color: #4d5054;
+    }
+
+    .about-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+
+      margin-top: 34px;
+
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+
+      color: var(--ink);
+    }
+
+    .about-link span {
+      width: 42px;
+      height: 1px;
+      background: var(--ink);
+
+      transition:
+        width 0.3s ease,
+        background 0.3s ease;
+    }
+
+    .about-link:hover span {
+      width: 65px;
+      background: var(--blue);
+    }
+
+    .about-image {
+      min-height: 420px;
+      overflow: hidden;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+
+      display: block;
+
+      object-fit: cover;
+
+      filter:
+        saturate(0.65)
+        contrast(1.02);
+
+      transition: transform 0.8s ease;
+    }
+
+    .about-image:hover img {
+      transform: scale(1.03);
     }
 
 
-    /* =========================
+    /* =========================================================
        FOOTER
-    ========================= */
+    ========================================================= */
 
     footer {
-      padding: 35px 0 45px;
-      border-top: 1px solid var(--line);
+      background: #0b0e11;
+      color: white;
+
+      padding: 42px 5vw 38px;
     }
 
     .footer-inner {
+      width: min(var(--max), 90vw);
+      margin: 0 auto;
+
       display: flex;
+      align-items: flex-end;
       justify-content: space-between;
-      align-items: center;
+
+      gap: 40px;
     }
 
-    .footer-left,
-    .footer-right {
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
+    .footer-location {
+      font-family: "Courier New", monospace;
+      font-size: 9px;
+      line-height: 1.8;
+      letter-spacing: 0.12em;
+
+      color: rgba(255,255,255,0.55);
+    }
+
+    .footer-location span {
+      color: var(--blue-light);
     }
 
     .footer-right {
       text-align: right;
+
+      font-size: 9px;
+      line-height: 1.8;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+
+      color: rgba(255,255,255,0.55);
+    }
+
+    .footer-right strong {
+      color: white;
+      font-weight: 400;
+    }
+
+    .footer-mark {
+      margin-top: 8px;
+    }
+
+    .footer-mark span {
+      color: var(--blue-light);
     }
 
 
-    /* =========================
+    /* =========================================================
+       ANIMATIONS
+    ========================================================= */
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+
+    /* =========================================================
+       SELECTION
+    ========================================================= */
+
+    ::selection {
+      background: var(--blue);
+      color: white;
+    }
+
+
+    /* =========================================================
        MOBILE
-    ========================= */
+    ========================================================= */
 
-    @media (max-width: 700px) {
+    @media (max-width: 850px) {
 
-      .container {
-        width: min(100% - 32px, 1120px);
+      .site-header {
+        height: 65px;
+        padding: 0 22px;
       }
 
-      header {
-        padding: 24px 0;
+      .site-name {
+        font-size: 8px;
+        letter-spacing: 0.19em;
       }
 
-      .nav-name {
-        font-size: 12px;
-        letter-spacing: 0.07em;
-      }
-
-      .nav-links {
+      .nav {
         gap: 18px;
-        font-size: 9px;
       }
 
+      .nav a {
+        font-size: 8px;
+        letter-spacing: 0.16em;
+      }
 
-      /* HERO */
+      .nav-dot {
+        display: none;
+      }
+
 
       .hero {
-        min-height: 75vh;
-        padding: 60px 0 90px;
+        min-height: 760px;
+        height: 100svh;
+      }
+
+      .hero-image {
+        object-position: 60% center;
+      }
+
+      .hero::before {
+        background:
+          linear-gradient(
+            180deg,
+            rgba(4,7,10,0.45) 0%,
+            rgba(4,7,10,0.2) 25%,
+            rgba(4,7,10,0.82) 78%,
+            rgba(4,7,10,0.95) 100%
+          );
+      }
+
+      .hero-grid {
+        width: calc(100% - 44px);
+        display: block;
+        padding-top: 135px;
+      }
+
+      .hero-content {
+        max-width: 100%;
+      }
+
+      .archive-label {
+        margin-bottom: 24px;
+        font-size: 8px;
       }
 
       .hero-title {
-        font-size: clamp(48px, 15vw, 76px);
-        line-height: 0.98;
+        max-width: 95%;
+
+        font-size: clamp(54px, 15vw, 92px);
+        line-height: 0.88;
       }
 
-      .hero-line {
-        margin-top: 50px;
+      .hero-description {
+        max-width: 300px;
+
+        margin-top: 30px;
+        padding-left: 15px;
+
+        font-size: 11px;
+        line-height: 1.7;
+      }
+
+      .hero-description strong {
+        font-size: 8px;
+      }
+
+      .hero-enter {
+        margin-top: 28px;
+        font-size: 8px;
+      }
+
+      .hero-index {
+        right: 22px;
+        bottom: 28px;
+        font-size: 8px;
+      }
+
+      .scroll-cue {
+        left: 22px;
+        bottom: 28px;
+
+        font-size: 7px;
       }
 
 
-      /* SECTIONS */
+      .works-section {
+        padding: 75px 0 85px;
+      }
 
-      section {
-        padding: 75px 0;
+      .works-grid {
+        display: block;
+      }
+
+      .works-column + .works-column {
+        margin-top: 75px;
       }
 
       .section-heading {
-        margin-bottom: 35px;
+        padding-bottom: 14px;
       }
 
-
-      /* WORKS */
+      .section-title {
+        font-size: 9px;
+        letter-spacing: 0.18em;
+      }
 
       .work {
-        grid-template-columns: 38px 1fr auto;
-        gap: 15px;
-        padding: 23px 0;
-      }
-
-      .work:hover {
-        padding-left: 0;
-      }
-
-      .work-number {
-        font-size: 12px;
+        grid-template-columns: 34px 1fr 24px;
+        min-height: 76px;
       }
 
       .work-title {
-        font-size: 20px;
-      }
-
-      .books .work-title {
-        font-size: 23px;
+        font-size: 11px;
+        letter-spacing: 0.06em;
       }
 
       .work-meta {
-        font-size: 9px;
-        line-height: 1.5;
+        font-size: 8px;
       }
 
-      .work-arrow {
-        font-size: 16px;
+      .journal-image {
+        margin-top: 32px;
+        aspect-ratio: 1.2 / 1;
       }
 
-
-      /* ABOUT */
 
       .about-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
+        display: block;
       }
 
-      .about-text {
-        font-size: 24px;
+      .about-copy {
+        padding: 65px 22px 60px;
+      }
+
+      .about-title {
+        font-size: 31px;
+      }
+
+      .about-description {
+        font-size: 10px;
+      }
+
+      .about-image {
+        height: 320px;
+        min-height: 0;
       }
 
 
-      /* FOOTER */
+      footer {
+        padding: 32px 22px;
+      }
 
       .footer-inner {
+        width: 100%;
+
         align-items: flex-start;
-        gap: 20px;
+        flex-direction: column;
+
+        gap: 28px;
       }
 
       .footer-right {
-        text-align: right;
+        text-align: left;
       }
-
     }
 
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 
@@ -414,84 +1020,134 @@
 <body>
 
 
-  <!-- =========================
+  <!-- =======================================================
        HEADER
-  ========================== -->
+  ======================================================== -->
 
-  <header>
+  <header class="site-header">
 
-    <div class="container">
+    <a href="index.html" class="site-name">
+      HENDI HESA MAHENDRA
+    </a>
 
-      <nav class="nav">
-
-        <div class="nav-name">
-          HENDI HESA MAHENDRA
-        </div>
-
-        <div class="nav-links">
-          <a href="#works">Works</a>
-          <a href="#about">About</a>
-        </div>
-
-      </nav>
-
-    </div>
+    <nav class="nav">
+      <a href="#works">Works</a>
+      <a href="#about">About</a>
+      <span class="nav-dot"></span>
+    </nav>
 
   </header>
 
 
 
-  <!-- =========================
+  <!-- =======================================================
        HERO
-  ========================== -->
+  ======================================================== -->
 
-  <main>
+  <section class="hero">
 
-    <div class="container">
+    <!--
+      Upload foto kamu ke repository dengan nama:
+      hero.jpg
+    -->
 
-      <section class="hero" style="border-top: none;">
+    <img
+      src="hero.jpg"
+      alt="Hendi Hesa Mahendra"
+      class="hero-image"
+    />
 
-        <div class="hero-inner">
+    <div class="hero-grid">
 
-          <h1 class="hero-title">
-            A Small Archive<br>
-            of Being.
-          </h1>
+      <div class="hero-content">
 
-          <div class="hero-line"></div>
+        <div class="archive-label">
+          Personal Archive
+          <span>· 2026</span>
+        </div>
+
+        <h1 class="hero-title">
+          A SMALL<br />
+          ARCHIVE<br />
+          OF <span>BEING.</span>
+        </h1>
+
+        <div class="hero-description">
+
+          <strong>Penulis Pengembara.</strong>
+
+          Mencatat perjalanan.<br />
+          Merawat ingatan.<br />
+          Meninggalkan jejak.
 
         </div>
 
-      </section>
+        <a href="#works" class="hero-enter">
+
+          Selamat datang di arsip saya
+
+          <span class="hero-enter-line"></span>
+
+          →
+
+        </a>
+
+      </div>
 
     </div>
 
 
-
-    <!-- =========================
-         WORKS
-    ========================= -->
-
-    <div id="works">
+    <div class="hero-index">
+      ARCHIVE <span>001</span>
+    </div>
 
 
-      <!-- =========================
-           BOOKS
-      ========================= -->
+    <div class="scroll-cue">
 
-      <section class="books">
+      <span>Scroll to explore</span>
 
-        <div class="container">
+      <span class="scroll-line"></span>
+
+      <span class="scroll-arrow">↓</span>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =======================================================
+       WORKS
+  ======================================================== -->
+
+  <main id="works">
+
+    <section class="section works-section">
+
+      <div class="works-grid">
+
+
+        <!-- ================= BOOKS ================= -->
+
+        <div class="works-column">
 
           <div class="section-heading">
 
-            <div class="section-title">
-              Books
+            <div class="section-heading-left">
+
+              <span class="section-number">
+                01
+              </span>
+
+              <h2 class="section-title">
+                Books
+              </h2>
+
             </div>
 
-            <div class="section-count">
+            <span class="section-count">
               02
-            </div>
+            </span>
 
           </div>
 
@@ -499,91 +1155,118 @@
           <div class="work-list">
 
 
-            <!-- BOOK 01 -->
-
             <a
-              class="work"
               href="reader.html?book=saliyah"
+              class="work"
             >
 
-              <div class="work-number">
+              <span class="work-number">
                 01
-              </div>
+              </span>
 
               <div class="work-info">
 
-                <div class="work-title">
+                <h3 class="work-title">
                   Saliyah Layu Melulu
-                </div>
+                </h3>
 
                 <div class="work-meta">
-                  First Book · Poetry Collection
+                  Poetry Collection
                 </div>
 
               </div>
 
-              <div class="work-arrow">
+              <span class="work-arrow">
                 →
-              </div>
+              </span>
 
             </a>
 
-
-            <!-- BOOK 02 -->
 
             <a
-              class="work"
               href="reader.html?book=kita"
+              class="work"
             >
 
-              <div class="work-number">
+              <span class="work-number">
                 02
-              </div>
+              </span>
 
               <div class="work-info">
 
-                <div class="work-title">
+                <h3 class="work-title">
                   Kita di Antara Kata
-                </div>
+                </h3>
 
                 <div class="work-meta">
-                  Second Book · Poetry Collection
+                  Poetry Collection
                 </div>
 
               </div>
 
-              <div class="work-arrow">
+              <span class="work-arrow">
                 →
-              </div>
+              </span>
 
             </a>
 
+
+          </div>
+
+
+          <!-- JOURNAL IMAGE -->
+
+          <div class="journal-image">
+
+            <img
+              src="hero.jpg"
+              alt="Field notes"
+            />
+
+            <div class="journal-overlay">
+
+              <div class="journal-text">
+
+                Jalan adalah guru terbaik.
+                Ia tidak banyak bicara,
+                tapi selalu meninggalkan
+                pelajaran.
+
+                <span>
+                  — HHM / FIELD NOTE
+                </span>
+
+              </div>
+
+            </div>
 
           </div>
 
         </div>
 
-      </section>
 
 
+        <!-- ================= WRITINGS ================= -->
 
-      <!-- =========================
-           WRITINGS
-      ========================= -->
-
-      <section>
-
-        <div class="container">
+        <div class="works-column">
 
           <div class="section-heading">
 
-            <div class="section-title">
-              Writings
+            <div class="section-heading-left">
+
+              <span class="section-number">
+                02
+              </span>
+
+              <h2 class="section-title">
+                Writings
+              </h2>
+
             </div>
 
-            <div class="section-count">
+            <span class="section-count">
               05
-            </div>
+            </span>
 
           </div>
 
@@ -591,22 +1274,20 @@
           <div class="work-list">
 
 
-            <!-- WRITING 03 -->
-
             <a
-              class="work"
               href="reader.html?book=kesepian"
+              class="work"
             >
 
-              <div class="work-number">
+              <span class="work-number">
                 03
-              </div>
+              </span>
 
               <div class="work-info">
 
-                <div class="work-title">
+                <h3 class="work-title">
                   Kesepian Modern
-                </div>
+                </h3>
 
                 <div class="work-meta">
                   Essay · Reflection
@@ -614,29 +1295,27 @@
 
               </div>
 
-              <div class="work-arrow">
+              <span class="work-arrow">
                 →
-              </div>
+              </span>
 
             </a>
 
 
-            <!-- WRITING 04 -->
-
             <a
-              class="work"
               href="reader.html?book=jatuhcinta"
+              class="work"
             >
 
-              <div class="work-number">
+              <span class="work-number">
                 04
-              </div>
+              </span>
 
               <div class="work-info">
 
-                <div class="work-title">
+                <h3 class="work-title">
                   Kalau Nanti Jatuh Cinta Lagi
-                </div>
+                </h3>
 
                 <div class="work-meta">
                   Notes · Reflection
@@ -644,29 +1323,27 @@
 
               </div>
 
-              <div class="work-arrow">
+              <span class="work-arrow">
                 →
-              </div>
+              </span>
 
             </a>
 
 
-            <!-- WRITING 05 -->
-
             <a
-              class="work"
               href="essay.html?work=kerja"
+              class="work"
             >
 
-              <div class="work-number">
+              <span class="work-number">
                 05
-              </div>
+              </span>
 
               <div class="work-info">
 
-                <div class="work-title">
+                <h3 class="work-title">
                   Kerja, Belajar, dan Tumbuh
-                </div>
+                </h3>
 
                 <div class="work-meta">
                   Notes · Growth
@@ -674,29 +1351,27 @@
 
               </div>
 
-              <div class="work-arrow">
+              <span class="work-arrow">
                 →
-              </div>
+              </span>
 
             </a>
 
 
-            <!-- WRITING 06 -->
-
             <a
-              class="work"
               href="essay.html?work=pengabdian"
+              class="work"
             >
 
-              <div class="work-number">
+              <span class="work-number">
                 06
-              </div>
+              </span>
 
               <div class="work-info">
 
-                <div class="work-title">
+                <h3 class="work-title">
                   Tentang Pengabdian Masyarakat
-                </div>
+                </h3>
 
                 <div class="work-meta">
                   Notes · Society
@@ -704,29 +1379,27 @@
 
               </div>
 
-              <div class="work-arrow">
+              <span class="work-arrow">
                 →
-              </div>
+              </span>
 
             </a>
 
 
-            <!-- WRITING 07 -->
-
             <a
-              class="work"
               href="reader.html?book=keuangan"
+              class="work"
             >
 
-              <div class="work-number">
+              <span class="work-number">
                 07
-              </div>
+              </span>
 
               <div class="work-info">
 
-                <div class="work-title">
+                <h3 class="work-title">
                   Manajemen Keuangan Kecil-Kecilan
-                </div>
+                </h3>
 
                 <div class="work-meta">
                   Notes · Personal Finance
@@ -734,9 +1407,9 @@
 
               </div>
 
-              <div class="work-arrow">
+              <span class="work-arrow">
                 →
-              </div>
+              </span>
 
             </a>
 
@@ -745,61 +1418,106 @@
 
         </div>
 
-      </section>
+      </div>
 
-    </div>
+    </section>
 
 
 
-    <!-- =========================
+    <!-- =====================================================
          ABOUT
-    ========================= -->
+    ====================================================== -->
 
-    <div class="container">
+    <section id="about" class="about-section">
 
-      <section id="about">
+      <div class="about-grid">
 
-        <div class="about-grid">
+
+        <div class="about-copy">
 
           <div class="about-label">
-            About
+            About this archive
           </div>
 
-          <div class="about-text">
-            A quiet place for things written,
-            remembered, questioned,
-            and left somewhere along the way.
-          </div>
+          <h2 class="about-title">
+            Tempat untuk
+            hal-hal yang
+            pernah hidup.
+          </h2>
+
+          <p class="about-description">
+
+            Tempat untuk hal-hal yang ditulis,
+            diingat, dipertanyakan,
+            dan ditinggalkan sepanjang perjalanan.
+
+          </p>
+
+          <a href="#works" class="about-link">
+
+            Explore archive
+
+            <span></span>
+
+            →
+
+          </a>
 
         </div>
 
-      </section>
 
-    </div>
+        <div class="about-image">
+
+          <img
+            src="hero.jpg"
+            alt="Hendi Hesa Mahendra"
+          />
+
+        </div>
+
+
+      </div>
+
+    </section>
 
   </main>
 
 
 
-  <!-- =========================
+  <!-- =======================================================
        FOOTER
-  ========================= -->
+  ======================================================== -->
 
   <footer>
 
-    <div class="container">
+    <div class="footer-inner">
 
-      <div class="footer-inner">
 
-        <div class="footer-left">
+      <div class="footer-location">
+
+        <span>03° 25′ S · 114° 45′ E</span><br />
+
+        SIMPANG EMPAT SUNGAI BARU
+
+      </div>
+
+
+      <div class="footer-right">
+
+        <strong>
+          A Small Archive of Being.
+        </strong>
+
+        <div class="footer-mark">
+
           © 2026 HENDI HESA MAHENDRA
-        </div>
+          <span>·</span>
+          PERSONAL ARCHIVE
 
-        <div class="footer-right">
-          A Small Archive of Being
         </div>
 
       </div>
+
 
     </div>
 
