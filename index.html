@@ -18,10 +18,10 @@
     ========================= */
 
     :root {
-      --paper: #ffffff;
-      --ink: #111111;
-      --muted: #6e6e6e;
-      --line: #d4d4d4;
+      --paper: #f6f4ef;
+      --ink: #171717;
+      --muted: #77736c;
+      --line: #d9d5cd;
     }
 
     * {
@@ -99,45 +99,33 @@
 
     /* =========================
        HERO
-       Full-bleed photo, edge to edge,
-       with the title overlaid on the
-       left where the photo is empty.
     ========================= */
 
     .hero {
-      position: relative;
-      width: 100%;
-      height: 82vh;
-      min-height: 460px;
-      max-height: 760px;
-      overflow: hidden;
-    }
-
-    .hero-photo {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 20%;
-      display: block;
-    }
-
-    .hero-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      min-height: 78vh;
       display: flex;
       align-items: center;
+      padding: 80px 0 120px;
+    }
+
+    .hero-inner {
+      width: 100%;
     }
 
     .hero-title {
       font-family: Georgia, "Times New Roman", serif;
       font-weight: normal;
-      font-size: clamp(38px, 6vw, 88px);
-      line-height: 1.0;
-      letter-spacing: -0.04em;
-      max-width: 480px;
+      font-size: clamp(52px, 8vw, 108px);
+      line-height: 0.98;
+      letter-spacing: -0.045em;
+      max-width: 900px;
+    }
+
+    .hero-line {
+      width: 100%;
+      height: 1px;
+      background: var(--line);
+      margin-top: 70px;
     }
 
 
@@ -332,36 +320,20 @@
       }
 
 
-      /* HERO — stacked instead of overlaid,
-         since there isn't enough width left
-         for text to sit beside the photo */
+      /* HERO */
 
       .hero {
-        height: auto;
-        min-height: 0;
-        max-height: none;
-      }
-
-      .hero-photo {
-        position: relative;
-        height: auto;
-        aspect-ratio: 4 / 3;
-        object-position: center top;
-      }
-
-      .hero-overlay {
-        position: static;
-        top: auto;
-        left: auto;
-        right: auto;
-        bottom: auto;
-        display: block;
-        padding: 28px 0 40px;
+        min-height: 75vh;
+        padding: 60px 0 90px;
       }
 
       .hero-title {
-        max-width: 100%;
-        font-size: clamp(36px, 11vw, 58px);
+        font-size: clamp(48px, 15vw, 76px);
+        line-height: 0.98;
+      }
+
+      .hero-line {
+        margin-top: 50px;
       }
 
 
@@ -475,28 +447,24 @@
 
   <main>
 
-    <section class="hero">
+    <div class="container">
 
-      <img
-        src="profile.jpg"
-        alt="Hendi Hesa Mahendra"
-        class="hero-photo"
-      >
+      <section class="hero" style="border-top: none;">
 
-      <div class="hero-overlay">
-
-        <div class="container">
+        <div class="hero-inner">
 
           <h1 class="hero-title">
             A Small Archive<br>
             of Being.
           </h1>
 
+          <div class="hero-line"></div>
+
         </div>
 
-      </div>
+      </section>
 
-    </section>
+    </div>
 
 
 
