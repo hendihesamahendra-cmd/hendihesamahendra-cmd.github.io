@@ -11,7 +11,9 @@
     content="A Small Archive of Being."
   />
 
-  <!-- Handwriting Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
   <link
     href="https://fonts.googleapis.com/css2?family=Allura&display=swap"
     rel="stylesheet"
@@ -72,7 +74,7 @@
 
     ::selection {
       background: var(--blue);
-      color: white;
+      color: var(--white);
     }
 
     /* =========================
@@ -91,6 +93,7 @@
     .header-inner {
       max-width: var(--max);
       margin: auto;
+
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -136,8 +139,10 @@
     .hero {
       min-height: 100vh;
       position: relative;
+
       display: flex;
       align-items: flex-end;
+
       overflow: hidden;
       background: var(--black);
     }
@@ -145,6 +150,7 @@
     .hero-image {
       position: absolute;
       inset: 0;
+
       background-image:
         linear-gradient(
           to bottom,
@@ -154,9 +160,12 @@
           rgba(7, 9, 11, 0.94) 100%
         ),
         url("hero.jpg");
+
       background-size: cover;
       background-position: center;
+
       filter: saturate(0.82);
+
       transform: scale(1.02);
     }
 
@@ -164,7 +173,9 @@
       width: 100%;
       max-width: var(--max);
       margin: 0 auto;
+
       padding: 0 34px 72px;
+
       position: relative;
       z-index: 2;
     }
@@ -172,9 +183,13 @@
     .hero-title {
       font-size: clamp(56px, 10vw, 145px);
       line-height: 0.82;
+
       font-weight: 500;
+
       letter-spacing: -0.055em;
+
       text-transform: uppercase;
+
       max-width: 1100px;
     }
 
@@ -184,28 +199,38 @@
 
     .hero-bottom {
       margin-top: 46px;
+
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
+
       gap: 30px;
     }
 
     .hero-description {
       font-size: 13px;
       line-height: 1.8;
+
       letter-spacing: 0.08em;
+
       text-transform: uppercase;
+
       color: rgba(244, 244, 240, 0.68);
     }
 
     .hero-link {
       display: inline-flex;
       align-items: center;
+
       gap: 14px;
+
       font-size: 11px;
       letter-spacing: 0.16em;
+
       text-transform: uppercase;
+
       color: var(--white);
+
       transition: gap 0.3s ease;
     }
 
@@ -215,52 +240,73 @@
 
     .hero-link::after {
       content: "↗";
+
       color: var(--blue-light);
+
       font-size: 15px;
     }
 
     .scroll-cue {
       position: absolute;
+
       right: 34px;
       bottom: 35px;
+
       z-index: 3;
+
       font-size: 10px;
+
       letter-spacing: 0.16em;
+
       text-transform: uppercase;
+
       color: rgba(244, 244, 240, 0.45);
+
       writing-mode: vertical-rl;
     }
 
     /* =========================
-       GENERAL
+       GENERAL SECTION
     ========================= */
 
     .section {
       max-width: var(--max);
+
       margin: 0 auto;
+
       padding: 130px 34px;
     }
 
     .section-header {
       display: flex;
+
       justify-content: space-between;
       align-items: baseline;
+
       border-bottom: 1px solid var(--line);
+
       padding-bottom: 18px;
+
       margin-bottom: 55px;
     }
 
     .section-title {
       font-size: 11px;
+
       text-transform: uppercase;
+
       letter-spacing: 0.18em;
+
       font-weight: 500;
     }
 
     .section-note {
       font-size: 10px;
+
       letter-spacing: 0.12em;
+
       text-transform: uppercase;
+
       color: var(--muted);
     }
 
@@ -274,18 +320,27 @@
 
     .works-grid {
       display: grid;
+
       grid-template-columns: repeat(2, 1fr);
+
       gap: 0 80px;
     }
 
     .work {
       position: relative;
+
       padding: 25px 0 34px;
+
       border-bottom: 1px solid var(--line);
+
       display: grid;
+
       grid-template-columns: 45px 1fr auto;
+
       gap: 20px;
+
       align-items: baseline;
+
       transition: padding 0.3s ease;
     }
 
@@ -295,14 +350,19 @@
 
     .work-number {
       font-size: 10px;
+
       color: var(--muted-dark);
+
       letter-spacing: 0.08em;
     }
 
     .work-title {
       font-size: clamp(19px, 2vw, 26px);
+
       font-weight: 400;
+
       letter-spacing: -0.02em;
+
       transition: color 0.3s ease;
     }
 
@@ -312,10 +372,15 @@
 
     .work-meta {
       font-size: 9px;
+
       color: var(--muted);
+
       letter-spacing: 0.1em;
+
       text-transform: uppercase;
+
       text-align: right;
+
       white-space: nowrap;
     }
 
@@ -325,29 +390,37 @@
 
     .journal {
       background: var(--paper-light);
+
       color: #222426;
+
       padding: 100px 34px 120px;
     }
 
     .journal-inner {
       max-width: var(--max);
+
       margin: auto;
     }
 
     .journal-card {
       max-width: 760px;
+
       margin: 0 auto;
     }
 
     .journal-image-wrap {
       overflow: hidden;
+
       background: #d9d7d0;
     }
 
     .journal-image {
       aspect-ratio: 4 / 3;
+
       object-fit: cover;
+
       filter: saturate(0.75);
+
       transition: transform 0.7s ease;
     }
 
@@ -357,29 +430,45 @@
 
     .journal-caption {
       max-width: 90%;
+
       margin: 18px auto 0;
+
       text-align: center;
+
       font-family: "Allura", cursive;
+
       font-style: normal;
+
       font-size: 21px;
+
       line-height: 1.35;
+
       letter-spacing: 0.01em;
+
       color: #3d4043;
     }
 
     .journal-meta {
       margin-top: 32px;
+
       display: flex;
+
       justify-content: space-between;
+
       align-items: center;
+
       border-top: 1px solid rgba(34, 36, 38, 0.18);
+
       padding-top: 14px;
     }
 
     .journal-meta span {
       font-size: 9px;
+
       text-transform: uppercase;
+
       letter-spacing: 0.15em;
+
       color: #686b6e;
     }
 
@@ -393,64 +482,152 @@
 
     .about-grid {
       display: grid;
+
       grid-template-columns: 1fr 1fr;
+
       gap: 100px;
+
       align-items: center;
+    }
+
+    /*
+      PHOTO COMPOSITION
+      Foto utama + frame + paper stack
+    */
+
+    .about-visual {
+      position: relative;
+
+      width: min(100%, 620px);
+
+      margin: 0 auto;
+
+      padding: 24px 24px 24px 24px;
+    }
+
+    .about-paper {
+      position: absolute;
+
+      background: var(--paper-white);
+
+      border: 1px solid rgba(20, 22, 24, 0.1);
+
+      box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.12);
+
+      pointer-events: none;
+    }
+
+    .about-paper-one {
+      inset: 12px 10px 18px 36px;
+
+      transform: rotate(3.2deg);
+    }
+
+    .about-paper-two {
+      inset: 19px 30px 7px 18px;
+
+      transform: rotate(-2.2deg);
+    }
+
+    .about-frame {
+      position: relative;
+
+      background: var(--paper-white);
+
+      padding: 13px;
+
+      box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.18);
+
+      transform: rotate(-1.2deg);
+
+      z-index: 3;
     }
 
     .about-image-wrap {
       overflow: hidden;
+
+      position: relative;
+
+      z-index: 2;
+
+      background: #d9d7d0;
     }
 
     .about-image {
       aspect-ratio: 4 / 5;
+
       object-fit: cover;
+
       filter: saturate(0.75);
+
       transition: transform 0.7s ease;
     }
 
-    .about-image-wrap:hover .about-image {
+    .about-frame:hover .about-image {
       transform: scale(1.025);
     }
 
     .about-label {
       font-size: 10px;
+
       text-transform: uppercase;
+
       letter-spacing: 0.17em;
+
       color: var(--blue-light);
+
       margin-bottom: 35px;
     }
 
     .about-text {
       font-size: clamp(28px, 4vw, 55px);
+
       line-height: 1.04;
+
       letter-spacing: -0.035em;
+
       font-weight: 400;
+
       max-width: 650px;
     }
 
     .about-footer {
       margin-top: 45px;
+
       display: flex;
+
       justify-content: space-between;
+
       align-items: center;
+
       max-width: 520px;
+
       padding-top: 20px;
+
       border-top: 1px solid var(--line);
     }
 
     .about-footer span {
       font-size: 10px;
+
       letter-spacing: 0.12em;
+
       text-transform: uppercase;
+
       color: var(--muted);
     }
 
     .about-footer a {
       font-size: 10px;
+
       letter-spacing: 0.12em;
+
       text-transform: uppercase;
+
       color: var(--white);
+
       transition: color 0.3s ease;
     }
 
@@ -464,54 +641,99 @@
 
     footer {
       background: var(--black);
-      padding: 70px 34px 35px;
+
+      padding: 85px 34px 35px;
+
       border-top: 1px solid var(--line);
     }
 
     .footer-inner {
       max-width: var(--max);
+
       margin: auto;
     }
 
-    .footer-top {
+    .footer-main {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+
+      grid-template-columns: 1fr 2fr;
+
       gap: 80px;
-      padding-bottom: 70px;
+
+      padding-bottom: 90px;
+    }
+
+    .footer-label {
+      font-size: 10px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.16em;
+
+      color: var(--muted);
+    }
+
+    .footer-name {
+      margin-top: 22px;
+
+      font-size: clamp(28px, 4vw, 56px);
+
+      line-height: 0.95;
+
+      letter-spacing: -0.04em;
+
+      font-weight: 400;
+    }
+
+    .footer-right {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 50px;
+
+      align-items: flex-end;
     }
 
     .footer-location {
       font-size: 10px;
+
       line-height: 1.8;
+
       letter-spacing: 0.14em;
+
       text-transform: uppercase;
+
       color: var(--muted);
     }
 
     .footer-location strong {
       display: block;
-      color: var(--white);
-      font-weight: 400;
-    }
 
-    .footer-phrase {
-      font-size: clamp(28px, 4vw, 54px);
-      line-height: 0.95;
-      letter-spacing: -0.04em;
-      max-width: 520px;
+      color: var(--white);
+
+      font-weight: 400;
     }
 
     .footer-links {
       display: flex;
-      gap: 30px;
-      margin-top: 32px;
+
+      flex-direction: column;
+
+      gap: 13px;
+
+      text-align: right;
     }
 
     .footer-links a {
       font-size: 10px;
+
       text-transform: uppercase;
+
       letter-spacing: 0.15em;
+
       color: var(--muted);
+
       transition: color 0.3s ease;
     }
 
@@ -521,16 +743,23 @@
 
     .footer-bottom {
       border-top: 1px solid var(--line);
+
       padding-top: 18px;
+
       display: flex;
+
       justify-content: space-between;
+
       gap: 30px;
     }
 
     .footer-bottom span {
       font-size: 9px;
+
       letter-spacing: 0.12em;
+
       text-transform: uppercase;
+
       color: var(--muted-dark);
     }
 
@@ -539,6 +768,7 @@
     ========================= */
 
     @media (max-width: 900px) {
+
       header {
         padding: 23px 22px;
       }
@@ -553,12 +783,15 @@
 
       .hero-bottom {
         margin-top: 35px;
+
         align-items: flex-start;
+
         flex-direction: column;
       }
 
       .scroll-cue {
         right: 22px;
+
         bottom: 25px;
       }
 
@@ -568,35 +801,49 @@
 
       .works-grid {
         grid-template-columns: 1fr;
+
         gap: 0;
       }
 
       .about-grid {
         grid-template-columns: 1fr;
-        gap: 55px;
+
+        gap: 75px;
       }
 
-      .about-image-wrap {
+      .about-visual {
         max-width: 620px;
       }
 
       .journal {
         padding-left: 22px;
+
         padding-right: 22px;
       }
 
       footer {
         padding-left: 22px;
+
         padding-right: 22px;
       }
 
-      .footer-top {
+      .footer-main {
         grid-template-columns: 1fr;
+
         gap: 55px;
+      }
+
+      .footer-right {
+        align-items: flex-start;
+      }
+
+      .footer-links {
+        text-align: left;
       }
     }
 
     @media (max-width: 600px) {
+
       nav {
         gap: 18px;
       }
@@ -607,6 +854,7 @@
 
       .logo {
         font-size: 9px;
+
         letter-spacing: 0.13em;
       }
 
@@ -616,11 +864,13 @@
 
       .hero-title {
         font-size: clamp(45px, 14vw, 75px);
+
         line-height: 0.86;
       }
 
       .hero-description {
         font-size: 10px;
+
         line-height: 1.7;
       }
 
@@ -630,6 +880,7 @@
 
       .section {
         padding-top: 80px;
+
         padding-bottom: 80px;
       }
 
@@ -643,29 +894,56 @@
 
       .work {
         grid-template-columns: 32px 1fr;
+
         gap: 12px;
+
         padding: 21px 0 26px;
       }
 
       .work-title {
         font-size: 18px;
+
         line-height: 1.15;
       }
 
       .work-meta {
         grid-column: 2;
+
         text-align: left;
+
         margin-top: 7px;
+
         font-size: 8px;
       }
 
       .journal {
         padding-top: 75px;
+
         padding-bottom: 85px;
       }
 
       .journal-caption {
         font-size: 19px;
+      }
+
+      .about-grid {
+        gap: 60px;
+      }
+
+      .about-visual {
+        padding: 18px;
+      }
+
+      .about-frame {
+        padding: 10px;
+      }
+
+      .about-paper-one {
+        inset: 8px 6px 14px 26px;
+      }
+
+      .about-paper-two {
+        inset: 14px 20px 5px 12px;
       }
 
       .about-text {
@@ -674,18 +952,33 @@
 
       .about-footer {
         margin-top: 35px;
+
+        gap: 20px;
       }
 
-      .footer-top {
-        padding-bottom: 50px;
+      .footer-main {
+        padding-bottom: 55px;
       }
 
-      .footer-phrase {
+      .footer-name {
         font-size: 36px;
+      }
+
+      .footer-right {
+        flex-direction: column;
+
+        gap: 40px;
+      }
+
+      .footer-links {
+        flex-direction: row;
+
+        flex-wrap: wrap;
       }
 
       .footer-bottom {
         flex-direction: column;
+
         gap: 8px;
       }
     }
@@ -695,6 +988,7 @@
     ========================= */
 
     @media (prefers-reduced-motion: reduce) {
+
       html {
         scroll-behavior: auto;
       }
@@ -703,7 +997,9 @@
       *::before,
       *::after {
         transition-duration: 0.01ms !important;
+
         animation-duration: 0.01ms !important;
+
         animation-iteration-count: 1 !important;
       }
     }
@@ -717,15 +1013,25 @@
   ========================= -->
 
   <header>
+
     <div class="header-inner">
-      <a href="#" class="logo">HENDI HESA MAHENDRA</a>
+
+      <a href="#" class="logo">
+        HENDI HESA MAHENDRA
+      </a>
 
       <nav>
+
         <a href="#works">Works</a>
+
         <a href="#about">About</a>
+
         <span class="nav-dot"></span>
+
       </nav>
+
     </div>
+
   </header>
 
 
@@ -758,6 +1064,7 @@
         </a>
 
       </div>
+
     </div>
 
     <div class="scroll-cue">
@@ -774,16 +1081,28 @@
   <section class="section works" id="works">
 
     <div class="section-header">
-      <h2 class="section-title">Works</h2>
-      <span class="section-note">Selected writings</span>
+
+      <h2 class="section-title">
+        Works
+      </h2>
+
+      <span class="section-note">
+        Selected writings
+      </span>
+
     </div>
+
 
     <div class="works-grid">
 
-      <!-- 01 -->
-      <a href="reader.html?book=saliyah" class="work">
+      <a
+        href="reader.html?book=saliyah"
+        class="work"
+      >
 
-        <span class="work-number">01</span>
+        <span class="work-number">
+          01
+        </span>
 
         <span class="work-title">
           Saliyah Layu Melulu
@@ -796,10 +1115,14 @@
       </a>
 
 
-      <!-- 02 -->
-      <a href="reader.html?book=kita" class="work">
+      <a
+        href="reader.html?book=kita"
+        class="work"
+      >
 
-        <span class="work-number">02</span>
+        <span class="work-number">
+          02
+        </span>
 
         <span class="work-title">
           Kita di Antara Kata
@@ -812,10 +1135,14 @@
       </a>
 
 
-      <!-- 03 -->
-      <a href="reader.html?book=kesepian" class="work">
+      <a
+        href="reader.html?book=kesepian"
+        class="work"
+      >
 
-        <span class="work-number">03</span>
+        <span class="work-number">
+          03
+        </span>
 
         <span class="work-title">
           Kesepian Modern
@@ -828,10 +1155,14 @@
       </a>
 
 
-      <!-- 04 -->
-      <a href="reader.html?book=jatuhcinta" class="work">
+      <a
+        href="reader.html?book=jatuhcinta"
+        class="work"
+      >
 
-        <span class="work-number">04</span>
+        <span class="work-number">
+          04
+        </span>
 
         <span class="work-title">
           Kalau Nanti Jatuh Cinta Lagi
@@ -844,10 +1175,14 @@
       </a>
 
 
-      <!-- 05 -->
-      <a href="essay.html?work=kerja" class="work">
+      <a
+        href="essay.html?work=kerja"
+        class="work"
+      >
 
-        <span class="work-number">05</span>
+        <span class="work-number">
+          05
+        </span>
 
         <span class="work-title">
           Kerja, Belajar, dan Tumbuh
@@ -860,10 +1195,14 @@
       </a>
 
 
-      <!-- 06 -->
-      <a href="essay.html?work=pengabdian" class="work">
+      <a
+        href="essay.html?work=pengabdian"
+        class="work"
+      >
 
-        <span class="work-number">06</span>
+        <span class="work-number">
+          06
+        </span>
 
         <span class="work-title">
           Tentang Pengabdian Masyarakat
@@ -876,10 +1215,14 @@
       </a>
 
 
-      <!-- 07 -->
-      <a href="reader.html?book=keuangan" class="work">
+      <a
+        href="reader.html?book=keuangan"
+        class="work"
+      >
 
-        <span class="work-number">07</span>
+        <span class="work-number">
+          07
+        </span>
 
         <span class="work-title">
           Manajemen Keuangan Kecil-Kecilan
@@ -897,7 +1240,7 @@
 
 
   <!-- =========================
-       JOURNAL / FIELD NOTE
+       JOURNAL
   ========================= -->
 
   <section class="journal">
@@ -907,21 +1250,32 @@
       <div class="journal-card">
 
         <div class="journal-image-wrap">
+
           <img
             src="pendakian-sindoro-sumbing.jpg"
             alt="Pendakian Sindoro Sumbing"
             class="journal-image"
           />
+
         </div>
+
 
         <div class="journal-caption">
           "We make a living by what we get,<br />
           but we make a life by what we give."
         </div>
 
+
         <div class="journal-meta">
-          <span>Field Note · 2026</span>
-          <span>Somewhere along the way</span>
+
+          <span>
+            Field Note · 2026
+          </span>
+
+          <span>
+            Somewhere along the way
+          </span>
+
         </div>
 
       </div>
@@ -939,16 +1293,33 @@
 
     <div class="about-grid">
 
-      <div class="about-image-wrap">
 
-        <img
-          src="beach-motorcycle.jpg"
-          alt="Hendi Hesa Mahendra"
-          class="about-image"
-        />
+      <!-- FOTO + FRAME + PAPER STACK -->
+
+      <div class="about-visual">
+
+        <div class="about-paper about-paper-one"></div>
+
+        <div class="about-paper about-paper-two"></div>
+
+        <div class="about-frame">
+
+          <div class="about-image-wrap">
+
+            <img
+              src="beach-motorcycle.jpg"
+              alt="Hendi Hesa Mahendra"
+              class="about-image"
+            />
+
+          </div>
+
+        </div>
 
       </div>
 
+
+      <!-- TEXT -->
 
       <div class="about-content">
 
@@ -987,24 +1358,34 @@
 
     <div class="footer-inner">
 
-      <div class="footer-top">
+      <div class="footer-main">
 
-        <div class="footer-location">
+        <div>
 
-          <strong>
-            03° 52′ S · 115° 12′ E
-          </strong>
+          <div class="footer-label">
+            Hendi Hesa Mahendra
+          </div>
 
-          KINTAP, SOUTH BORNEO
+          <div class="footer-name">
+            A Small Archive<br />
+            of Being.
+          </div>
 
         </div>
 
 
-        <div>
+        <div class="footer-right">
 
-          <div class="footer-phrase">
-            A Small Archive of Being.
+          <div class="footer-location">
+
+            <strong>
+              03° 52′ S · 115° 12′ E
+            </strong>
+
+            KINTAP, SOUTH BORNEO
+
           </div>
+
 
           <div class="footer-links">
 
@@ -1013,7 +1394,7 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              YouTube
+              YouTube ↗
             </a>
 
             <a
@@ -1021,7 +1402,7 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              Instagram
+              Instagram ↗
             </a>
 
           </div>
@@ -1046,6 +1427,7 @@
     </div>
 
   </footer>
+
 
 </body>
 </html>
