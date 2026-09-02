@@ -288,7 +288,7 @@
       padding-top: 65px;
     }
 
-    .archive-label {
+    .hero-label {
       display: flex;
       align-items: center;
       gap: 13px;
@@ -304,7 +304,7 @@
       animation: fadeUp 1s 0.15s both ease;
     }
 
-    .archive-label::before {
+    .hero-label::before {
       content: "";
 
       width: 32px;
@@ -313,7 +313,7 @@
       background: var(--blue-light);
     }
 
-    .archive-label span {
+    .hero-label span {
       color: rgba(255,255,255,0.4);
     }
 
@@ -390,23 +390,6 @@
     .hero-enter:hover .hero-enter-line {
       width: 82px;
       background: var(--blue-light);
-    }
-
-    .hero-index {
-      position: absolute;
-      z-index: 8;
-
-      right: 5vw;
-      bottom: 43px;
-
-      font-size: 8px;
-      letter-spacing: 0.25em;
-
-      color: rgba(255,255,255,0.42);
-    }
-
-    .hero-index span {
-      color: var(--blue-light);
     }
 
     .scroll-cue {
@@ -965,6 +948,10 @@
     }
 
     .footer-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
       text-align: right;
 
       font-size: 8px;
@@ -980,6 +967,48 @@
     .footer-right strong {
       color: white;
       font-weight: 400;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+
+      margin-top: 8px;
+    }
+
+    .footer-links a {
+      position: relative;
+
+      color: rgba(255,255,255,0.48);
+
+      transition:
+        color 0.3s ease,
+        opacity 0.3s ease;
+    }
+
+    .footer-links a::after {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      bottom: -4px;
+
+      width: 0;
+      height: 1px;
+
+      background: var(--blue-light);
+
+      transition: width 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-links a:hover::after {
+      width: 100%;
     }
 
     .footer-mark {
@@ -1098,14 +1127,14 @@
         padding-top: 0;
       }
 
-      .archive-label {
+      .hero-label {
         margin-bottom: 23px;
 
         font-size: 7px;
         letter-spacing: 0.24em;
       }
 
-      .archive-label::before {
+      .hero-label::before {
         width: 26px;
       }
 
@@ -1137,13 +1166,6 @@
 
       .hero-enter-line {
         width: 45px;
-      }
-
-      .hero-index {
-        right: 22px;
-        bottom: 27px;
-
-        font-size: 7px;
       }
 
       .scroll-cue {
@@ -1342,9 +1364,15 @@
       }
 
       .footer-right {
+        align-items: flex-start;
+
         text-align: left;
 
         font-size: 7px;
+      }
+
+      .footer-links {
+        gap: 18px;
       }
     }
 
@@ -1450,11 +1478,6 @@
 
       <div class="hero-content">
 
-        <div class="archive-label">
-          Personal Archive
-          <span>· 2026</span>
-        </div>
-
         <h1 class="hero-title">
           A SMALL<br />
           ARCHIVE<br />
@@ -1471,17 +1494,13 @@
           href="#works"
           class="hero-enter"
         >
-          Welcome to my archive
+          Welcome
           <span class="hero-enter-line"></span>
           →
         </a>
 
       </div>
 
-    </div>
-
-    <div class="hero-index">
-      ARCHIVE <span>001</span>
     </div>
 
     <div class="scroll-cue">
@@ -1839,7 +1858,7 @@
         <div class="about-copy">
 
           <div class="about-label">
-            About this archive
+            About
           </div>
 
           <h2 class="about-title">
@@ -1853,7 +1872,7 @@
             class="about-link"
           >
 
-            Explore archive
+            Explore works
 
             <span></span>
 
@@ -1897,13 +1916,29 @@
           A Small Archive of Being.
         </strong>
 
+        <div class="footer-links">
+
+          <a
+            href="https://www.youtube.com/@HendiHesaMahendra"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            YouTube →
+          </a>
+
+          <a
+            href="https://www.instagram.com/1633.1642/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Instagram →
+          </a>
+
+        </div>
+
         <div class="footer-mark">
 
           © 2026 HENDI HESA MAHENDRA
-
-          <span>·</span>
-
-          PERSONAL ARCHIVE
 
         </div>
 
