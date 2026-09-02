@@ -30,7 +30,6 @@
       --blue-light: #82c1ff;
       --blue-faint: rgba(61, 143, 232, 0.09);
 
-      /* PAPER */
       --paper-light: #e8e6df;
       --paper-white: #f5f3ed;
 
@@ -603,7 +602,6 @@
 
     /* =========================================================
        JOURNAL / FIELD NOTE
-       PAPER CONCEPT — TETAP
     ========================================================= */
 
     .journal-stack {
@@ -757,6 +755,208 @@
 
 
     /* =========================================================
+       MAP / MADING
+    ========================================================= */
+
+    .map-section {
+      padding: 90px 0 120px;
+    }
+
+    .mading-board {
+      position: relative;
+
+      margin-top: 40px;
+      padding: 64px 6vw 74px;
+
+      background:
+        radial-gradient(rgba(0, 0, 0, 0.16) 1px, transparent 1.6px) 0 0 / 15px 15px,
+        radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1.6px) 7px 7px / 15px 15px,
+        linear-gradient(160deg, #8a6a4d 0%, #6f5138 75%);
+
+      border: 10px solid #46341f;
+      border-radius: 3px;
+
+      box-shadow:
+        inset 0 0 70px rgba(0, 0, 0, 0.4),
+        0 26px 54px rgba(0, 0, 0, 0.42);
+    }
+
+    .map-frame {
+      position: relative;
+
+      max-width: 780px;
+
+      margin: 0 auto;
+      padding: 34px 34px 30px;
+
+      background: var(--paper-white);
+      border-radius: 2px;
+
+      box-shadow: 0 22px 44px rgba(0, 0, 0, 0.42);
+
+      transform: rotate(-0.6deg);
+
+      transition:
+        transform 0.5s ease,
+        box-shadow 0.5s ease;
+    }
+
+    .map-frame:hover {
+      transform: rotate(-0.6deg) translateY(-4px);
+
+      box-shadow:
+        0 28px 52px rgba(0, 0, 0, 0.48);
+    }
+
+    .map-tape {
+      position: absolute;
+
+      top: -15px;
+
+      width: 72px;
+      height: 26px;
+
+      background: rgba(244, 244, 240, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+
+      box-shadow:
+        0 3px 6px rgba(0, 0, 0, 0.28);
+    }
+
+    .map-tape.left {
+      left: 8%;
+      transform: rotate(-7deg);
+    }
+
+    .map-tape.right {
+      right: 8%;
+      transform: rotate(6deg);
+    }
+
+    .map-image-wrap {
+      position: relative;
+    }
+
+    .indonesia-map-img {
+      display: block;
+
+      width: 100%;
+      height: auto;
+
+      filter: saturate(0.9);
+    }
+
+    .mading-pin {
+      position: absolute;
+
+      width: 15px;
+      height: 15px;
+      padding: 0;
+
+      background:
+        radial-gradient(
+          circle at 34% 30%,
+          #ff8577,
+          #d81f1f 62%,
+          #8c1212 100%
+        );
+
+      border: none;
+      border-radius: 50%;
+
+      box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.5),
+        0 0 0 2px rgba(255, 255, 255, 0.55);
+
+      transform: translate(-50%, -50%);
+
+      cursor: pointer;
+
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .mading-pin:hover,
+    .mading-pin:focus-visible {
+      transform:
+        translate(-50%, -50%)
+        scale(1.4);
+
+      box-shadow:
+        0 3px 7px rgba(0, 0, 0, 0.55),
+        0 0 0 2px rgba(255, 255, 255, 0.75);
+    }
+
+    .mading-pin::after {
+      content: attr(data-caption);
+
+      position: absolute;
+
+      bottom: 135%;
+      left: 50%;
+
+      white-space: nowrap;
+
+      transform: translateX(-50%);
+
+      font-family: "Courier New", monospace;
+
+      font-size: 8px;
+      letter-spacing: 0.08em;
+
+      text-transform: uppercase;
+
+      color: #16181a;
+
+      background: rgba(244, 244, 240, 0.94);
+
+      padding: 4px 8px;
+
+      border-radius: 2px;
+
+      opacity: 0;
+      pointer-events: none;
+
+      transition: opacity 0.25s ease;
+    }
+
+    .mading-pin:hover::after,
+    .mading-pin:focus-visible::after {
+      opacity: 1;
+    }
+
+    .map-caption {
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 11px;
+
+      margin-top: 28px;
+
+      font-family: "Courier New", monospace;
+
+      font-size: 9px;
+      letter-spacing: 0.14em;
+
+      text-transform: uppercase;
+
+      color: rgba(244, 244, 240, 0.75);
+    }
+
+    .map-caption-dot {
+      width: 5px;
+      height: 5px;
+
+      border-radius: 50%;
+
+      background: #d81f1f;
+    }
+
+
+    /* =========================================================
        ABOUT
     ========================================================= */
 
@@ -896,201 +1096,18 @@
 
 
     /* =========================================================
-       MAP
+       MADING PHOTO MODAL
     ========================================================= */
-
-    .map-section {
-      padding: 90px 0 120px;
-    }
-
-    /* ---- corkboard ---- */
-
-    .mading-board {
-      position: relative;
-
-      margin-top: 40px;
-      padding: 64px 6vw 74px;
-
-      background:
-        radial-gradient(rgba(0, 0, 0, 0.16) 1px, transparent 1.6px) 0 0 / 15px 15px,
-        radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1.6px) 7px 7px / 15px 15px,
-        linear-gradient(160deg, #8a6a4d 0%, #6f5138 75%);
-
-      border: 10px solid #46341f;
-      border-radius: 3px;
-
-      box-shadow:
-        inset 0 0 70px rgba(0, 0, 0, 0.4),
-        0 26px 54px rgba(0, 0, 0, 0.42);
-    }
-
-    /* ---- pinned paper map ---- */
-
-    .map-frame {
-      position: relative;
-
-      max-width: 780px;
-
-      margin: 0 auto;
-      padding: 34px 34px 30px;
-
-      background: var(--paper-white);
-      border-radius: 2px;
-
-      box-shadow: 0 22px 44px rgba(0, 0, 0, 0.42);
-
-      transform: rotate(-0.6deg);
-
-      transition: transform 0.5s ease, box-shadow 0.5s ease;
-    }
-
-    .map-frame:hover {
-      transform: rotate(-0.6deg) translateY(-4px);
-
-      box-shadow: 0 28px 52px rgba(0, 0, 0, 0.48);
-    }
-
-    .map-tape {
-      position: absolute;
-
-      top: -15px;
-
-      width: 72px;
-      height: 26px;
-
-      background: rgba(244, 244, 240, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.35);
-
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.28);
-    }
-
-    .map-tape.left {
-      left: 8%;
-      transform: rotate(-7deg);
-    }
-
-    .map-tape.right {
-      right: 8%;
-      transform: rotate(6deg);
-    }
-
-    .map-image-wrap {
-      position: relative;
-    }
-
-    .indonesia-map-img {
-      display: block;
-
-      width: 100%;
-      height: auto;
-
-      filter: saturate(0.9);
-    }
-
-    /* ---- pins ---- */
-
-    .mading-pin {
-      position: absolute;
-
-      width: 15px;
-      height: 15px;
-      padding: 0;
-
-      background: radial-gradient(circle at 34% 30%, #ff8577, #d81f1f 62%, #8c1212 100%);
-      border: none;
-      border-radius: 50%;
-
-      box-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.5),
-        0 0 0 2px rgba(255, 255, 255, 0.55);
-
-      transform: translate(-50%, -50%);
-
-      cursor: pointer;
-
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .mading-pin:hover,
-    .mading-pin:focus-visible {
-      transform: translate(-50%, -50%) scale(1.4);
-
-      box-shadow:
-        0 3px 7px rgba(0, 0, 0, 0.55),
-        0 0 0 2px rgba(255, 255, 255, 0.75);
-    }
-
-    .mading-pin::after {
-      content: attr(data-caption);
-
-      position: absolute;
-      bottom: 135%;
-      left: 50%;
-
-      white-space: nowrap;
-
-      transform: translateX(-50%);
-
-      font-family: "Courier New", monospace;
-
-      font-size: 8px;
-      letter-spacing: 0.08em;
-
-      text-transform: uppercase;
-
-      color: #16181a;
-
-      background: rgba(244, 244, 240, 0.94);
-
-      padding: 4px 8px;
-      border-radius: 2px;
-
-      opacity: 0;
-      pointer-events: none;
-
-      transition: opacity 0.25s ease;
-    }
-
-    .mading-pin:hover::after,
-    .mading-pin:focus-visible::after {
-      opacity: 1;
-    }
-
-    .map-caption {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 11px;
-
-      margin-top: 28px;
-
-      font-family: "Courier New", monospace;
-
-      font-size: 9px;
-      letter-spacing: 0.14em;
-
-      text-transform: uppercase;
-
-      color: rgba(244, 244, 240, 0.75);
-    }
-
-    .map-caption-dot {
-      width: 5px;
-      height: 5px;
-
-      border-radius: 50%;
-
-      background: #d81f1f;
-    }
-
-    /* ---- photo modal ---- */
 
     .mading-modal {
       position: fixed;
+
       z-index: 100;
+
       inset: 0;
 
       display: flex;
+
       align-items: center;
       justify-content: center;
 
@@ -1099,7 +1116,9 @@
       visibility: hidden;
       opacity: 0;
 
-      transition: opacity 0.3s ease, visibility 0.3s ease;
+      transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
     }
 
     .mading-modal.is-open {
@@ -1116,6 +1135,7 @@
 
     .mading-modal-card {
       position: relative;
+
       z-index: 1;
 
       width: 100%;
@@ -1125,37 +1145,53 @@
 
       background: var(--paper-white);
 
-      box-shadow: 0 32px 60px rgba(0, 0, 0, 0.55);
+      box-shadow:
+        0 32px 60px rgba(0, 0, 0, 0.55);
 
-      transform: translateY(14px) rotate(-1deg);
+      transform:
+        translateY(14px)
+        rotate(-1deg);
 
-      transition: transform 0.35s ease;
+      transition:
+        transform 0.35s ease;
     }
 
     .mading-modal.is-open .mading-modal-card {
-      transform: translateY(0) rotate(-0.6deg);
+      transform:
+        translateY(0)
+        rotate(-0.6deg);
     }
 
     .mading-modal-card::before {
       content: "";
 
       position: absolute;
+
       top: -8px;
       left: 50%;
 
       width: 15px;
       height: 15px;
 
-      background: radial-gradient(circle at 34% 30%, #ff8577, #d81f1f 62%, #8c1212 100%);
+      background:
+        radial-gradient(
+          circle at 34% 30%,
+          #ff8577,
+          #d81f1f 62%,
+          #8c1212 100%
+        );
+
       border-radius: 50%;
 
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      box-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.5);
 
       transform: translateX(-50%);
     }
 
     .mading-modal-close {
       position: absolute;
+
       top: -14px;
       right: -14px;
 
@@ -1163,6 +1199,7 @@
       height: 30px;
 
       display: flex;
+
       align-items: center;
       justify-content: center;
 
@@ -1170,11 +1207,14 @@
       line-height: 1;
 
       color: white;
+
       background: #111417;
+
       border: none;
       border-radius: 50%;
 
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+      box-shadow:
+        0 6px 14px rgba(0, 0, 0, 0.4);
 
       cursor: pointer;
     }
@@ -1195,7 +1235,9 @@
 
       object-fit: cover;
 
-      filter: saturate(0.75) contrast(1.05);
+      filter:
+        saturate(0.75)
+        contrast(1.05);
     }
 
     .mading-modal-caption {
@@ -1232,6 +1274,7 @@
       margin: 0 auto;
 
       display: flex;
+
       align-items: flex-end;
       justify-content: space-between;
 
@@ -1375,6 +1418,7 @@
         width: calc(100% - 44px);
 
         display: flex;
+
         flex-direction: column;
         justify-content: flex-end;
 
@@ -1521,6 +1565,49 @@
       }
 
 
+      /* MAP */
+
+      .map-section {
+        padding: 68px 0 82px;
+      }
+
+      .mading-board {
+        margin-top: 30px;
+
+        padding: 42px 5vw 48px;
+
+        border-width: 7px;
+      }
+
+      .map-frame {
+        padding: 22px 18px 20px;
+      }
+
+      .map-tape {
+        width: 52px;
+        height: 20px;
+      }
+
+      .mading-pin {
+        width: 13px;
+        height: 13px;
+      }
+
+      .map-caption {
+        margin-top: 20px;
+
+        font-size: 8px;
+
+        text-align: center;
+      }
+
+      .mading-modal-card {
+        max-width: 320px;
+
+        padding: 14px 14px 20px;
+      }
+
+
       /* ABOUT */
 
       .about-section {
@@ -1589,48 +1676,6 @@
 
       .about-link span {
         background: #111316;
-      }
-
-
-      /* MAP */
-
-      .map-section {
-        padding: 68px 0 82px;
-      }
-
-      .mading-board {
-        margin-top: 30px;
-        padding: 42px 5vw 48px;
-
-        border-width: 7px;
-      }
-
-      .map-frame {
-        padding: 22px 18px 20px;
-      }
-
-      .map-tape {
-        width: 52px;
-        height: 20px;
-      }
-
-      .mading-pin {
-        width: 13px;
-        height: 13px;
-      }
-
-      .map-caption {
-        margin-top: 20px;
-
-        font-size: 8px;
-
-        text-align: center;
-      }
-
-      .mading-modal-card {
-        max-width: 320px;
-
-        padding: 14px 14px 20px;
       }
 
 
@@ -1777,25 +1822,21 @@
           OF <span>BEING.</span>
         </h1>
 
-
         <div class="hero-description">
           Merekam perjalanan.<br />
           Mengabadikan kenangan.<br />
           Meninggalkan jejak.
         </div>
 
-
         <a
           href="#works"
           class="hero-enter"
         >
-
           Welcome to my archive
 
           <span class="hero-enter-line"></span>
 
           →
-
         </a>
 
       </div>
@@ -1859,7 +1900,6 @@
 
 
           <div class="work-list">
-
 
             <a
               href="reader.html?book=saliyah"
@@ -1940,12 +1980,10 @@
 
               </div>
 
-
               <p class="journal-caption">
                 "We make a living by what we get,<br />
                 but we make a life by what we give."
               </p>
-
 
               <div class="journal-note">
                 Field Note
@@ -1976,7 +2014,6 @@
 
 
           <div class="work-list">
-
 
             <a
               href="reader.html?book=kesepian"
@@ -2142,6 +2179,94 @@
 
 
     <!-- =====================================================
+         MAP / MADING
+         DIPINDAHKAN SEBELUM ABOUT
+    ====================================================== -->
+
+    <section
+      id="map"
+      class="section map-section"
+    >
+
+      <div class="section-heading">
+
+        <div class="section-heading-left">
+
+          <h2 class="section-title">
+            Mading
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="mading-board">
+
+        <div class="map-frame">
+
+          <span
+            class="map-tape left"
+            aria-hidden="true"
+          ></span>
+
+          <span
+            class="map-tape right"
+            aria-hidden="true"
+          ></span>
+
+
+          <div class="map-image-wrap">
+
+            <img
+              src="indonesia-map.png"
+              alt="Map of the Indonesian archipelago"
+              class="indonesia-map-img"
+            />
+
+
+            <!-- ============================================
+                 PINS
+            ============================================= -->
+
+            <button
+              type="button"
+              class="mading-pin"
+              style="left: 32%; top: 77%;"
+              data-image="pendakian-sindoro-sumbing.jpg"
+              data-caption="Jogja"
+              aria-label="Lihat foto: Jogja"
+            ></button>
+
+
+            <button
+              type="button"
+              class="mading-pin"
+              style="left: 44%; top: 55%;"
+              data-image="hero.jpg"
+              data-caption="Kintap, Kalimantan Selatan"
+              aria-label="Lihat foto: Kintap, Kalimantan Selatan"
+            ></button>
+
+          </div>
+
+        </div>
+
+
+        <div class="map-caption">
+
+          <span class="map-caption-dot"></span>
+
+          Tap pin merah untuk melihat foto
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
          ABOUT
     ====================================================== -->
 
@@ -2192,88 +2317,6 @@
 
     </section>
 
-
-    <!-- =====================================================
-         MAP / MADING
-    ====================================================== -->
-
-    <section
-      id="map"
-      class="section map-section"
-    >
-
-      <div class="section-heading">
-
-        <div class="section-heading-left">
-
-          <h2 class="section-title">
-            Mading
-          </h2>
-
-        </div>
-
-      </div>
-
-
-      <div class="mading-board">
-
-        <div class="map-frame">
-
-          <span class="map-tape left" aria-hidden="true"></span>
-          <span class="map-tape right" aria-hidden="true"></span>
-
-          <div class="map-image-wrap">
-
-            <img
-              src="indonesia-map.png"
-              alt="Map of the Indonesian archipelago"
-              class="indonesia-map-img"
-            />
-
-            <!-- ============================================
-                 PINS
-                 To add a new pin: copy one <button> block,
-                 change left/top (roughly where the island is
-                 on the map), data-image (photo file), and
-                 data-caption (label shown on hover + in the
-                 popup).
-            ============================================= -->
-
-            <button
-              type="button"
-              class="mading-pin"
-              style="left: 32%; top: 77%;"
-              data-image="pendakian-sindoro-sumbing.jpg"
-              data-caption="Jogja"
-              aria-label="Lihat foto: Jogja"
-            ></button>
-
-            <button
-              type="button"
-              class="mading-pin"
-              style="left: 44%; top: 55%;"
-              data-image="hero.jpg"
-              data-caption="Kintap, Kalimantan Selatan"
-              aria-label="Lihat foto: Kintap, Kalimantan Selatan"
-            ></button>
-
-          </div>
-
-        </div>
-
-
-        <div class="map-caption">
-
-          <span class="map-caption-dot"></span>
-
-          Tap pin merah untuk melihat foto
-
-        </div>
-
-      </div>
-
-    </section>
-
   </main>
 
 
@@ -2292,6 +2335,7 @@
       data-mading-close
     ></div>
 
+
     <div class="mading-modal-card">
 
       <button
@@ -2303,13 +2347,17 @@
         ×
       </button>
 
+
       <div class="mading-modal-photo">
+
         <img
           id="madingModalImg"
           src=""
           alt=""
         />
+
       </div>
+
 
       <p
         id="madingModalCaption"
@@ -2323,37 +2371,86 @@
 
   <script>
     (function () {
-      var modal = document.getElementById("madingModal");
-      var modalImg = document.getElementById("madingModalImg");
-      var modalCaption = document.getElementById("madingModalCaption");
+
+      var modal =
+        document.getElementById("madingModal");
+
+      var modalImg =
+        document.getElementById("madingModalImg");
+
+      var modalCaption =
+        document.getElementById("madingModalCaption");
+
 
       function openMading(src, caption) {
+
         modalImg.src = src;
         modalImg.alt = caption;
+
         modalCaption.textContent = caption;
 
         modal.classList.add("is-open");
-        modal.setAttribute("aria-hidden", "false");
+
+        modal.setAttribute(
+          "aria-hidden",
+          "false"
+        );
       }
+
 
       function closeMading() {
+
         modal.classList.remove("is-open");
-        modal.setAttribute("aria-hidden", "true");
+
+        modal.setAttribute(
+          "aria-hidden",
+          "true"
+        );
       }
 
-      document.querySelectorAll(".mading-pin").forEach(function (pin) {
-        pin.addEventListener("click", function () {
-          openMading(pin.getAttribute("data-image"), pin.getAttribute("data-caption"));
+
+      document
+        .querySelectorAll(".mading-pin")
+        .forEach(function (pin) {
+
+          pin.addEventListener(
+            "click",
+            function () {
+
+              openMading(
+                pin.getAttribute("data-image"),
+                pin.getAttribute("data-caption")
+              );
+
+            }
+          );
+
         });
-      });
 
-      modal.querySelectorAll("[data-mading-close]").forEach(function (el) {
-        el.addEventListener("click", closeMading);
-      });
 
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") closeMading();
-      });
+      modal
+        .querySelectorAll("[data-mading-close]")
+        .forEach(function (el) {
+
+          el.addEventListener(
+            "click",
+            closeMading
+          );
+
+        });
+
+
+      document.addEventListener(
+        "keydown",
+        function (e) {
+
+          if (e.key === "Escape") {
+            closeMading();
+          }
+
+        }
+      );
+
     })();
   </script>
 
