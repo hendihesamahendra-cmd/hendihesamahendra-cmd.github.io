@@ -30,6 +30,7 @@
       --blue-light: #82c1ff;
       --blue-faint: rgba(61, 143, 232, 0.09);
 
+      /* PAPER */
       --paper-light: #e8e6df;
       --paper-white: #f5f3ed;
 
@@ -288,34 +289,10 @@
       padding-top: 65px;
     }
 
-    .archive-label {
-      display: flex;
-      align-items: center;
-      gap: 13px;
 
-      margin-bottom: 29px;
-
-      font-size: 8px;
-      letter-spacing: 0.27em;
-      text-transform: uppercase;
-
-      color: rgba(255,255,255,0.63);
-
-      animation: fadeUp 1s 0.15s both ease;
-    }
-
-    .archive-label::before {
-      content: "";
-
-      width: 32px;
-      height: 1px;
-
-      background: var(--blue-light);
-    }
-
-    .archive-label span {
-      color: rgba(255,255,255,0.4);
-    }
+    /* =========================================================
+       HERO TITLE
+    ========================================================= */
 
     .hero-title {
       max-width: 760px;
@@ -330,7 +307,7 @@
 
       text-transform: uppercase;
 
-      animation: fadeUp 1s 0.3s both ease;
+      animation: fadeUp 1s 0.15s both ease;
     }
 
     .hero-title span {
@@ -352,7 +329,7 @@
 
       color: rgba(255,255,255,0.7);
 
-      animation: fadeUp 1s 0.45s both ease;
+      animation: fadeUp 1s 0.3s both ease;
     }
 
     .hero-enter {
@@ -369,7 +346,7 @@
 
       color: rgba(255,255,255,0.82);
 
-      animation: fadeUp 1s 0.6s both ease;
+      animation: fadeUp 1s 0.45s both ease;
     }
 
     .hero-enter-line {
@@ -427,7 +404,7 @@
 
       color: rgba(255,255,255,0.42);
 
-      animation: fadeUp 1s 0.9s both ease;
+      animation: fadeUp 1s 0.7s both ease;
     }
 
     .scroll-line {
@@ -500,15 +477,6 @@
       letter-spacing: 0.19em;
 
       text-transform: uppercase;
-    }
-
-    .section-count {
-      font-family: "Courier New", monospace;
-
-      font-size: 9px;
-      letter-spacing: 0.12em;
-
-      color: var(--blue);
     }
 
 
@@ -635,6 +603,7 @@
 
     /* =========================================================
        JOURNAL / FIELD NOTE
+       PAPER CONCEPT — TETAP
     ========================================================= */
 
     .journal-stack {
@@ -1098,17 +1067,6 @@
         padding-top: 0;
       }
 
-      .archive-label {
-        margin-bottom: 23px;
-
-        font-size: 7px;
-        letter-spacing: 0.24em;
-      }
-
-      .archive-label::before {
-        width: 26px;
-      }
-
       .hero-title {
         max-width: 95%;
 
@@ -1187,10 +1145,6 @@
         letter-spacing: 0.15em;
       }
 
-      .section-count {
-        font-size: 8px;
-      }
-
       .work {
         grid-template-columns:
           34px
@@ -1211,7 +1165,6 @@
 
       .work-meta {
         margin-top: 6px;
-
         font-size: 7px;
       }
 
@@ -1252,8 +1205,7 @@
 
       .about-section {
         min-height: 500px;
-
-        background: #15181b;
+        background: var(--paper-light);
       }
 
       .about-image-full {
@@ -1264,10 +1216,10 @@
         background:
           linear-gradient(
             180deg,
-            rgba(20,23,26,0.97) 0%,
-            rgba(20,23,26,0.9) 40%,
-            rgba(20,23,26,0.52) 67%,
-            rgba(20,23,26,0.05) 100%
+            rgba(232,230,223,0.97) 0%,
+            rgba(232,230,223,0.9) 40%,
+            rgba(232,230,223,0.52) 67%,
+            rgba(232,230,223,0.05) 100%
           );
       }
 
@@ -1291,21 +1243,20 @@
 
         font-size: 7px;
 
-        color: var(--white);
+        color: #17191b;
       }
 
       .about-label::after {
-        background: var(--blue-light);
+        background: var(--blue);
       }
 
       .about-title {
         max-width: 100%;
 
         font-size: 26px;
-
         line-height: 1.22;
 
-        color: var(--white);
+        color: #111316;
       }
 
       .about-link {
@@ -1313,11 +1264,11 @@
 
         font-size: 7px;
 
-        color: var(--white);
+        color: #111316;
       }
 
       .about-link span {
-        background: var(--white);
+        background: #111316;
       }
 
 
@@ -1343,7 +1294,6 @@
 
       .footer-right {
         text-align: left;
-
         font-size: 7px;
       }
     }
@@ -1398,7 +1348,9 @@
   </style>
 </head>
 
+
 <body>
+
 
   <!-- =======================================================
        HEADER
@@ -1414,7 +1366,10 @@
       HENDI HESA MAHENDRA
     </a>
 
-    <nav class="nav" aria-label="Main navigation">
+    <nav
+      class="nav"
+      aria-label="Main navigation"
+    >
 
       <a href="#works">
         Works
@@ -1450,39 +1405,42 @@
 
       <div class="hero-content">
 
-        <div class="archive-label">
-          Personal Archive
-          <span>· 2026</span>
-        </div>
-
         <h1 class="hero-title">
           A SMALL<br />
           ARCHIVE<br />
           OF <span>BEING.</span>
         </h1>
 
+
         <div class="hero-description">
-          Recording journeys.<br />
-          Preserving memories.<br />
-          Leaving traces.
+          Merekam perjalanan.<br />
+          Mengabadikan kenangan.<br />
+          Meninggalkan jejak.
         </div>
+
 
         <a
           href="#works"
           class="hero-enter"
         >
+
           Welcome to my archive
+
           <span class="hero-enter-line"></span>
+
           →
+
         </a>
 
       </div>
 
     </div>
 
+
     <div class="hero-index">
       ARCHIVE <span>001</span>
     </div>
+
 
     <div class="scroll-cue">
 
@@ -1507,6 +1465,7 @@
 
   <main id="works">
 
+
     <!-- =====================================================
          WORKS
     ====================================================== -->
@@ -1514,6 +1473,7 @@
     <section class="section works-section">
 
       <div class="works-grid">
+
 
         <!-- ================= BOOKS ================= -->
 
@@ -1529,14 +1489,11 @@
 
             </div>
 
-            <span class="section-count">
-              02
-            </span>
-
           </div>
 
 
           <div class="work-list">
+
 
             <a
               href="reader.html?book=saliyah"
@@ -1602,7 +1559,7 @@
           </div>
 
 
-          <!-- ================= FIELD NOTE ================= -->
+          <!-- ================= PAPER ================= -->
 
           <div class="journal-stack">
 
@@ -1617,13 +1574,15 @@
 
               </div>
 
+
               <p class="journal-caption">
                 "We make a living by what we get,<br />
                 but we make a life by what we give."
               </p>
 
+
               <div class="journal-note">
-                Field Note · 2026
+                Field Note
               </div>
 
             </div>
@@ -1647,14 +1606,11 @@
 
             </div>
 
-            <span class="section-count">
-              05
-            </span>
-
           </div>
 
 
           <div class="work-list">
+
 
             <a
               href="reader.html?book=kesepian"
@@ -1834,6 +1790,7 @@
         class="about-image-full"
       />
 
+
       <div class="about-grid">
 
         <div class="about-copy">
@@ -1842,18 +1799,20 @@
             About this archive
           </div>
 
+
           <h2 class="about-title">
             A place for things written,
             remembered, questioned,
             and left behind along the way.
           </h2>
 
+
           <a
             href="#works"
             class="about-link"
           >
 
-            Explore archive
+            Explore
 
             <span></span>
 
@@ -1878,6 +1837,7 @@
 
     <div class="footer-inner">
 
+
       <div class="footer-location">
 
         <span>
@@ -1897,9 +1857,10 @@
           A Small Archive of Being.
         </strong>
 
+
         <div class="footer-mark">
 
-          © 2026 HENDI HESA MAHENDRA
+          © HENDI HESA MAHENDRA
 
           <span>·</span>
 
@@ -1912,6 +1873,7 @@
     </div>
 
   </footer>
+
 
 </body>
 </html>
