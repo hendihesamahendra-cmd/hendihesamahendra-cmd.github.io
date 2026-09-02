@@ -1,31 +1,46 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>HENDI HESA MAHENDRA</title>
-  <meta
-    name="description"
-    content="A Small Archive of Being."
-  />
+
+<meta
+ name="description"
+ content="A Small Archive of Being."
+/>
 
   <style>
     :root {
-      --black: #080a0c;
-      --black-soft: #101317;
-      --white: #f4f4f0;
-      --paper: #121417;
-      --ink: #f1f1ec;
-      --muted: #8b9096;
-      --line: rgba(244, 244, 240, 0.14);
-      --line-dark: rgba(255, 255, 255, 0.18);
+      --black: #07090b;
+      --black-soft: #0d1013;
+      --paper: #111417;
 
-      --blue: #2478d8;
-      --blue-light: #75b7ff;
+      --white: #f4f4f0;
+      --ink: #eeeeea;
+
+      --muted: #858b91;
+      --muted-dark: #646a70;
+
+      --line: rgba(244, 244, 240, 0.12);
+      --line-strong: rgba(244, 244, 240, 0.2);
+
+      --blue: #3d8fe8;
+      --blue-light: #82c1ff;
+      --blue-faint: rgba(61, 143, 232, 0.09);
+
+      --paper-light: #e8e6df;
+      --paper-white: #f5f3ed;
 
       --max: 1380px;
     }
+
+
+    /* =========================================================
+       RESET
+    ========================================================= */
 
     * {
       box-sizing: border-box;
@@ -37,11 +52,20 @@
 
     body {
       margin: 0;
+
       background: var(--paper);
       color: var(--ink);
+
       font-family: Helvetica, Arial, sans-serif;
+
       -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+
       overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
     }
 
     a {
@@ -54,6 +78,11 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    ::selection {
+      background: var(--blue);
+      color: white;
+    }
+
 
     /* =========================================================
        HEADER
@@ -62,8 +91,10 @@
     .site-header {
       position: absolute;
       z-index: 20;
+
       top: 0;
       left: 0;
+
       width: 100%;
       height: 82px;
 
@@ -77,10 +108,21 @@
     }
 
     .site-name {
-      font-size: 11px;
+      position: relative;
+
+      font-size: 10px;
       font-weight: 500;
+
       letter-spacing: 0.24em;
       text-transform: uppercase;
+
+      opacity: 0.9;
+
+      transition: opacity 0.3s ease;
+    }
+
+    .site-name:hover {
+      opacity: 1;
     }
 
     .nav {
@@ -92,30 +134,31 @@
     .nav a {
       position: relative;
 
-      font-size: 10px;
+      font-size: 9px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
 
-      opacity: 0.85;
+      opacity: 0.72;
 
       transition:
-        opacity 0.25s ease,
-        color 0.25s ease;
+        opacity 0.3s ease,
+        color 0.3s ease;
     }
 
     .nav a::after {
       content: "";
 
       position: absolute;
+
       left: 0;
-      bottom: -7px;
+      bottom: -8px;
 
       width: 0;
       height: 1px;
 
       background: var(--blue-light);
 
-      transition: width 0.3s ease;
+      transition: width 0.35s ease;
     }
 
     .nav a:hover {
@@ -130,8 +173,13 @@
     .nav-dot {
       width: 5px;
       height: 5px;
+
       border-radius: 50%;
+
       background: var(--blue-light);
+
+      box-shadow:
+        0 0 0 4px rgba(130, 193, 255, 0.05);
     }
 
 
@@ -162,9 +210,9 @@
       object-position: center center;
 
       filter:
-        saturate(0.82)
+        saturate(0.78)
         contrast(1.08)
-        brightness(0.72);
+        brightness(0.7);
 
       transform: scale(1.02);
 
@@ -174,7 +222,7 @@
     @keyframes heroImage {
       from {
         opacity: 0;
-        transform: scale(1.06);
+        transform: scale(1.07);
       }
 
       to {
@@ -188,15 +236,16 @@
 
       position: absolute;
       z-index: 1;
+
       inset: 0;
 
       background:
         linear-gradient(
           90deg,
-          rgba(4, 7, 10, 0.92) 0%,
-          rgba(4, 7, 10, 0.72) 30%,
-          rgba(4, 7, 10, 0.22) 64%,
-          rgba(4, 7, 10, 0.46) 100%
+          rgba(4, 7, 10, 0.94) 0%,
+          rgba(4, 7, 10, 0.78) 26%,
+          rgba(4, 7, 10, 0.28) 61%,
+          rgba(4, 7, 10, 0.48) 100%
         );
     }
 
@@ -205,15 +254,16 @@
 
       position: absolute;
       z-index: 2;
+
       inset: 0;
 
       background:
         linear-gradient(
           180deg,
-          rgba(0,0,0,0.38) 0%,
-          transparent 25%,
+          rgba(0, 0, 0, 0.44) 0%,
+          transparent 27%,
           transparent 68%,
-          rgba(0,0,0,0.72) 100%
+          rgba(0, 0, 0, 0.78) 100%
         );
     }
 
@@ -227,14 +277,18 @@
       margin: 0 auto;
 
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr);
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        minmax(320px, 0.8fr);
 
       align-items: center;
     }
 
     .hero-content {
-      padding-top: 70px;
-      max-width: 690px;
+      max-width: 720px;
+
+      padding-top: 65px;
     }
 
     .archive-label {
@@ -242,13 +296,13 @@
       align-items: center;
       gap: 13px;
 
-      margin-bottom: 30px;
+      margin-bottom: 29px;
 
-      font-size: 9px;
-      letter-spacing: 0.25em;
+      font-size: 8px;
+      letter-spacing: 0.27em;
       text-transform: uppercase;
 
-      color: rgba(255,255,255,0.68);
+      color: rgba(255,255,255,0.63);
 
       animation: fadeUp 1s 0.15s both ease;
     }
@@ -256,21 +310,27 @@
     .archive-label::before {
       content: "";
 
-      width: 30px;
+      width: 32px;
       height: 1px;
 
       background: var(--blue-light);
     }
 
-    .hero-title {
-      margin: 0;
+    .archive-label span {
+      color: rgba(255,255,255,0.4);
+    }
 
-      max-width: 720px;
+    .hero-title {
+      max-width: 760px;
+
+      margin: 0;
 
       font-size: clamp(58px, 8vw, 126px);
       font-weight: 700;
-      line-height: 0.87;
-      letter-spacing: -0.065em;
+
+      line-height: 0.86;
+      letter-spacing: -0.068em;
+
       text-transform: uppercase;
 
       animation: fadeUp 1s 0.3s both ease;
@@ -281,34 +341,21 @@
     }
 
     .hero-description {
-      max-width: 400px;
+      max-width: 390px;
 
-      margin: 38px 0 0;
-      padding-left: 20px;
+      margin: 39px 0 0;
+      padding-left: 19px;
 
       border-left: 1px solid var(--blue-light);
 
-      font-size: 13px;
-      line-height: 1.8;
-      letter-spacing: 0.03em;
+      font-size: 12px;
+      line-height: 1.85;
 
-      color: rgba(255,255,255,0.78);
+      letter-spacing: 0.035em;
+
+      color: rgba(255,255,255,0.7);
 
       animation: fadeUp 1s 0.45s both ease;
-    }
-
-    .hero-description strong {
-      display: block;
-
-      margin-bottom: 14px;
-
-      font-size: 10px;
-      font-weight: 500;
-
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-
-      color: white;
     }
 
     .hero-enter {
@@ -316,39 +363,49 @@
       align-items: center;
       gap: 15px;
 
-      margin-top: 38px;
+      margin-top: 37px;
 
-      font-size: 9px;
-      letter-spacing: 0.2em;
+      font-size: 8px;
+      letter-spacing: 0.23em;
+
       text-transform: uppercase;
+
+      color: rgba(255,255,255,0.82);
 
       animation: fadeUp 1s 0.6s both ease;
     }
 
     .hero-enter-line {
-      width: 55px;
+      width: 54px;
       height: 1px;
-      background: white;
+
+      background: rgba(255,255,255,0.8);
 
       transition:
-        width 0.3s ease,
-        background 0.3s ease;
+        width 0.35s ease,
+        background 0.35s ease;
+    }
+
+    .hero-enter:hover {
+      color: white;
     }
 
     .hero-enter:hover .hero-enter-line {
-      width: 80px;
+      width: 82px;
       background: var(--blue-light);
     }
 
     .hero-index {
       position: absolute;
+      z-index: 8;
 
-      right: 0;
-      bottom: 45px;
+      right: 5vw;
+      bottom: 43px;
 
-      font-size: 9px;
+      font-size: 8px;
       letter-spacing: 0.25em;
-      color: rgba(255,255,255,0.55);
+
+      color: rgba(255,255,255,0.42);
     }
 
     .hero-index span {
@@ -360,30 +417,32 @@
       z-index: 8;
 
       left: 5vw;
-      bottom: 42px;
+      bottom: 40px;
 
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 14px;
 
-      font-size: 8px;
+      font-size: 7px;
       letter-spacing: 0.25em;
+
       text-transform: uppercase;
 
-      color: rgba(255,255,255,0.55);
+      color: rgba(255,255,255,0.42);
 
       animation: fadeUp 1s 0.9s both ease;
     }
 
     .scroll-line {
-      width: 50px;
+      width: 48px;
       height: 1px;
-      background: rgba(255,255,255,0.45);
+
+      background: rgba(255,255,255,0.35);
     }
 
     .scroll-arrow {
       color: var(--blue-light);
-      font-size: 14px;
+      font-size: 13px;
     }
 
 
@@ -406,12 +465,16 @@
     ========================================================= */
 
     .works-section {
-      padding: 105px 0 125px;
+      padding: 112px 0 130px;
     }
 
     .works-grid {
       display: grid;
-      grid-template-columns: 0.85fr 1.15fr;
+
+      grid-template-columns:
+        0.85fr
+        1.15fr;
+
       gap: 9vw;
     }
 
@@ -420,7 +483,7 @@
       align-items: center;
       justify-content: space-between;
 
-      padding-bottom: 17px;
+      padding-bottom: 16px;
 
       border-bottom: 1px solid var(--line);
     }
@@ -431,24 +494,23 @@
       gap: 18px;
     }
 
-    .section-number {
-      color: var(--blue);
-      font-size: 10px;
-      letter-spacing: 0.2em;
-    }
-
     .section-title {
       margin: 0;
 
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
+      font-size: 15px;
+      font-weight: 600;
+
+      letter-spacing: 0.19em;
+
       text-transform: uppercase;
     }
 
     .section-count {
-      font-size: 10px;
-      letter-spacing: 0.16em;
+      font-family: "Courier New", monospace;
+
+      font-size: 9px;
+      letter-spacing: 0.12em;
+
       color: var(--blue);
     }
 
@@ -458,33 +520,65 @@
     ========================================================= */
 
     .work-list {
-      margin-top: 10px;
+      margin-top: 9px;
     }
 
     .work {
       position: relative;
 
       display: grid;
-      grid-template-columns: 42px 1fr 30px;
+
+      grid-template-columns:
+        44px
+        minmax(0, 1fr)
+        28px;
+
       align-items: center;
 
-      min-height: 82px;
+      min-height: 86px;
+
+      padding: 0;
 
       border-bottom: 1px solid var(--line);
 
       transition:
-        background 0.3s ease,
-        padding 0.3s ease;
+        padding 0.35s ease,
+        background 0.35s ease;
+    }
+
+    .work::before {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      bottom: -1px;
+
+      width: 0;
+      height: 1px;
+
+      background: var(--blue);
+
+      transition: width 0.45s ease;
     }
 
     .work:hover {
-      padding-left: 12px;
-      background: rgba(36, 120, 216, 0.1);
+      padding-left: 13px;
+      background: var(--blue-faint);
+    }
+
+    .work:hover::before {
+      width: 100%;
     }
 
     .work-number {
-      font-size: 10px;
-      letter-spacing: 0.12em;
+      align-self: center;
+
+      font-family: "Courier New", monospace;
+
+      font-size: 9px;
+      letter-spacing: 0.08em;
+
       color: var(--blue);
     }
 
@@ -497,47 +591,61 @@
 
       font-size: 13px;
       font-weight: 500;
+
       line-height: 1.35;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.085em;
+
       text-transform: uppercase;
+
+      transition: color 0.3s ease;
+    }
+
+    .work:hover .work-title {
+      color: white;
     }
 
     .work-meta {
       margin-top: 7px;
 
       font-family: "Courier New", monospace;
-      font-size: 9px;
+
+      font-size: 8px;
       line-height: 1.4;
+
+      letter-spacing: 0.02em;
 
       color: var(--muted);
     }
 
     .work-arrow {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 300;
 
       text-align: right;
 
+      color: rgba(255,255,255,0.48);
+
       transition:
-        transform 0.3s ease,
-        color 0.3s ease;
+        transform 0.35s ease,
+        color 0.35s ease;
     }
 
     .work:hover .work-arrow {
-      color: var(--blue);
+      color: var(--blue-light);
       transform: translateX(5px);
     }
 
 
     /* =========================================================
-       JOURNAL IMAGE
+       JOURNAL / FIELD NOTE
     ========================================================= */
 
     .journal-stack {
       position: relative;
 
-      margin-top: 45px;
-      padding: 14px 18px 22px;
+      margin-top: 49px;
+
+      padding: 14px 18px 23px;
     }
 
     .journal-stack::before,
@@ -547,75 +655,136 @@
       position: absolute;
       inset: 0;
 
-      background: #f3f1eb;
-      border: 1px solid rgba(17, 19, 22, 0.12);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+      background: #f1efe8;
+
+      border: 1px solid rgba(17,19,22,0.1);
+
+      box-shadow:
+        0 15px 32px rgba(0,0,0,0.38);
     }
 
     .journal-stack::before {
       z-index: 0;
-      transform: rotate(-3.2deg) translate(-9px, 7px);
+
+      transform:
+        rotate(-3.1deg)
+        translate(-9px, 7px);
     }
 
     .journal-stack::after {
       z-index: 0;
-      transform: rotate(2.6deg) translate(10px, -5px);
-      background: #ece9e0;
+
+      transform:
+        rotate(2.5deg)
+        translate(10px, -5px);
+
+      background: #e9e6dc;
     }
 
     .journal-image {
       position: relative;
       z-index: 1;
 
-      background: #f8f7f3;
+      padding: 14px 14px 19px;
 
-      padding: 14px 14px 46px;
+      background: var(--paper-white);
 
-      box-shadow: 0 14px 28px rgba(8, 10, 12, 0.35);
+      box-shadow:
+        0 15px 30px rgba(8,10,12,0.34);
+
+      transition:
+        transform 0.5s ease,
+        box-shadow 0.5s ease;
+    }
+
+    .journal-stack:hover .journal-image {
+      transform: translateY(-4px) rotate(-0.25deg);
+
+      box-shadow:
+        0 20px 38px rgba(8,10,12,0.42);
     }
 
     .journal-photo {
+      position: relative;
+
       overflow: hidden;
 
       aspect-ratio: 16 / 9;
     }
 
+    .journal-photo::after {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      pointer-events: none;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,0.07),
+          transparent 50%
+        );
+    }
+
     .journal-photo img {
+      display: block;
+
       width: 100%;
       height: 100%;
-
-      display: block;
 
       object-fit: cover;
 
       filter:
-        saturate(0.65)
-        contrast(1.05);
+        saturate(0.62)
+        contrast(1.06);
 
       transition:
-        transform 0.7s ease,
-        filter 0.7s ease;
+        transform 0.8s ease,
+        filter 0.8s ease;
     }
 
     .journal-image:hover .journal-photo img {
-      transform: scale(1.035);
-      filter: saturate(0.9) contrast(1.05);
+      transform: scale(1.04);
+
+      filter:
+        saturate(0.84)
+        contrast(1.05);
     }
 
-    .journal-quote {
-      max-width: 380px;
+    .journal-caption {
+      max-width: 90%;
 
-      margin-top: 26px;
-      padding-left: 20px;
+      margin: 15px auto 0;
 
-      border-left: 1px solid var(--blue-light);
+      text-align: center;
 
       font-family: "Courier New", monospace;
-      font-size: 12px;
-      line-height: 1.8;
-      letter-spacing: 0.01em;
 
-      color: var(--ink);
+      font-style: italic;
+
+      font-size: 10px;
+      line-height: 1.65;
+
+      letter-spacing: 0.005em;
+
+      color: #3d4043;
+    }
+
+    .journal-note {
+      margin-top: 9px;
+
+      text-align: center;
+
+      font-family: "Courier New", monospace;
+
+      font-size: 7px;
+      letter-spacing: 0.18em;
+
+      text-transform: uppercase;
+
+      color: #777a7c;
     }
 
 
@@ -626,9 +795,9 @@
     .about-section {
       position: relative;
 
-      min-height: 560px;
+      min-height: 580px;
 
-      background: #e8e6df;
+      background: var(--paper-light);
 
       overflow: hidden;
     }
@@ -646,7 +815,7 @@
       object-position: center 30%;
 
       filter:
-        saturate(0.85)
+        saturate(0.82)
         contrast(1.05);
     }
 
@@ -659,11 +828,11 @@
       background:
         linear-gradient(
           90deg,
-          rgba(232, 230, 223, 0.95) 0%,
-          rgba(232, 230, 223, 0.82) 26%,
-          rgba(232, 230, 223, 0.4) 46%,
-          rgba(232, 230, 223, 0.05) 60%,
-          transparent 72%
+          rgba(232,230,223,0.97) 0%,
+          rgba(232,230,223,0.86) 25%,
+          rgba(232,230,223,0.43) 45%,
+          rgba(232,230,223,0.08) 62%,
+          transparent 75%
         );
     }
 
@@ -672,7 +841,7 @@
       z-index: 2;
 
       width: min(var(--max), 90vw);
-      min-height: 560px;
+      min-height: 580px;
 
       margin: 0 auto;
 
@@ -681,7 +850,8 @@
     }
 
     .about-copy {
-      max-width: 460px;
+      max-width: 470px;
+
       padding: 80px 0;
     }
 
@@ -690,13 +860,14 @@
       align-items: center;
       gap: 14px;
 
-      margin-bottom: 32px;
+      margin-bottom: 31px;
 
-      font-size: 10px;
-      letter-spacing: 0.22em;
+      font-size: 8px;
+      letter-spacing: 0.25em;
+
       text-transform: uppercase;
 
-      color: #111316;
+      color: #17191b;
     }
 
     .about-label::after {
@@ -709,29 +880,19 @@
     }
 
     .about-title {
-      max-width: 460px;
+      max-width: 470px;
 
       margin: 0;
 
-      font-size: clamp(26px, 3.4vw, 44px);
+      font-size: clamp(27px, 3.4vw, 45px);
       font-weight: 500;
+
       line-height: 1.16;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.035em;
+
       text-transform: uppercase;
 
       color: #111316;
-    }
-
-    .about-description {
-      max-width: 420px;
-
-      margin: 28px 0 0;
-
-      font-family: "Courier New", monospace;
-      font-size: 11px;
-      line-height: 1.8;
-
-      color: #4d5054;
     }
 
     .about-link {
@@ -739,27 +900,29 @@
       align-items: center;
       gap: 15px;
 
-      margin-top: 34px;
+      margin-top: 35px;
 
-      font-size: 9px;
-      letter-spacing: 0.2em;
+      font-size: 8px;
+      letter-spacing: 0.22em;
+
       text-transform: uppercase;
 
       color: #111316;
     }
 
     .about-link span {
-      width: 42px;
+      width: 43px;
       height: 1px;
+
       background: #111316;
 
       transition:
-        width 0.3s ease,
-        background 0.3s ease;
+        width 0.35s ease,
+        background 0.35s ease;
     }
 
     .about-link:hover span {
-      width: 65px;
+      width: 68px;
       background: var(--blue);
     }
 
@@ -769,14 +932,15 @@
     ========================================================= */
 
     footer {
-      background: #0b0e11;
+      background: #0a0d10;
       color: white;
 
-      padding: 42px 5vw 38px;
+      padding: 43px 5vw 39px;
     }
 
     .footer-inner {
       width: min(var(--max), 90vw);
+
       margin: 0 auto;
 
       display: flex;
@@ -788,11 +952,13 @@
 
     .footer-location {
       font-family: "Courier New", monospace;
-      font-size: 9px;
-      line-height: 1.8;
+
+      font-size: 8px;
+      line-height: 1.9;
+
       letter-spacing: 0.12em;
 
-      color: rgba(255,255,255,0.55);
+      color: rgba(255,255,255,0.45);
     }
 
     .footer-location span {
@@ -802,12 +968,14 @@
     .footer-right {
       text-align: right;
 
-      font-size: 9px;
-      line-height: 1.8;
-      letter-spacing: 0.16em;
+      font-size: 8px;
+      line-height: 1.9;
+
+      letter-spacing: 0.17em;
+
       text-transform: uppercase;
 
-      color: rgba(255,255,255,0.55);
+      color: rgba(255,255,255,0.42);
     }
 
     .footer-right strong {
@@ -816,7 +984,7 @@
     }
 
     .footer-mark {
-      margin-top: 8px;
+      margin-top: 7px;
     }
 
     .footer-mark span {
@@ -825,13 +993,25 @@
 
 
     /* =========================================================
-       ANIMATIONS
+       REVEAL
     ========================================================= */
 
-    @keyframes fadeUp {
+    .works-column {
+      animation: reveal 0.9s both ease;
+    }
+
+    .works-column:nth-child(2) {
+      animation-delay: 0.12s;
+    }
+
+    .about-copy {
+      animation: reveal 1s both ease;
+    }
+
+    @keyframes reveal {
       from {
         opacity: 0;
-        transform: translateY(22px);
+        transform: translateY(24px);
       }
 
       to {
@@ -842,20 +1022,12 @@
 
 
     /* =========================================================
-       SELECTION
-    ========================================================= */
-
-    ::selection {
-      background: var(--blue);
-      color: white;
-    }
-
-
-    /* =========================================================
        MOBILE
     ========================================================= */
 
     @media (max-width: 850px) {
+
+      /* HEADER */
 
       .site-header {
         height: 65px;
@@ -863,16 +1035,16 @@
       }
 
       .site-name {
-        font-size: 8px;
-        letter-spacing: 0.19em;
+        font-size: 7px;
+        letter-spacing: 0.2em;
       }
 
       .nav {
-        gap: 18px;
+        gap: 19px;
       }
 
       .nav a {
-        font-size: 8px;
+        font-size: 7px;
         letter-spacing: 0.16em;
       }
 
@@ -880,6 +1052,8 @@
         display: none;
       }
 
+
+      /* HERO */
 
       .hero {
         min-height: 760px;
@@ -894,10 +1068,20 @@
         background:
           linear-gradient(
             180deg,
-            rgba(4,7,10,0.45) 0%,
-            rgba(4,7,10,0.2) 25%,
-            rgba(4,7,10,0.82) 78%,
-            rgba(4,7,10,0.95) 100%
+            rgba(4,7,10,0.46) 0%,
+            rgba(4,7,10,0.18) 25%,
+            rgba(4,7,10,0.82) 76%,
+            rgba(4,7,10,0.97) 100%
+          );
+      }
+
+      .hero::after {
+        background:
+          linear-gradient(
+            180deg,
+            rgba(0,0,0,0.25),
+            transparent 35%,
+            rgba(0,0,0,0.65) 100%
           );
       }
 
@@ -909,7 +1093,7 @@
         justify-content: flex-end;
 
         padding-top: 0;
-        padding-bottom: 96px;
+        padding-bottom: 94px;
       }
 
       .hero-content {
@@ -918,52 +1102,75 @@
       }
 
       .archive-label {
-        margin-bottom: 24px;
-        font-size: 8px;
+        margin-bottom: 23px;
+
+        font-size: 7px;
+        letter-spacing: 0.24em;
+      }
+
+      .archive-label::before {
+        width: 26px;
       }
 
       .hero-title {
         max-width: 95%;
 
-        font-size: clamp(54px, 15vw, 92px);
-        line-height: 0.88;
+        font-size: clamp(38px, 12vw, 92px);
+
+        line-height: 0.91;
+        letter-spacing: -0.065em;
       }
 
       .hero-description {
-        max-width: 300px;
+        max-width: 290px;
 
-        margin-top: 30px;
-        padding-left: 15px;
+        margin-top: 28px;
+        padding-left: 14px;
 
-        font-size: 11px;
-        line-height: 1.7;
-      }
-
-      .hero-description strong {
-        font-size: 8px;
+        font-size: 10px;
+        line-height: 1.75;
       }
 
       .hero-enter {
-        margin-top: 28px;
-        font-size: 8px;
+        margin-top: 27px;
+
+        font-size: 7px;
+        letter-spacing: 0.2em;
+      }
+
+      .hero-enter-line {
+        width: 45px;
       }
 
       .hero-index {
         right: 22px;
-        bottom: 28px;
-        font-size: 8px;
-      }
-
-      .scroll-cue {
-        left: 22px;
-        bottom: 28px;
+        bottom: 27px;
 
         font-size: 7px;
       }
 
+      .scroll-cue {
+        left: 22px;
+        bottom: 27px;
+
+        gap: 10px;
+
+        font-size: 6px;
+      }
+
+      .scroll-line {
+        width: 34px;
+      }
+
+
+      /* WORKS */
+
+      .section {
+        width: calc(100% - 44px);
+      }
 
       .works-section {
-        padding: 75px 0 85px;
+        padding: 75px 0 86px;
       }
 
       .works-grid {
@@ -971,7 +1178,7 @@
       }
 
       .works-column + .works-column {
-        margin-top: 75px;
+        margin-top: 76px;
       }
 
       .section-heading {
@@ -979,37 +1186,76 @@
       }
 
       .section-title {
-        font-size: 13px;
-        letter-spacing: 0.14em;
+        font-size: 12px;
+        letter-spacing: 0.15em;
       }
 
-      .work {
-        grid-template-columns: 34px 1fr 24px;
-        min-height: 76px;
-      }
-
-      .work-title {
-        font-size: 11px;
-        letter-spacing: 0.06em;
-      }
-
-      .work-meta {
+      .section-count {
         font-size: 8px;
       }
 
+      .work {
+        grid-template-columns:
+          34px
+          minmax(0, 1fr)
+          23px;
+
+        min-height: 76px;
+      }
+
+      .work:hover {
+        padding-left: 8px;
+      }
+
+      .work-title {
+        font-size: 10px;
+        letter-spacing: 0.065em;
+      }
+
+      .work-meta {
+        margin-top: 6px;
+
+        font-size: 7px;
+      }
+
+      .work-arrow {
+        font-size: 15px;
+      }
+
+
+      /* JOURNAL */
+
       .journal-stack {
-        margin-top: 32px;
-        padding: 10px 12px 16px;
+        margin-top: 33px;
+
+        padding: 10px 12px 17px;
+      }
+
+      .journal-image {
+        padding: 10px 10px 16px;
       }
 
       .journal-photo {
         aspect-ratio: 16 / 9;
       }
 
+      .journal-caption {
+        margin-top: 13px;
+
+        font-size: 9px;
+      }
+
+      .journal-note {
+        font-size: 6px;
+      }
+
+
+      /* ABOUT */
 
       .about-section {
-        min-height: 480px;
-        background: #14171a;
+        min-height: 500px;
+
+        background: #15181b;
       }
 
       .about-image-full {
@@ -1020,19 +1266,21 @@
         background:
           linear-gradient(
             180deg,
-            rgba(20, 23, 26, 0.97) 0%,
-            rgba(20, 23, 26, 0.88) 42%,
-            rgba(20, 23, 26, 0.4) 68%,
-            transparent 88%
+            rgba(20,23,26,0.97) 0%,
+            rgba(20,23,26,0.9) 40%,
+            rgba(20,23,26,0.52) 67%,
+            rgba(20,23,26,0.05) 100%
           );
       }
 
       .about-grid {
+        width: 100%;
+
         display: block;
 
-        min-height: 480px;
+        min-height: 500px;
 
-        padding: 70px 22px 40px;
+        padding: 68px 22px 42px;
       }
 
       .about-copy {
@@ -1041,50 +1289,102 @@
       }
 
       .about-label {
-        color: #f1f1ec;
+        margin-bottom: 28px;
+
+        font-size: 7px;
+
+        color: var(--white);
+      }
+
+      .about-label::after {
+        background: var(--blue-light);
       }
 
       .about-title {
         max-width: 100%;
-        font-size: 27px;
-        line-height: 1.22;
-        color: #f1f1ec;
-      }
 
-      .about-description {
-        font-size: 10px;
-        color: #8b9096;
+        font-size: 26px;
+
+        line-height: 1.22;
+
+        color: var(--white);
       }
 
       .about-link {
-        color: #f1f1ec;
+        margin-top: 31px;
+
+        font-size: 7px;
+
+        color: var(--white);
       }
 
       .about-link span {
-        background: #f1f1ec;
+        background: var(--white);
       }
 
 
+      /* FOOTER */
+
       footer {
-        padding: 32px 22px;
+        padding: 31px 22px;
       }
 
       .footer-inner {
         width: 100%;
 
         align-items: flex-start;
+
         flex-direction: column;
 
-        gap: 28px;
+        gap: 27px;
+      }
+
+      .footer-location {
+        font-size: 7px;
       }
 
       .footer-right {
         text-align: left;
+
+        font-size: 7px;
       }
     }
 
 
+    /* =========================================================
+       SMALL PHONES
+    ========================================================= */
+
+    @media (max-width: 390px) {
+
+      .hero-title {
+        font-size: 37px;
+      }
+
+      .hero-description {
+        font-size: 9px;
+      }
+
+      .work-title {
+        font-size: 9.5px;
+      }
+
+      .about-title {
+        font-size: 24px;
+      }
+
+      .scroll-cue {
+        display: none;
+      }
+    }
+
+
+    /* =========================================================
+       REDUCED MOTION
+    ========================================================= */
+
     @media (prefers-reduced-motion: reduce) {
+
       html {
         scroll-behavior: auto;
       }
@@ -1097,12 +1397,12 @@
         transition-duration: 0.01ms !important;
       }
     }
+
   </style>
+
 </head>
 
-
 <body>
-
 
   <!-- =======================================================
        HEADER
@@ -1110,19 +1410,31 @@
 
   <header class="site-header">
 
-    <a href="index.html" class="site-name">
-      HENDI HESA MAHENDRA
-    </a>
+```
+<a
+  href="index.html"
+  class="site-name"
+  aria-label="Hendi Hesa Mahendra"
+>
+  HENDI HESA MAHENDRA
+</a>
 
-    <nav class="nav">
-      <a href="#works">Works</a>
-      <a href="#about">About</a>
-      <span class="nav-dot"></span>
-    </nav>
+<nav class="nav" aria-label="Main navigation">
+
+  <a href="#works">
+    Works
+  </a>
+
+  <a href="#about">
+    About
+  </a>
+
+  <span class="nav-dot"></span>
+
+</nav>
+```
 
   </header>
-
-
 
   <!-- =======================================================
        HERO
@@ -1130,416 +1442,449 @@
 
   <section class="hero">
 
-    <!--
-      Upload your photo to the repository with the filename:
-      hero.jpg
-    -->
+```
+<img
+  src="hero.jpg"
+  alt="Hendi Hesa Mahendra"
+  class="hero-image"
+/>
 
-    <img
-      src="hero.jpg"
-      alt="Hendi Hesa Mahendra"
-      class="hero-image"
-    />
 
-    <div class="hero-grid">
+<div class="hero-grid">
 
-      <div class="hero-content">
+  <div class="hero-content">
 
-        <div class="archive-label">
-          Personal Archive
-          <span>· 2026</span>
-        </div>
+    <div class="archive-label">
 
-        <h1 class="hero-title">
-          A SMALL<br />
-          ARCHIVE<br />
-          OF <span>BEING.</span>
-        </h1>
+      Personal Archive
 
-        <div class="hero-description">
-
-          Recording journeys.<br />
-          Preserving memories.<br />
-          Leaving traces.
-
-        </div>
-
-        <a href="#works" class="hero-enter">
-
-          Welcome to my archive
-
-          <span class="hero-enter-line"></span>
-
-          →
-
-        </a>
-
-      </div>
+      <span>· 2026</span>
 
     </div>
 
 
-    <div class="hero-index">
-      ARCHIVE <span>001</span>
+    <h1 class="hero-title">
+
+      A SMALL<br />
+      ARCHIVE<br />
+      OF <span>BEING.</span>
+
+    </h1>
+
+
+    <div class="hero-description">
+
+      Recording journeys.<br />
+      Preserving memories.<br />
+      Leaving traces.
+
     </div>
 
 
-    <div class="scroll-cue">
+    <a
+      href="#works"
+      class="hero-enter"
+    >
 
-      <span>Scroll to explore</span>
+      Welcome to my archive
 
-      <span class="scroll-line"></span>
+      <span class="hero-enter-line"></span>
 
-      <span class="scroll-arrow">↓</span>
+      →
 
-    </div>
+    </a>
+
+  </div>
+
+</div>
+
+
+<div class="hero-index">
+
+  ARCHIVE <span>001</span>
+
+</div>
+
+
+<div class="scroll-cue">
+
+  <span>
+    Scroll to explore
+  </span>
+
+  <span class="scroll-line"></span>
+
+  <span class="scroll-arrow">
+    ↓
+  </span>
+
+</div>
+```
 
   </section>
 
-
-
   <!-- =======================================================
-       WORKS
+       MAIN
   ======================================================== -->
 
   <main id="works">
 
-    <section class="section works-section">
+```
+<!-- =====================================================
+     WORKS
+====================================================== -->
 
-      <div class="works-grid">
+<section class="section works-section">
 
+  <div class="works-grid">
 
-        <!-- ================= BOOKS ================= -->
 
-        <div class="works-column">
+    <!-- ================= BOOKS ================= -->
 
-          <div class="section-heading">
+    <div class="works-column">
 
-            <div class="section-heading-left">
+      <div class="section-heading">
 
-              <h2 class="section-title">
-                Books
-              </h2>
+        <div class="section-heading-left">
 
-            </div>
-
-            <span class="section-count">
-              02
-            </span>
-
-          </div>
-
-
-          <div class="work-list">
-
-
-            <a
-              href="reader.html?book=saliyah"
-              class="work"
-            >
-
-              <span class="work-number">
-                01
-              </span>
-
-              <div class="work-info">
-
-                <h3 class="work-title">
-                  Saliyah Layu Melulu
-                </h3>
-
-                <div class="work-meta">
-                  Poetry Collection
-                </div>
-
-              </div>
-
-              <span class="work-arrow">
-                →
-              </span>
-
-            </a>
-
-
-            <a
-              href="reader.html?book=kita"
-              class="work"
-            >
-
-              <span class="work-number">
-                02
-              </span>
-
-              <div class="work-info">
-
-                <h3 class="work-title">
-                  Kita di Antara Kata
-                </h3>
-
-                <div class="work-meta">
-                  Poetry Collection
-                </div>
-
-              </div>
-
-              <span class="work-arrow">
-                →
-              </span>
-
-            </a>
-
-
-          </div>
-
-
-          <!-- JOURNAL IMAGE -->
-
-          <div class="journal-stack">
-
-            <div class="journal-image">
-
-              <div class="journal-photo">
-
-                <img
-                  src="pendakian-sindoro-sumbing.jpg"
-                  alt="Hiking"
-                />
-
-              </div>
-
-            </div>
-
-          </div>
-
-          <p class="journal-quote">
-            "We make a living by what we get, but We make a life by what we give"
-          </p>
-
-        </div>
-
-
-
-        <!-- ================= WRITINGS ================= -->
-
-        <div class="works-column">
-
-          <div class="section-heading">
-
-            <div class="section-heading-left">
-
-              <h2 class="section-title">
-                Writings
-              </h2>
-
-            </div>
-
-            <span class="section-count">
-              05
-            </span>
-
-          </div>
-
-
-          <div class="work-list">
-
-
-            <a
-              href="reader.html?book=kesepian"
-              class="work"
-            >
-
-              <span class="work-number">
-                03
-              </span>
-
-              <div class="work-info">
-
-                <h3 class="work-title">
-                  Kesepian Modern
-                </h3>
-
-                <div class="work-meta">
-                  Essay · Reflection
-                </div>
-
-              </div>
-
-              <span class="work-arrow">
-                →
-              </span>
-
-            </a>
-
-
-            <a
-              href="reader.html?book=jatuhcinta"
-              class="work"
-            >
-
-              <span class="work-number">
-                04
-              </span>
-
-              <div class="work-info">
-
-                <h3 class="work-title">
-                  Kalau Nanti Jatuh Cinta Lagi
-                </h3>
-
-                <div class="work-meta">
-                  Notes · Reflection
-                </div>
-
-              </div>
-
-              <span class="work-arrow">
-                →
-              </span>
-
-            </a>
-
-
-            <a
-              href="essay.html?work=kerja"
-              class="work"
-            >
-
-              <span class="work-number">
-                05
-              </span>
-
-              <div class="work-info">
-
-                <h3 class="work-title">
-                  Kerja, Belajar, dan Tumbuh
-                </h3>
-
-                <div class="work-meta">
-                  Notes · Growth
-                </div>
-
-              </div>
-
-              <span class="work-arrow">
-                →
-              </span>
-
-            </a>
-
-
-            <a
-              href="essay.html?work=pengabdian"
-              class="work"
-            >
-
-              <span class="work-number">
-                06
-              </span>
-
-              <div class="work-info">
-
-                <h3 class="work-title">
-                  Tentang Pengabdian Masyarakat
-                </h3>
-
-                <div class="work-meta">
-                  Notes · Society
-                </div>
-
-              </div>
-
-              <span class="work-arrow">
-                →
-              </span>
-
-            </a>
-
-
-            <a
-              href="reader.html?book=keuangan"
-              class="work"
-            >
-
-              <span class="work-number">
-                07
-              </span>
-
-              <div class="work-info">
-
-                <h3 class="work-title">
-                  Manajemen Keuangan Kecil-Kecilan
-                </h3>
-
-                <div class="work-meta">
-                  Notes · Personal Finance
-                </div>
-
-              </div>
-
-              <span class="work-arrow">
-                →
-              </span>
-
-            </a>
-
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         ABOUT
-    ====================================================== -->
-
-    <section id="about" class="about-section">
-
-      <img
-        src="beach-motorcycle.jpg"
-        alt="Hendi Hesa Mahendra"
-        class="about-image-full"
-      />
-
-      <div class="about-grid">
-
-
-        <div class="about-copy">
-
-          <div class="about-label">
-            About this archive
-          </div>
-
-          <h2 class="about-title">
-            A place for things written,
-            remembered, questioned,
-            and left behind along the way.
+          <h2 class="section-title">
+            Books
           </h2>
 
-          <a href="#works" class="about-link">
-
-            Explore archive
-
-            <span></span>
-
-            →
-
-          </a>
-
         </div>
+
+        <span class="section-count">
+          02
+        </span>
+
+      </div>
+
+
+      <div class="work-list">
+
+
+        <a
+          href="reader.html?book=saliyah"
+          class="work"
+        >
+
+          <span class="work-number">
+            01
+          </span>
+
+          <div class="work-info">
+
+            <h3 class="work-title">
+              Saliyah Layu Melulu
+            </h3>
+
+            <div class="work-meta">
+              Poetry Collection
+            </div>
+
+          </div>
+
+          <span class="work-arrow">
+            →
+          </span>
+
+        </a>
+
+
+        <a
+          href="reader.html?book=kita"
+          class="work"
+        >
+
+          <span class="work-number">
+            02
+          </span>
+
+          <div class="work-info">
+
+            <h3 class="work-title">
+              Kita di Antara Kata
+            </h3>
+
+            <div class="work-meta">
+              Poetry Collection
+            </div>
+
+          </div>
+
+          <span class="work-arrow">
+            →
+          </span>
+
+        </a>
 
 
       </div>
 
-    </section>
+
+      <!-- ================= FIELD NOTE ================= -->
+
+      <div class="journal-stack">
+
+        <div class="journal-image">
+
+          <div class="journal-photo">
+
+            <img
+              src="pendakian-sindoro-sumbing.jpg"
+              alt="Hiking in Sindoro and Sumbing"
+            />
+
+          </div>
+
+
+          <p class="journal-caption">
+            "We make a living by what we get,
+            but we make a life by what we give."
+          </p>
+
+
+          <div class="journal-note">
+            Field Note · 2026
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ================= WRITINGS ================= -->
+
+    <div class="works-column">
+
+      <div class="section-heading">
+
+        <div class="section-heading-left">
+
+          <h2 class="section-title">
+            Writings
+          </h2>
+
+        </div>
+
+        <span class="section-count">
+          05
+        </span>
+
+      </div>
+
+
+      <div class="work-list">
+
+
+        <a
+          href="reader.html?book=kesepian"
+          class="work"
+        >
+
+          <span class="work-number">
+            03
+          </span>
+
+          <div class="work-info">
+
+            <h3 class="work-title">
+              Kesepian Modern
+            </h3>
+
+            <div class="work-meta">
+              Essay · Reflection
+            </div>
+
+          </div>
+
+          <span class="work-arrow">
+            →
+          </span>
+
+        </a>
+
+
+        <a
+          href="reader.html?book=jatuhcinta"
+          class="work"
+        >
+
+          <span class="work-number">
+            04
+          </span>
+
+          <div class="work-info">
+
+            <h3 class="work-title">
+              Kalau Nanti Jatuh Cinta Lagi
+            </h3>
+
+            <div class="work-meta">
+              Notes · Reflection
+            </div>
+
+          </div>
+
+          <span class="work-arrow">
+            →
+          </span>
+
+        </a>
+
+
+        <a
+          href="essay.html?work=kerja"
+          class="work"
+        >
+
+          <span class="work-number">
+            05
+          </span>
+
+          <div class="work-info">
+
+            <h3 class="work-title">
+              Kerja, Belajar, dan Tumbuh
+            </h3>
+
+            <div class="work-meta">
+              Notes · Growth
+            </div>
+
+          </div>
+
+          <span class="work-arrow">
+            →
+          </span>
+
+        </a>
+
+
+        <a
+          href="essay.html?work=pengabdian"
+          class="work"
+        >
+
+          <span class="work-number">
+            06
+          </span>
+
+          <div class="work-info">
+
+            <h3 class="work-title">
+              Tentang Pengabdian Masyarakat
+            </h3>
+
+            <div class="work-meta">
+              Notes · Society
+            </div>
+
+          </div>
+
+          <span class="work-arrow">
+            →
+          </span>
+
+        </a>
+
+
+        <a
+          href="reader.html?book=keuangan"
+          class="work"
+        >
+
+          <span class="work-number">
+            07
+          </span>
+
+          <div class="work-info">
+
+            <h3 class="work-title">
+              Manajemen Keuangan Kecil-Kecilan
+            </h3>
+
+            <div class="work-meta">
+              Notes · Personal Finance
+            </div>
+
+          </div>
+
+          <span class="work-arrow">
+            →
+          </span>
+
+        </a>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ABOUT
+====================================================== -->
+
+<section
+  id="about"
+  class="about-section"
+>
+
+  <img
+    src="beach-motorcycle.jpg"
+    alt="Hendi Hesa Mahendra"
+    class="about-image-full"
+  />
+
+
+  <div class="about-grid">
+
+    <div class="about-copy">
+
+      <div class="about-label">
+        About this archive
+      </div>
+
+
+      <h2 class="about-title">
+
+        A place for things written,
+        remembered, questioned,
+        and left behind along the way.
+
+      </h2>
+
+
+      <a
+        href="#works"
+        class="about-link"
+      >
+
+        Explore archive
+
+        <span></span>
+
+        →
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+```
 
   </main>
-
-
 
   <!-- =======================================================
        FOOTER
@@ -1547,39 +1892,47 @@
 
   <footer>
 
-    <div class="footer-inner">
+```
+<div class="footer-inner">
 
 
-      <div class="footer-location">
+  <div class="footer-location">
 
-        <span>03° 52′ S · 115° 12′ E</span><br />
+    <span>
+      03° 52′ S · 115° 12′ E
+    </span>
 
-        KINTAP
+    <br />
 
-      </div>
+    KINTAP
+
+  </div>
 
 
-      <div class="footer-right">
+  <div class="footer-right">
 
-        <strong>
-          A Small Archive of Being.
-        </strong>
+    <strong>
+      A Small Archive of Being.
+    </strong>
 
-        <div class="footer-mark">
 
-          © 2026 HENDI HESA MAHENDRA
-          <span>·</span>
-          PERSONAL ARCHIVE
+    <div class="footer-mark">
 
-        </div>
+      © 2026 HENDI HESA MAHENDRA
 
-      </div>
+      <span>·</span>
 
+      PERSONAL ARCHIVE
 
     </div>
 
-  </footer>
+  </div>
 
+
+</div>
+```
+
+  </footer>
 
 </body>
 </html>
