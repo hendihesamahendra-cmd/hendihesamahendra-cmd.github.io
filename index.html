@@ -728,13 +728,29 @@
     }
 
     /* =========================
+       MADING SIDE COLUMN
+    ========================= */
+
+    .mading-side {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      flex: 0 0 185px;
+      width: 185px;
+    }
+
+    .mading-side .youtube-note,
+    .mading-side .poem-note {
+      flex: none;
+      width: 100%;
+    }
+
+    /* =========================
        SMALL YOUTUBE POSTER
     ========================= */
 
     .youtube-note {
       position: relative;
-      flex: 0 0 185px;
-      width: 185px;
       padding: 20px 16px 18px;
       background: #f4f1e8;
       color: #17191b;
@@ -863,6 +879,256 @@
 
     .youtube-link-arrow {
       font-size: 12px;
+    }
+
+    /* =========================
+       POEM NOTE
+    ========================= */
+
+    .poem-note {
+      position: relative;
+      padding: 20px 16px 20px;
+      background: #f6f2e4;
+      color: #17191b;
+      border: none;
+      font-family: inherit;
+      text-align: left;
+      cursor: pointer;
+      box-shadow:
+        0 16px 28px rgba(0, 0, 0, 0.38);
+      transform: rotate(-2deg);
+      transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+    }
+
+    .poem-note:hover {
+      transform:
+        rotate(0deg)
+        translateY(-5px);
+      box-shadow:
+        0 21px 34px rgba(0, 0, 0, 0.44);
+    }
+
+    .poem-tape {
+      position: absolute;
+      top: -11px;
+      width: 50px;
+      height: 20px;
+      background: rgba(245, 243, 237, 0.62);
+      border: 1px solid rgba(255,255,255,0.42);
+      box-shadow:
+        0 2px 5px rgba(0,0,0,0.22);
+    }
+
+    .poem-tape.left {
+      left: 12px;
+      transform: rotate(-6deg);
+    }
+
+    .poem-tape.right {
+      right: 12px;
+      transform: rotate(7deg);
+    }
+
+    .poem-note-label {
+      margin: 4px 0 0;
+      text-align: center;
+      font-family: "Courier New", monospace;
+      font-size: 7px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #77736b;
+    }
+
+    .poem-note-excerpt {
+      margin: 12px 0 0;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-style: italic;
+      font-size: 13px;
+      line-height: 1.55;
+      color: #2b2d2f;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .poem-note-divider {
+      width: 35px;
+      height: 1px;
+      margin: 13px auto;
+      background: #b5b0a5;
+    }
+
+    .poem-note-title {
+      margin: 0;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .poem-note-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding-top: 11px;
+      border-top: 1px solid rgba(0,0,0,0.12);
+      font-family: "Courier New", monospace;
+      font-size: 7px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #3d3a36;
+      transition:
+        color 0.3s ease,
+        gap 0.3s ease;
+    }
+
+    .poem-note:hover .poem-note-link {
+      color: var(--blue);
+      gap: 12px;
+    }
+
+    /* =========================
+       POEM MODAL
+    ========================= */
+
+    .poem-modal {
+      position: fixed;
+      z-index: 100;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      visibility: hidden;
+      opacity: 0;
+      transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+    }
+
+    .poem-modal.is-open {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .poem-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(5, 6, 8, 0.87);
+    }
+
+    .poem-modal-card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 420px;
+      max-height: 84vh;
+      overflow-y: auto;
+      padding: 34px 28px 28px;
+      background: var(--paper-white);
+      box-shadow:
+        0 32px 60px rgba(0, 0, 0, 0.55);
+      transform:
+        translateY(14px)
+        rotate(-0.6deg);
+      transition: transform 0.35s ease;
+    }
+
+    .poem-modal.is-open .poem-modal-card {
+      transform:
+        translateY(0)
+        rotate(0deg);
+    }
+
+    .poem-modal-close {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      line-height: 1;
+      color: white;
+      background: #111417;
+      border: none;
+      border-radius: 50%;
+      box-shadow:
+        0 6px 14px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+    }
+
+    .poem-modal-label {
+      margin: 0;
+      text-align: center;
+      font-family: "Courier New", monospace;
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #77736b;
+    }
+
+    .poem-modal-title {
+      margin: 8px 0 0;
+      text-align: center;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #111316;
+    }
+
+    .poem-modal-divider {
+      width: 38px;
+      height: 1px;
+      margin: 16px auto;
+      background: #b5b0a5;
+    }
+
+    .poem-modal-text {
+      margin: 0;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-style: italic;
+      font-size: 15px;
+      line-height: 1.9;
+      color: #2b2d2f;
+      text-align: center;
+      white-space: pre-line;
+    }
+
+    .poem-modal-link {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 22px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+      font-family: "Courier New", monospace;
+      font-size: 8px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #3d3a36;
+      transition:
+        color 0.3s ease,
+        gap 0.3s ease;
+    }
+
+    .poem-modal-link.is-visible {
+      display: flex;
+    }
+
+    .poem-modal-link:hover {
+      color: var(--blue);
+      gap: 12px;
     }
 
     .map-caption {
@@ -1423,11 +1689,22 @@
         height: 13px;
       }
 
-      .youtube-note {
+      .mading-side {
         flex: none;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 18px;
+      }
+
+      .mading-side .youtube-note,
+      .mading-side .poem-note {
         width: 170px;
+      }
+
+      .youtube-note {
         padding: 18px 14px 16px;
-        align-self: center;
         transform: rotate(-1.8deg);
       }
 
@@ -1445,6 +1722,26 @@
 
       .youtube-title {
         font-size: 12px;
+      }
+
+      .poem-note {
+        padding: 18px 14px 16px;
+        transform: rotate(1.8deg);
+      }
+
+      .poem-note:hover {
+        transform:
+          rotate(0deg)
+          translateY(-4px);
+      }
+
+      .poem-note-title {
+        font-size: 11px;
+      }
+
+      .poem-modal-card {
+        max-width: 340px;
+        padding: 28px 22px 22px;
       }
 
       .map-caption {
@@ -1559,7 +1856,8 @@
         display: none;
       }
 
-      .youtube-note {
+      .mading-side .youtube-note,
+      .mading-side .poem-note {
         width: 160px;
       }
     }
@@ -2106,66 +2404,142 @@
         </div>
 
 
-        <!-- SMALL YOUTUBE POSTER -->
+        <div class="mading-side">
 
-        <a
-          href="https://www.youtube.com/@HendiHesaMahendra"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="youtube-note"
-          aria-label="Kunjungi channel YouTube Hendi Hesa Mahendra"
-        >
+          <!-- SMALL YOUTUBE POSTER -->
 
-          <span
-            class="youtube-tape left"
-            aria-hidden="true"
-          ></span>
+          <a
+            href="https://www.youtube.com/@HendiHesaMahendra"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="youtube-note"
+            aria-label="Kunjungi channel YouTube Hendi Hesa Mahendra"
+          >
 
-          <span
-            class="youtube-tape right"
-            aria-hidden="true"
-          ></span>
+            <span
+              class="youtube-tape left"
+              aria-hidden="true"
+            ></span>
 
-
-          <div
-            class="youtube-logo"
-            aria-hidden="true"
-          ></div>
+            <span
+              class="youtube-tape right"
+              aria-hidden="true"
+            ></span>
 
 
-          <p class="youtube-small-label">
-            Watch my channel
-          </p>
+            <div
+              class="youtube-logo"
+              aria-hidden="true"
+            ></div>
 
 
-          <h3 class="youtube-title">
-            Hendi Hesa<br />
-            Mahendra
-          </h3>
+            <p class="youtube-small-label">
+              Watch my channel
+            </p>
 
 
-          <div
-            class="youtube-divider"
-            aria-hidden="true"
-          ></div>
+            <h3 class="youtube-title">
+              Hendi Hesa<br />
+              Mahendra
+            </h3>
 
 
-          <p class="youtube-handle">
-            @HendiHesaMahendra
-          </p>
+            <div
+              class="youtube-divider"
+              aria-hidden="true"
+            ></div>
 
 
-          <div class="youtube-link">
+            <p class="youtube-handle">
+              @HendiHesaMahendra
+            </p>
 
-            Visit channel
 
-            <span class="youtube-link-arrow">
-              →
-            </span>
+            <div class="youtube-link">
 
-          </div>
+              Visit channel
 
-        </a>
+              <span class="youtube-link-arrow">
+                →
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- POEM NOTE -->
+
+          <button
+            type="button"
+            class="poem-note"
+            data-poem-title="Tetaplah"
+            data-poem-text="Tuhan yang Maha Penyayang, yang cintaNya tak pernah terukur.
+temani aku selagi kuhabiskan sebungkus rokok ini.
+temani aku selagi es perlahan mencair di kopiku ini.
+
+Sudikah Kau tetap duduk bersama seseorang senoda diriku?
+Sudikah Kau bicara padaku dalam sunyi,
+walau aku bukan nabi, bukan pula orang suci—
+hanya anak yang tersesat?
+
+Inilah satu-satunya doaku malam ini:
+untuk sadar bahwa benar dan salah,
+baik dan buruk, tidak pernah ada.
+Yang benar-benar ada hanyalah Cinta.
+
+Maka biarkan aku jadi anakMu yang paling nakal,
+yang paling sering menyakiti hatiMu,
+namun juga yang paling Kau cintai.
+
+Saat amarahMu jatuh padaku, aku merasa didekap.
+Saat kesedihanMu menyentuhku, aku tahu aku dilihat.
+
+Hukum aku sekeras apa pun.
+Bakar aku bersih dengan apiMu.
+Namun—jangan pernah tinggalkan aku.
+
+Tetaplah. Tetaplah bersamaku.
+Jangan pernah pergi."
+            data-poem-link=""
+            aria-label="Baca puisi Tetaplah"
+          >
+
+            <span
+              class="poem-tape left"
+              aria-hidden="true"
+            ></span>
+
+            <span
+              class="poem-tape right"
+              aria-hidden="true"
+            ></span>
+
+            <p class="poem-note-label">
+              Puisi
+            </p>
+
+            <p class="poem-note-excerpt">
+              "Tuhan yang Maha Penyayang, yang cintaNya tak pernah terukur..."
+            </p>
+
+            <div
+              class="poem-note-divider"
+              aria-hidden="true"
+            ></div>
+
+            <p class="poem-note-title">
+              Tetaplah
+            </p>
+
+            <div class="poem-note-link">
+              Baca puisi
+              <span class="poem-note-arrow">→</span>
+            </div>
+
+          </button>
+
+        </div>
 
 
         <div class="map-caption">
@@ -2278,6 +2652,64 @@
   </div>
 
 
+  <!-- POEM MODAL -->
+
+  <div
+    id="poemModal"
+    class="poem-modal"
+    aria-hidden="true"
+  >
+
+    <div
+      class="poem-modal-backdrop"
+      data-poem-close
+    ></div>
+
+
+    <div class="poem-modal-card">
+
+      <button
+        type="button"
+        class="poem-modal-close"
+        data-poem-close
+        aria-label="Tutup"
+      >
+        ×
+      </button>
+
+      <p class="poem-modal-label">
+        Puisi
+      </p>
+
+      <h3
+        id="poemModalTitle"
+        class="poem-modal-title"
+      ></h3>
+
+      <div
+        class="poem-modal-divider"
+        aria-hidden="true"
+      ></div>
+
+      <p
+        id="poemModalText"
+        class="poem-modal-text"
+      ></p>
+
+      <a
+        id="poemModalLink"
+        href="#"
+        class="poem-modal-link"
+      >
+        Baca puisi lengkap
+        <span class="poem-modal-link-arrow">→</span>
+      </a>
+
+    </div>
+
+  </div>
+
+
   <!-- JAVASCRIPT -->
 
   <script>
@@ -2362,6 +2794,109 @@
           if (e.key === "Escape") {
 
             closeMading();
+
+          }
+
+        }
+      );
+
+    })();
+
+
+    (function () {
+
+      var poemModal =
+        document.getElementById("poemModal");
+
+      var poemTitle =
+        document.getElementById("poemModalTitle");
+
+      var poemText =
+        document.getElementById("poemModalText");
+
+      var poemLink =
+        document.getElementById("poemModalLink");
+
+
+      function openPoem(title, text, link) {
+
+        poemTitle.textContent = title;
+
+        poemText.textContent = text;
+
+        if (link) {
+
+          poemLink.href = link;
+
+          poemLink.classList.add("is-visible");
+
+        } else {
+
+          poemLink.classList.remove("is-visible");
+
+        }
+
+        poemModal.classList.add("is-open");
+
+        poemModal.setAttribute(
+          "aria-hidden",
+          "false"
+        );
+
+      }
+
+
+      function closePoem() {
+
+        poemModal.classList.remove("is-open");
+
+        poemModal.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+
+      }
+
+
+      document
+        .querySelectorAll(".poem-note")
+        .forEach(function (note) {
+
+          note.addEventListener(
+            "click",
+            function () {
+
+              openPoem(
+                note.getAttribute("data-poem-title"),
+                note.getAttribute("data-poem-text"),
+                note.getAttribute("data-poem-link")
+              );
+
+            }
+          );
+
+        });
+
+
+      poemModal
+        .querySelectorAll("[data-poem-close]")
+        .forEach(function (el) {
+
+          el.addEventListener(
+            "click",
+            closePoem
+          );
+
+        });
+
+
+      document.addEventListener(
+        "keydown",
+        function (e) {
+
+          if (e.key === "Escape") {
+
+            closePoem();
 
           }
 
