@@ -255,12 +255,32 @@
       line-height: 0.82;
       letter-spacing: -0.045em;
       text-transform: uppercase;
-      animation: fadeUp 1s 0.15s both ease;
       will-change: transform, opacity;
     }
 
     .hero-title span {
+      color: inherit;
+    }
+
+    .hero-line {
+      display: block;
+      white-space: nowrap;
+    }
+
+    .hero-char {
+      display: inline-block;
+      color: white;
+      will-change: transform, opacity, filter;
+      transform-origin: 50% 55%;
+      backface-visibility: hidden;
+    }
+
+    .hero-char.hero-accent {
       color: var(--blue-light);
+    }
+
+    .hero-char.hero-space {
+      width: 0.26em;
     }
 
     .hero-description {
@@ -889,10 +909,11 @@
     .poem-note {
       position: relative;
       padding: 20px 16px 20px;
-      background: #2a231b;
-      color: #e8dfd0;
+      background: #c9baa0;
+      color: #29241d;
       border: none;
       font-family: "Times New Roman", Times, serif;
+      font-style: normal;
       text-align: left;
       cursor: pointer;
       box-shadow:
@@ -939,16 +960,16 @@
       font-size: 7px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #a89a84;
+      color: #5f5547;
     }
 
     .poem-note-excerpt {
       margin: 12px 0 0;
       font-family: "Times New Roman", Times, serif;
-      font-style: italic;
+      font-style: normal;
       font-size: 13px;
       line-height: 1.55;
-      color: #d9cfbd;
+      color: #29241d;
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
@@ -959,7 +980,7 @@
       width: 35px;
       height: 1px;
       margin: 13px auto;
-      background: #6b5d47;
+      background: #8b7d68;
     }
 
     .poem-note-title {
@@ -970,7 +991,7 @@
       font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: #c1272d;
+      color: #7f2b2b;
     }
 
     .poem-note-link {
@@ -1082,6 +1103,8 @@
     .poem-modal-title {
       margin: 8px 0 0;
       text-align: center;
+      font-family: "Times New Roman", Times, serif;
+      font-style: normal;
       font-size: 17px;
       font-weight: 600;
       letter-spacing: 0.03em;
@@ -1098,8 +1121,8 @@
 
     .poem-modal-text {
       margin: 0;
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-style: italic;
+      font-family: "Times New Roman", Times, serif;
+      font-style: normal;
       font-size: 15px;
       line-height: 1.9;
       color: #2b2d2f;
@@ -1712,12 +1735,12 @@
 
       .mading-side .youtube-note,
       .mading-side .poem-note {
-        width: 42px;
+        width: 59px;
       }
 
       .youtube-note,
       .poem-note {
-        padding: 4px 3px 4px;
+        padding: 6px 4px 6px;
       }
 
       .youtube-note {
@@ -1746,10 +1769,10 @@
       }
 
       .youtube-logo {
-        width: 11px;
-        height: 8px;
-        margin: 2px auto 3px;
-        border-radius: 2px;
+        width: 15px;
+        height: 11px;
+        margin: 3px auto 4px;
+        border-radius: 3px;
       }
 
       .youtube-logo::after {
@@ -1764,30 +1787,30 @@
       .youtube-link,
       .poem-note-label,
       .poem-note-link {
-        font-size: 2px;
+        font-size: 2.8px;
       }
 
       .youtube-title,
       .poem-note-title {
-        margin-top: 2px;
-        font-size: 3px;
+        margin-top: 2.8px;
+        font-size: 4.2px;
       }
 
       .youtube-divider,
       .poem-note-divider {
-        width: 9px;
-        margin: 3px auto;
+        width: 13px;
+        margin: 4px auto;
       }
 
       .youtube-link,
       .poem-note-link {
-        gap: 2px;
-        margin-top: 3px;
-        padding-top: 3px;
+        gap: 2.8px;
+        margin-top: 4px;
+        padding-top: 4px;
       }
 
       .youtube-link-arrow {
-        font-size: 3px;
+        font-size: 4.2px;
       }
 
       .poem-tape.left {
@@ -1809,8 +1832,8 @@
       }
 
       .poem-note-excerpt {
-        margin-top: 3px;
-        font-size: 3px;
+        margin-top: 4px;
+        font-size: 4.2px;
         line-height: 1.3;
         -webkit-line-clamp: 2;
       }
@@ -1938,7 +1961,7 @@
 
       .mading-side .youtube-note,
       .mading-side .poem-note {
-        width: 40px;
+        width: 56px;
       }
     }
 
@@ -2014,10 +2037,3323 @@
 
       <div class="hero-content">
 
-        <h1 class="hero-title">
-          A SMALL<br />
-          ARCHIVE<br />
-          OF <span>BEING.</span>
+        <h1 class="hero-title" aria-label="A Small Archive of Being.">
+          <span class="hero-line">
+            <span class="hero-char">A</span>
+            <span class="hero-char hero-space" aria-hidden="true">&nbsp;</span>
+            <span class="hero-char">S</span><span class="hero-char">M</span><span class="hero-char">A</span><span class="hero-char">L</span><span class="hero-char">L</span>
+          </span>
+          <span class="hero-line">
+            <span class="hero-char">A</span><span class="hero-char">R</span><span class="hero-char">C</span><span class="hero-char">H</span><span class="hero-char">I</span><span class="hero-char">V</span><span class="hero-char">E</span>
+          </span>
+          <span class="hero-line">
+            <span class="hero-char">O</span><span class="hero-char hero-space" aria-hidden="true">&nbsp;</span><span class="hero-char">F</span>
+            <span class="hero-char hero-space" aria-hidden="true">&nbsp;</span>
+            <span class="hero-char hero-accent">B</span><span class="hero-char hero-accent">E</span><span class="hero-char hero-accent">I</span><span class="hero-char hero-accent">N</span><span class="hero-char hero-accent">G</span><span class="hero-char hero-accent">.</span>
+          </span>
+        </h1>
+
+        <div class="hero-description">
+          Merekam perjalanan.<br />
+          Mengabadikan kenangan.<br />
+          Meninggalkan jejak.
+        </div>
+
+        <a
+          href="#works"
+          class="hero-enter"
+        >
+          Welcome to my archive
+
+          <span class="hero-enter-line"></span>
+
+          →
+        </a>
+
+      </div>
+
+    </div>
+
+    <div class="scroll-cue">
+
+      <span>
+        Scroll to explore
+      </span>
+
+      <span class="scroll-line"></span>
+
+      <span class="scroll-arrow">
+        ↓
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <!-- MAIN -->
+
+  <main id="works">
+
+    <!-- WORKS -->
+
+    <section class="section works-section">
+
+      <div class="works-grid">
+
+        <!-- BOOKS -->
+
+        <div class="works-column">
+
+          <div class="section-heading">
+
+            <div class="section-heading-left">
+
+              <h2 class="section-title">
+                Books
+              </h2>
+
+            </div>
+
+          </div>
+
+          <div class="work-list">
+
+            <a
+              href="reader.html?book=saliyah"
+              class="work"
+            >
+
+              <span class="work-number">
+                01
+              </span>
+
+              <div class="work-info">
+
+                <h3 class="work-title">
+                  Saliyah Layu Melulu
+                </h3>
+
+                <div class="work-meta">
+                  Poetry Collection
+                </div>
+
+              </div>
+
+              <span
+                class="work-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </a>
+
+
+            <a
+              href="reader.html?book=kita"
+              class="work"
+            >
+
+              <span class="work-number">
+                02
+              </span>
+
+              <div class="work-info">
+
+                <h3 class="work-title">
+                  Kita di Antara Kata
+                </h3>
+
+                <div class="work-meta">
+                  Poetry Collection
+                </div>
+
+              </div>
+
+              <span
+                class="work-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </a>
+
+          </div>
+
+
+          <!-- JOURNAL -->
+
+          <div class="journal-stack">
+
+            <div class="journal-image">
+
+              <div class="journal-photo">
+
+                <img
+                  src="pendakian-sindoro-sumbing.jpg"
+                  alt="Hiking in Sindoro and Sumbing"
+                />
+
+              </div>
+
+              <p class="journal-caption">
+                "We make a living by what we get,<br />
+                but we make a life by what we give."
+              </p>
+
+              <div class="journal-note">
+                Field Note
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- WRITINGS -->
+
+        <div class="works-column">
+
+          <div class="section-heading">
+
+            <div class="section-heading-left">
+
+              <h2 class="section-title">
+                Writings
+              </h2>
+
+            </div>
+
+          </div>
+
+          <div class="work-list">
+
+            <a
+              href="reader.html?book=kesepian"
+              class="work"
+            >
+
+              <span class="work-number">
+                03
+              </span>
+
+              <div class="work-info">
+
+                <h3 class="work-title">
+                  Kesepian Modern
+                </h3>
+
+                <div class="work-meta">
+                  Essay · Reflection
+                </div>
+
+              </div>
+
+              <span
+                class="work-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </a>
+
+
+            <a
+              href="reader.html?book=jatuhcinta"
+              class="work"
+            >
+
+              <span class="work-number">
+                04
+              </span>
+
+              <div class="work-info">
+
+                <h3 class="work-title">
+                  Kalau Nanti Jatuh Cinta Lagi
+                </h3>
+
+                <div class="work-meta">
+                  Notes · Reflection
+                </div>
+
+              </div>
+
+              <span
+                class="work-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </a>
+
+
+            <a
+              href="essay.html?work=kerja"
+              class="work"
+            >
+
+              <span class="work-number">
+                05
+              </span>
+
+              <div class="work-info">
+
+                <h3 class="work-title">
+                  Kerja, Belajar, dan Tumbuh
+                </h3>
+
+                <div class="work-meta">
+                  Notes · Growth
+                </div>
+
+              </div>
+
+              <span
+                class="work-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </a>
+
+
+            <a
+              href="essay.html?work=pengabdian"
+              class="work"
+            >
+
+              <span class="work-number">
+                06
+              </span>
+
+              <div class="work-info">
+
+                <h3 class="work-title">
+                  Tentang Pengabdian Masyarakat
+                </h3>
+
+                <div class="work-meta">
+                  Notes · Society
+                </div>
+
+              </div>
+
+              <span
+                class="work-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </a>
+
+
+            <a
+              href="reader.html?book=keuangan"
+              class="work"
+            >
+
+              <span class="work-number">
+                07
+              </span>
+
+              <div class="work-info">
+
+                <h3 class="work-title">
+                  Manajemen Keuangan Kecil-Kecilan
+                </h3>
+
+                <div class="work-meta">
+                  Notes · Personal Finance
+                </div>
+
+              </div>
+
+              <span
+                class="work-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- MADING -->
+
+    <section
+      id="map"
+      class="section map-section"
+    >
+
+      <div class="section-heading">
+
+        <div class="section-heading-left">
+
+          <h2 class="section-title">
+            Mading
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="mading-board">
+
+        <!-- MAP -->
+
+        <div class="map-frame">
+
+          <span
+            class="map-tape left"
+            aria-hidden="true"
+          ></span>
+
+          <span
+            class="map-tape right"
+            aria-hidden="true"
+          ></span>
+
+
+          <div class="map-image-wrap">
+
+            <img
+              src="indonesia-map.png"
+              alt="Map of the Indonesian archipelago"
+              class="indonesia-map-img"
+            />
+
+
+            <!-- JOGJA -->
+
+            <button
+              type="button"
+              class="mading-pin"
+              style="left: 32%; top: 77%;"
+              data-image="jogja-filosofikopi.jpg"
+              data-caption="Filosofi Kopi, Jogja"
+              aria-label="Lihat foto: Filosofi Kopi, Jogja"
+            ></button>
+
+
+            <!-- KERAYAAN BECCU -->
+
+            <button
+              type="button"
+              class="mading-pin"
+              style="left: 45%; top: 57%;"
+              data-image="kerayaan-beccu.jpg"
+              data-caption="Kerayaan Beccu, Kalimantan Selatan"
+              data-orientation="landscape"
+              aria-label="Lihat foto: Kerayaan Beccu, Kalimantan Selatan"
+            ></button>
+
+
+            <!-- GUNUNG PRAU -->
+
+            <button
+              type="button"
+              class="mading-pin"
+              style="left: 30%; top: 73%;"
+              data-image="gunung-prau.jpg"
+              data-caption="Gunung Prau, Jawa Tengah"
+              aria-label="Lihat foto: Gunung Prau, Jawa Tengah"
+            ></button>
+
+
+            <!-- GUNUNG BATUR -->
+
+            <button
+              type="button"
+              class="mading-pin"
+              style="left: 44%; top: 80%;"
+              data-image="gunung-batur.jpg"
+              data-caption="Gunung Batur, Bali"
+              aria-label="Lihat foto: Gunung Batur, Bali"
+            ></button>
+
+
+            <!-- GUNUNG HAUK -->
+
+            <button
+              type="button"
+              class="mading-pin"
+              style="left: 44%; top: 49%;"
+              data-image="gunung-hauk.jpg"
+              data-caption="Gunung Hauk, Kalimantan Selatan"
+              aria-label="Lihat foto: Gunung Hauk, Kalimantan Selatan"
+            ></button>
+
+
+            <!-- GUNUNG KAHUNG -->
+
+            <button
+              type="button"
+              class="mading-pin"
+              style="left: 44%; top: 55%;"
+              data-image="gunung-kahung.jpg"
+              data-caption="Gunung Kahung, Kalimantan Selatan"
+              aria-label="Lihat foto: Gunung Kahung, Kalimantan Selatan"
+            ></button>
+
+
+            <!-- BALIKPAPAN -->
+
+            <button
+              type="button"
+              class="mading-pin"
+              style="left: 47%; top: 36%;"
+              data-image="balikpapan.jpg"
+              data-caption="Balikpapan, Kalimantan Timur"
+              data-orientation="landscape"
+              aria-label="Lihat foto: Balikpapan, Kalimantan Timur"
+            ></button>
+
+
+            <!-- TANJUNG SELOR -->
+
+            <button
+              type="button"
+              class="mading-pin"
+              style="left: 47%; top: 15%;"
+              data-image="tanjung-selor.jpg"
+              data-caption="Tanjung Selor, Kalimantan Utara"
+              data-orientation="landscape"
+              aria-label="Lihat foto: Tanjung Selor, Kalimantan Utara"
+            ></button>
+
+          </div>
+
+        </div>
+
+
+        <div class="mading-side">
+
+          <!-- SMALL YOUTUBE POSTER -->
+
+          <a
+            href="https://www.youtube.com/@HendiHesaMahendra"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="youtube-note"
+            aria-label="Kunjungi channel YouTube Hendi Hesa Mahendra"
+          >
+
+            <span
+              class="youtube-tape left"
+              aria-hidden="true"
+            ></span>
+
+            <span
+              class="youtube-tape right"
+              aria-hidden="true"
+            ></span>
+
+
+            <div
+              class="youtube-logo"
+              aria-hidden="true"
+            ></div>
+
+
+            <p class="youtube-small-label">
+              Watch my channel
+            </p>
+
+
+            <h3 class="youtube-title">
+              Hendi Hesa<br />
+              Mahendra
+            </h3>
+
+
+            <div
+              class="youtube-divider"
+              aria-hidden="true"
+            ></div>
+
+
+            <p class="youtube-handle">
+              @HendiHesaMahendra
+            </p>
+
+
+            <div class="youtube-link">
+
+              Visit channel
+
+              <span class="youtube-link-arrow">
+                →
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- POEM NOTE -->
+
+          <button
+            type="button"
+            class="poem-note"
+            data-poem-title="Tinggal"
+            data-poem-text="Tuhan yang Maha Penyayang,.
+temani aku selagi kuhabiskan sebungkus rokok ini.
+temani aku selagi es perlahan mencair di kopiku ini.
+
+Sudikah Kau duduk bersama seorang pendosa?
+Sudikah Kau bicara padaku,
+walau aku bukan nabi, bukan orang suci—
+
+Inilah satu-satunya doaku malam ini:
+untuk sadar bahwa benar dan salah,
+baik dan buruk, tidak pernah ada.
+Yang benar-benar ada hanyalah Cinta.
+
+bolehkah aku menjadi anak paling nakal mu,
+tapi juga yang paling Kau cintai.
+
+Sebab saat amarahMu jatuh padaku, aku merasa dicintai.
+Sebab saat kau sedih padaku, aku tahu aku disayangi.
+
+Hukum aku seberat-beratnya
+namun jangan tinggalkan aku.
+
+Jangan tinggalkan aku.
+
+- Simpang Empat Sungai Baru, 17 Oktober 2024"
+            data-poem-link=""
+            aria-label="Baca puisi Tinggal"
+          >
+
+            <span
+              class="poem-tape left"
+              aria-hidden="true"
+            ></span>
+
+            <span
+              class="poem-tape right"
+              aria-hidden="true"
+            ></span>
+
+            <p class="poem-note-label">
+              Puisi
+            </p>
+
+            <p class="poem-note-excerpt">
+              "Tuhan yang Maha Penyayang,. temani aku selagi kuhabiskan sebungkus rokok ini..."
+            </p>
+
+            <div
+              class="poem-note-divider"
+              aria-hidden="true"
+            ></div>
+
+            <p class="poem-note-title">
+              Tinggal
+            </p>
+
+            <div class="poem-note-link">
+              Baca puisi
+              <span class="poem-note-arrow">→</span>
+            </div>
+
+          </button>
+
+        </div>
+
+
+        <div class="map-caption">
+
+          <span class="map-caption-dot"></span>
+
+          Tap pin merah untuk melihat foto
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section
+      id="about"
+      class="about-section"
+    >
+
+      <img
+        src="sunset-mountain-view.jpg"
+        alt="Hendi Hesa Mahendra"
+        class="about-image-full"
+      />
+
+
+      <div class="about-grid">
+
+        <div class="about-copy">
+
+          <div class="about-label">
+            About this archive
+          </div>
+
+          <h2 class="about-title">
+            A place for things written,
+            remembered, questioned,
+            and left behind along the way.
+          </h2>
+
+          <a
+            href="#works"
+            class="about-link"
+          >
+
+            Explore
+
+            <span></span>
+
+            →
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- MADING MODAL -->
+
+  <div
+    id="madingModal"
+    class="mading-modal"
+    aria-hidden="true"
+  >
+
+    <div
+      class="mading-modal-backdrop"
+      data-mading-close
+    ></div>
+
+
+    <div class="mading-modal-card">
+
+      <button
+        type="button"
+        class="mading-modal-close"
+        data-mading-close
+        aria-label="Tutup"
+      >
+        ×
+      </button>
+
+
+      <div class="mading-modal-photo">
+
+        <img
+          id="madingModalImg"
+          src=""
+          alt=""
+        />
+
+      </div>
+
+
+      <p
+        id="madingModalCaption"
+        class="mading-modal-caption"
+      ></p>
+
+    </div>
+
+  </div>
+
+
+  <!-- POEM MODAL -->
+
+  <div
+    id="poemModal"
+    class="poem-modal"
+    aria-hidden="true"
+  >
+
+    <div
+      class="poem-modal-backdrop"
+      data-poem-close
+    ></div>
+
+
+    <div class="poem-modal-card">
+
+      <button
+        type="button"
+        class="poem-modal-close"
+        data-poem-close
+        aria-label="Tutup"
+      >
+        ×
+      </button>
+
+      <p class="poem-modal-label">
+        Puisi
+      </p>
+
+      <h3
+        id="poemModalTitle"
+        class="poem-modal-title"
+      ></h3>
+
+      <div
+        class="poem-modal-divider"
+        aria-hidden="true"
+      ></div>
+
+      <p
+        id="poemModalText"
+        class="poem-modal-text"
+      ></p>
+
+      <a
+        id="poemModalLink"
+        href="#"
+        class="poem-modal-link"
+      >
+        Baca puisi lengkap
+        <span class="poem-modal-link-arrow">→</span>
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+
+    (function () {
+
+      var modal =
+        document.getElementById("madingModal");
+
+      var modalImg =
+        document.getElementById("madingModalImg");
+
+      var modalCaption =
+        document.getElementById("madingModalCaption");
+
+      var modalCard =
+        modal.querySelector(".mading-modal-card");
+
+      var modalPhoto =
+        modal.querySelector(".mading-modal-photo");
+
+
+      function openMading(src, caption, orientation) {
+
+        modalImg.src = src;
+
+        modalImg.alt = caption;
+
+        modalCaption.textContent = caption;
+
+        if (orientation === "landscape") {
+
+          modalPhoto.classList.add("is-landscape");
+
+          modalCard.classList.add("is-landscape");
+
+        } else {
+
+          modalPhoto.classList.remove("is-landscape");
+
+          modalCard.classList.remove("is-landscape");
+
+        }
+
+        modal.classList.add("is-open");
+
+        modal.setAttribute(
+          "aria-hidden",
+          "false"
+        );
+
+      }
+
+
+      function closeMading() {
+
+        modal.classList.remove("is-open");
+
+        modal.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+
+      }
+
+
+      document
+        .querySelectorAll(".mading-pin")
+        .forEach(function (pin) {
+
+          pin.addEventListener(
+            "click",
+            function () {
+
+              openMading(
+                pin.getAttribute("data-image"),
+                pin.getAttribute("data-caption"),
+                pin.getAttribute("data-orientation")
+              );
+
+            }
+          );
+
+        });
+
+
+      modal
+        .querySelectorAll("[data-mading-close]")
+        .forEach(function (el) {
+
+          el.addEventListener(
+            "click",
+            closeMading
+          );
+
+        });
+
+
+      document.addEventListener(
+        "keydown",
+        function (e) {
+
+          if (e.key === "Escape") {
+
+            closeMading();
+
+          }
+
+        }
+      );
+
+    })();
+
+
+    (function () {
+
+      var poemModal =
+        document.getElementById("poemModal");
+
+      var poemTitle =
+        document.getElementById("poemModalTitle");
+
+      var poemText =
+        document.getElementById("poemModalText");
+
+      var poemLink =
+        document.getElementById("poemModalLink");
+
+
+      function openPoem(title, text, link) {
+
+        poemTitle.textContent = title;
+
+        poemText.textContent = text;
+
+        if (link) {
+
+          poemLink.href = link;
+
+          poemLink.classList.add("is-visible");
+
+        } else {
+
+          poemLink.classList.remove("is-visible");
+
+        }
+
+        poemModal.classList.add("is-open");
+
+        poemModal.setAttribute(
+          "aria-hidden",
+          "false"
+        );
+
+      }
+
+
+      function closePoem() {
+
+        poemModal.classList.remove("is-open");
+
+        poemModal.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+
+      }
+
+
+      document
+        .querySelectorAll(".poem-note")
+        .forEach(function (note) {
+
+          note.addEventListener(
+            "click",
+            function () {
+
+              openPoem(
+                note.getAttribute("data-poem-title"),
+                note.getAttribute("data-poem-text"),
+                note.getAttribute("data-poem-link")
+              );
+
+            }
+          );
+
+        });
+
+
+      poemModal
+        .querySelectorAll("[data-poem-close]")
+        .forEach(function (el) {
+
+          el.addEventListener(
+            "click",
+            closePoem
+          );
+
+        });
+
+
+      document.addEventListener(
+        "keydown",
+        function (e) {
+
+          if (e.key === "Escape") {
+
+            closePoem();
+
+          }
+
+        }
+      );
+
+    })();
+
+
+    (function () {
+
+      var heroTitle =
+        document.querySelector(".hero-title");
+
+      if (!heroTitle) {
+        return;
+      }
+
+      var prefersReducedMotion =
+        window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+      if (prefersReducedMotion) {
+        return;
+      }
+
+      var ticking = false;
+
+      var maxScroll = 700;
+
+      var speed = 0.35;
+
+
+      function updateHeroParallax() {
+
+        var scrolled =
+          window.scrollY || window.pageYOffset;
+
+        var clamped =
+          Math.min(scrolled, maxScroll);
+
+        var translateY =
+          clamped * speed;
+
+        var opacity =
+          Math.max(
+            1 - clamped / maxScroll,
+            0.15
+          );
+
+        heroTitle.style.transform =
+          "translateY(" + translateY + "px)";
+
+        heroTitle.style.opacity = opacity;
+
+        ticking = false;
+
+      }
+
+
+      function onScroll() {
+
+        if (!ticking) {
+
+          window.requestAnimationFrame(
+            updateHeroParallax
+          );
+
+          ticking = true;
+
+        }
+
+      }
+
+
+      window.addEventListener(
+        "scroll",
+        onScroll,
+        { passive: true }
+      );
+
+
+      updateHeroParallax();
+
+    })();
+
+  </script>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="footer-inner">
+
+      <div class="footer-location">
+
+        <span>
+          03° 52′ S · 115° 12′ E
+        </span>
+
+        <br />
+
+        KINTAP, SOUTH BORNEO
+
+      </div>
+
+
+      <div class="footer-right">
+
+        <strong>
+          A Small Archive of Being.
+        </strong>
+
+        <div class="footer-mark">
+
+          © HENDI HESA MAHENDRA
+
+          <span>·</span>
+
+          PERSONAL ARCHIVE
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+</body>
+</html    (function () {
+      var heroTitle = document.querySelector(".hero-title");
+      var heroChars = heroTitle
+        ? Array.prototype.slice.call(
+            heroTitle.querySelectorAll(".hero-char")
+          )
+        : [];
+
+      if (!heroTitle || !heroChars.length) {
+        return;
+      }
+
+      var prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      if (prefersReducedMotion) {
+        return;
+      }
+
+      /*
+        The title behaves like a physical archive:
+        perfectly composed at the top, then progressively
+        breaks apart as the page is explored. Every character
+        has its own deterministic "memory" of where to drift.
+      */
+      var seeds = heroChars.map(function (_, i) {
+        var n = Math.sin((i + 1) * 12.9898) * 43758.5453;
+        n = n - Math.floor(n);
+
+        var n2 = Math.sin((i + 1) * 78.233) * 43758.5453;
+        n2 = n2 - Math.floor(n2);
+
+        var n3 = Math.sin((i + 1) * 39.425) * 43758.5453;
+        n3 = n3 - Math.floor(n3);
+
+        return {
+          x: (n - 0.5) * 360,
+          y: -100 + n2 * 270,
+          rotate: (n3 - 0.5) * 110,
+          scale: 0.68 + n * 0.42,
+          blur: 0.4 + n2 * 1.8
+        };
+      });
+
+      var ticking = false;
+
+      function clamp(value, min, max) {
+        return Math.min(Math.max(value, min), max);
+      }
+
+      function easeInOut(value) {
+        return value < 0.5
+          ? 2 * value * value
+          : 1 - Math.pow(-2 * value + 2, 2) / 2;
+      }
+
+      function updateHeroScatter() {
+        var scrolled = window.scrollY || window.pageYOffset || 0;
+
+        /*
+          Keep the effect concentrated around the transition
+          out of the hero so the title has a clear "before / after".
+        */
+        var progress = clamp(scrolled / 620, 0, 1);
+        var eased = easeInOut(progress);
+
+        heroChars.forEach(function (char, i) {
+          var seed = seeds[i];
+
+          var x = seed.x * eased;
+          var y = seed.y * eased;
+          var rotation = seed.rotate * eased;
+          var scale = 1 + (seed.scale - 1) * eased;
+          var blur = seed.blur * eased;
+
+          /*
+            Tiny depth movement makes the letters feel less like
+            a CSS effect and more like fragments drifting in space.
+          */
+          var depth = Math.sin((i + 1) * 1.7 + scrolled * 0.008) * 5 * eased;
+
+          char.style.transform =
+            "translate3d(" +
+            x.toFixed(2) +
+            "px, " +
+            (y + depth).toFixed(2) +
+            "px, 0) rotate(" +
+            rotation.toFixed(2) +
+            "deg) scale(" +
+            scale.toFixed(3) +
+            ")";
+
+          char.style.opacity = String(1 - eased * 0.76);
+          char.style.filter = "blur(" + blur.toFixed(2) + "px)";
+        });
+
+        ticking = false;
+      }
+
+      function onScroll() {
+        if (!ticking) {
+          window.requestAnimationFrame(updateHeroScatter);
+          ticking = true;
+        }
+      }
+
+      window.addEventListener("scroll", onScroll, {
+        passive: true
+      });
+
+      updateHeroScatter();
+    })();
+ html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>HENDI HESA MAHENDRA</title>
+
+  <meta
+    name="description"
+    content="A Small Archive of Being."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --black: #07090b;
+      --black-soft: #0d1013;
+      --paper: #111417;
+
+      --white: #f4f4f0;
+      --ink: #eeeeea;
+
+      --muted: #858b91;
+      --muted-dark: #646a70;
+
+      --line: rgba(244, 244, 240, 0.12);
+      --line-strong: rgba(244, 244, 240, 0.2);
+
+      --blue: #3d8fe8;
+      --blue-light: #82c1ff;
+      --blue-faint: rgba(61, 143, 232, 0.09);
+
+      --paper-light: #e8e6df;
+      --paper-white: #f5f3ed;
+
+      --max: 1380px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    ::selection {
+      background: var(--blue);
+      color: white;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .site-header {
+      position: absolute;
+      z-index: 20;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 82px;
+      padding: 0 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+    }
+
+    .site-name {
+      position: relative;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      opacity: 0.9;
+      transition: opacity 0.3s ease;
+    }
+
+    .site-name:hover {
+      opacity: 1;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 38px;
+    }
+
+    .nav a {
+      position: relative;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      opacity: 0.72;
+      transition:
+        opacity 0.3s ease,
+        color 0.3s ease;
+    }
+
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 0;
+      height: 1px;
+      background: var(--blue-light);
+      transition: width 0.35s ease;
+    }
+
+    .nav a:hover {
+      opacity: 1;
+      color: white;
+    }
+
+    .nav a:hover::after {
+      width: 100%;
+    }
+
+    .nav-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--blue-light);
+      box-shadow:
+        0 0 0 4px rgba(130, 193, 255, 0.05);
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      position: relative;
+      min-height: 820px;
+      height: 100vh;
+      background: var(--black);
+      color: white;
+      overflow: hidden;
+    }
+
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      filter:
+        saturate(0.78)
+        contrast(1.08)
+        brightness(0.7);
+      transform: scale(1.02);
+      animation: heroImage 1.8s ease forwards;
+    }
+
+    @keyframes heroImage {
+      from {
+        opacity: 0;
+        transform: scale(1.07);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1.02);
+      }
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(4, 7, 10, 0.94) 0%,
+          rgba(4, 7, 10, 0.78) 26%,
+          rgba(4, 7, 10, 0.28) 61%,
+          rgba(4, 7, 10, 0.48) 100%
+        );
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      inset: 0;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.44) 0%,
+          transparent 27%,
+          transparent 68%,
+          rgba(0, 0, 0, 0.78) 100%
+        );
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 5;
+      width: min(var(--max), 90vw);
+      height: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns:
+        minmax(0, 1fr)
+        minmax(320px, 0.8fr);
+      align-items: center;
+    }
+
+    .hero-content {
+      max-width: 720px;
+      padding-top: 65px;
+    }
+
+    .hero-title {
+      max-width: 760px;
+      margin: 0;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(72px, 9vw, 138px);
+      font-weight: 500;
+      line-height: 0.82;
+      letter-spacing: -0.045em;
+      text-transform: uppercase;
+      will-change: transform, opacity;
+    }
+
+    .hero-title span {
+      color: inherit;
+    }
+
+    .hero-line {
+      display: block;
+      white-space: nowrap;
+    }
+
+    .hero-char {
+      display: inline-block;
+      color: white;
+      will-change: transform, opacity, filter;
+      transform-origin: 50% 55%;
+      backface-visibility: hidden;
+    }
+
+    .hero-char.hero-accent {
+      color: var(--blue-light);
+    }
+
+    .hero-char.hero-space {
+      width: 0.26em;
+    }
+
+    .hero-description {
+      max-width: 390px;
+      margin: 39px 0 0;
+      padding-left: 19px;
+      border-left: 1px solid var(--blue-light);
+      font-size: 12px;
+      line-height: 1.85;
+      letter-spacing: 0.035em;
+      color: rgba(255,255,255,0.7);
+      animation: fadeUp 1s 0.3s both ease;
+    }
+
+    .hero-enter {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 37px;
+      font-size: 8px;
+      letter-spacing: 0.23em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.82);
+      animation: fadeUp 1s 0.45s both ease;
+    }
+
+    .hero-enter-line {
+      width: 54px;
+      height: 1px;
+      background: rgba(255,255,255,0.8);
+      transition:
+        width 0.35s ease,
+        background 0.35s ease;
+    }
+
+    .hero-enter:hover {
+      color: white;
+    }
+
+    .hero-enter:hover .hero-enter-line {
+      width: 82px;
+      background: var(--blue-light);
+    }
+
+    .scroll-cue {
+      position: absolute;
+      z-index: 8;
+      left: 5vw;
+      bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 7px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.42);
+      animation: fadeUp 1s 0.7s both ease;
+    }
+
+    .scroll-line {
+      width: 48px;
+      height: 1px;
+      background: rgba(255,255,255,0.35);
+    }
+
+    .scroll-arrow {
+      color: var(--blue-light);
+      font-size: 13px;
+    }
+
+    main {
+      background: var(--paper);
+    }
+
+    .section {
+      width: min(var(--max), 90vw);
+      margin: 0 auto;
+    }
+
+    /* =========================
+       WORKS
+    ========================= */
+
+    .works-section {
+      padding: 112px 0 130px;
+    }
+
+    .works-grid {
+      display: grid;
+      grid-template-columns:
+        0.85fr
+        1.15fr;
+      gap: 9vw;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-heading-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.19em;
+      text-transform: uppercase;
+    }
+
+    .work-list {
+      margin-top: 9px;
+    }
+
+    .work {
+      position: relative;
+      display: grid;
+      grid-template-columns:
+        44px
+        minmax(0, 1fr)
+        28px;
+      align-items: center;
+      min-height: 86px;
+      padding: 0;
+      border-bottom: 1px solid var(--line);
+      transition:
+        padding 0.35s ease,
+        background 0.35s ease;
+    }
+
+    .work::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 0;
+      height: 1px;
+      background: var(--blue);
+      transition: width 0.45s ease;
+    }
+
+    .work:hover {
+      padding-left: 13px;
+      background: var(--blue-faint);
+    }
+
+    .work:hover::before {
+      width: 100%;
+    }
+
+    .work-number {
+      align-self: center;
+      font-family: "Courier New", monospace;
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      color: var(--blue);
+    }
+
+    .work-info {
+      min-width: 0;
+    }
+
+    .work-title {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.35;
+      letter-spacing: 0.085em;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .work:hover .work-title {
+      color: white;
+    }
+
+    .work-meta {
+      margin-top: 7px;
+      font-family: "Courier New", monospace;
+      font-size: 8px;
+      line-height: 1.4;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+    }
+
+    .work-arrow {
+      font-size: 17px;
+      font-weight: 300;
+      text-align: right;
+      color: rgba(255,255,255,0.48);
+      transition:
+        transform 0.35s ease,
+        color 0.35s ease;
+    }
+
+    .work:hover .work-arrow {
+      color: var(--blue-light);
+      transform: translateX(5px);
+    }
+
+    /* =========================
+       JOURNAL
+    ========================= */
+
+    .journal-stack {
+      position: relative;
+      margin-top: 49px;
+      padding: 14px 18px 23px;
+    }
+
+    .journal-stack::before,
+    .journal-stack::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #f1efe8;
+      border: 1px solid rgba(17,19,22,0.1);
+      box-shadow:
+        0 15px 32px rgba(0,0,0,0.38);
+    }
+
+    .journal-stack::before {
+      z-index: 0;
+      transform:
+        rotate(-3.1deg)
+        translate(-9px, 7px);
+    }
+
+    .journal-stack::after {
+      z-index: 0;
+      transform:
+        rotate(2.5deg)
+        translate(10px, -5px);
+      background: #e9e6dc;
+    }
+
+    .journal-image {
+      position: relative;
+      z-index: 1;
+      padding: 14px 14px 19px;
+      background: var(--paper-white);
+      box-shadow:
+        0 15px 30px rgba(8,10,12,0.34);
+      transition:
+        transform 0.5s ease,
+        box-shadow 0.5s ease;
+    }
+
+    .journal-stack:hover .journal-image {
+      transform:
+        translateY(-4px)
+        rotate(-0.25deg);
+      box-shadow:
+        0 20px 38px rgba(8,10,12,0.42);
+    }
+
+    .journal-photo {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+    }
+
+    .journal-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,0.07),
+          transparent 50%
+        );
+    }
+
+    .journal-photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter:
+        saturate(0.62)
+        contrast(1.06);
+      transition:
+        transform 0.8s ease,
+        filter 0.8s ease;
+    }
+
+    .journal-image:hover .journal-photo img {
+      transform: scale(1.04);
+      filter:
+        saturate(0.84)
+        contrast(1.05);
+    }
+
+    .journal-caption {
+      max-width: 90%;
+      margin: 15px auto 0;
+      text-align: center;
+      font-family: "Courier New", monospace;
+      font-style: italic;
+      font-size: 10px;
+      line-height: 1.65;
+      letter-spacing: 0.005em;
+      color: #3d4043;
+    }
+
+    .journal-note {
+      margin-top: 9px;
+      text-align: center;
+      font-family: "Courier New", monospace;
+      font-size: 7px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #777a7c;
+    }
+
+    /* =========================
+       MADING / MAP
+    ========================= */
+
+    .map-section {
+      padding: 90px 0 120px;
+    }
+
+    .mading-board {
+      position: relative;
+      margin-top: 40px;
+      padding: 64px 5vw 74px;
+      background:
+        radial-gradient(rgba(0, 0, 0, 0.16) 1px, transparent 1.6px) 0 0 / 15px 15px,
+        radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1.6px) 7px 7px / 15px 15px,
+        linear-gradient(160deg, #8a6a4d 0%, #6f5138 75%);
+      border: 10px solid #46341f;
+      border-radius: 3px;
+      box-shadow:
+        inset 0 0 70px rgba(0, 0, 0, 0.4),
+        0 26px 54px rgba(0, 0, 0, 0.42);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 38px;
+    }
+
+    /* =========================
+       MAP FRAME
+    ========================= */
+
+    .map-frame {
+      position: relative;
+      flex: 1 1 auto;
+      max-width: 780px;
+      padding: 34px 34px 30px;
+      background: var(--paper-white);
+      border-radius: 2px;
+      box-shadow: 0 22px 44px rgba(0, 0, 0, 0.42);
+      transform: rotate(-0.6deg);
+      transition:
+        transform 0.5s ease,
+        box-shadow 0.5s ease;
+    }
+
+    .map-frame:hover {
+      transform: rotate(-0.6deg) translateY(-4px);
+      box-shadow:
+        0 28px 52px rgba(0, 0, 0, 0.48);
+    }
+
+    .map-tape {
+      position: absolute;
+      top: -15px;
+      width: 72px;
+      height: 26px;
+      background: rgba(244, 244, 240, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow:
+        0 3px 6px rgba(0, 0, 0, 0.28);
+    }
+
+    .map-tape.left {
+      left: 8%;
+      transform: rotate(-7deg);
+    }
+
+    .map-tape.right {
+      right: 8%;
+      transform: rotate(6deg);
+    }
+
+    .map-image-wrap {
+      position: relative;
+    }
+
+    .indonesia-map-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: saturate(0.9);
+    }
+
+    .mading-pin {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      padding: 0;
+      background:
+        radial-gradient(
+          circle at 34% 30%,
+          #ff8577,
+          #d81f1f 62%,
+          #8c1212 100%
+        );
+      border: none;
+      border-radius: 50%;
+      box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.5),
+        0 0 0 2px rgba(255, 255, 255, 0.55);
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .mading-pin:hover,
+    .mading-pin:focus-visible {
+      transform:
+        translate(-50%, -50%)
+        scale(1.4);
+      box-shadow:
+        0 3px 7px rgba(0, 0, 0, 0.55),
+        0 0 0 2px rgba(255, 255, 255, 0.75);
+    }
+
+    .mading-pin::after {
+      content: attr(data-caption);
+      position: absolute;
+      bottom: 135%;
+      left: 50%;
+      white-space: nowrap;
+      transform: translateX(-50%);
+      font-family: "Courier New", monospace;
+      font-size: 8px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #16181a;
+      background: rgba(244, 244, 240, 0.94);
+      padding: 4px 8px;
+      border-radius: 2px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .mading-pin:hover::after,
+    .mading-pin:focus-visible::after {
+      opacity: 1;
+    }
+
+    /* =========================
+       MADING SIDE COLUMN
+    ========================= */
+
+    .mading-side {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      flex: 0 0 185px;
+      width: 185px;
+    }
+
+    .mading-side .youtube-note,
+    .mading-side .poem-note {
+      flex: none;
+      width: 100%;
+    }
+
+    /* =========================
+       SMALL YOUTUBE POSTER
+    ========================= */
+
+    .youtube-note {
+      position: relative;
+      padding: 20px 16px 18px;
+      background: #f4f1e8;
+      color: #17191b;
+      box-shadow:
+        0 16px 28px rgba(0, 0, 0, 0.38);
+      transform: rotate(2.2deg);
+      transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+    }
+
+    .youtube-note:hover {
+      transform:
+        rotate(0deg)
+        translateY(-5px);
+      box-shadow:
+        0 21px 34px rgba(0, 0, 0, 0.44);
+    }
+
+    /* selotip kiri */
+    .youtube-tape {
+      position: absolute;
+      top: -11px;
+      width: 55px;
+      height: 20px;
+      background: rgba(245, 243, 237, 0.62);
+      border: 1px solid rgba(255,255,255,0.42);
+      box-shadow:
+        0 2px 5px rgba(0,0,0,0.22);
+    }
+
+    .youtube-tape.left {
+      left: 13px;
+      transform: rotate(-6deg);
+    }
+
+    /* selotip kanan */
+    .youtube-tape.right {
+      right: 13px;
+      transform: rotate(7deg);
+    }
+
+    .youtube-logo {
+      width: 47px;
+      height: 33px;
+      margin: 7px auto 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: #e62117;
+      border-radius: 9px;
+      box-shadow:
+        0 3px 7px rgba(0,0,0,0.18);
+    }
+
+    .youtube-logo::after {
+      content: "";
+      width: 0;
+      height: 0;
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-left: 11px solid white;
+      margin-left: 3px;
+    }
+
+    .youtube-small-label {
+      margin: 0;
+      text-align: center;
+      font-family: "Courier New", monospace;
+      font-size: 7px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #77736b;
+    }
+
+    .youtube-title {
+      margin: 8px 0 0;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.35;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .youtube-divider {
+      width: 35px;
+      height: 1px;
+      margin: 13px auto;
+      background: #b5b0a5;
+    }
+
+    .youtube-handle {
+      margin: 0;
+      text-align: center;
+      font-family: "Courier New", monospace;
+      font-size: 8px;
+      line-height: 1.55;
+      color: #65615b;
+      word-break: break-word;
+    }
+
+    .youtube-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding-top: 11px;
+      border-top: 1px solid rgba(0,0,0,0.12);
+      font-family: "Courier New", monospace;
+      font-size: 7px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #3d3a36;
+      transition:
+        color 0.3s ease,
+        gap 0.3s ease;
+    }
+
+    .youtube-link:hover {
+      color: #e62117;
+      gap: 12px;
+    }
+
+    .youtube-link-arrow {
+      font-size: 12px;
+    }
+
+    /* =========================
+       POEM NOTE
+    ========================= */
+
+    .poem-note {
+      position: relative;
+      padding: 20px 16px 20px;
+      background: #c9baa0;
+      color: #29241d;
+      border: none;
+      font-family: "Times New Roman", Times, serif;
+      font-style: normal;
+      text-align: left;
+      cursor: pointer;
+      box-shadow:
+        0 16px 28px rgba(0, 0, 0, 0.38);
+      transform: rotate(-2deg);
+      transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+    }
+
+    .poem-note:hover {
+      transform:
+        rotate(0deg)
+        translateY(-5px);
+      box-shadow:
+        0 21px 34px rgba(0, 0, 0, 0.44);
+    }
+
+    .poem-tape {
+      position: absolute;
+      top: -11px;
+      width: 50px;
+      height: 20px;
+      background: rgba(232, 223, 208, 0.28);
+      border: 1px solid rgba(255,255,255,0.22);
+      box-shadow:
+        0 2px 5px rgba(0,0,0,0.32);
+    }
+
+    .poem-tape.left {
+      left: 12px;
+      transform: rotate(-6deg);
+    }
+
+    .poem-tape.right {
+      right: 12px;
+      transform: rotate(7deg);
+    }
+
+    .poem-note-label {
+      margin: 4px 0 0;
+      text-align: center;
+      font-family: "Courier New", monospace;
+      font-size: 7px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #5f5547;
+    }
+
+    .poem-note-excerpt {
+      margin: 12px 0 0;
+      font-family: "Times New Roman", Times, serif;
+      font-style: normal;
+      font-size: 13px;
+      line-height: 1.55;
+      color: #29241d;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .poem-note-divider {
+      width: 35px;
+      height: 1px;
+      margin: 13px auto;
+      background: #8b7d68;
+    }
+
+    .poem-note-title {
+      margin: 0;
+      text-align: center;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #7f2b2b;
+    }
+
+    .poem-note-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding-top: 11px;
+      border-top: 1px solid rgba(255,255,255,0.14);
+      font-family: "Courier New", monospace;
+      font-size: 7px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #b8ab92;
+      transition:
+        color 0.3s ease,
+        gap 0.3s ease;
+    }
+
+    .poem-note:hover .poem-note-link {
+      color: #d94a4a;
+      gap: 12px;
+    }
+
+    /* =========================
+       POEM MODAL
+    ========================= */
+
+    .poem-modal {
+      position: fixed;
+      z-index: 100;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      visibility: hidden;
+      opacity: 0;
+      transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+    }
+
+    .poem-modal.is-open {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .poem-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(5, 6, 8, 0.87);
+    }
+
+    .poem-modal-card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 420px;
+      max-height: 84vh;
+      overflow-y: auto;
+      padding: 34px 28px 28px;
+      background: var(--paper-white);
+      box-shadow:
+        0 32px 60px rgba(0, 0, 0, 0.55);
+      transform:
+        translateY(14px)
+        rotate(-0.6deg);
+      transition: transform 0.35s ease;
+    }
+
+    .poem-modal.is-open .poem-modal-card {
+      transform:
+        translateY(0)
+        rotate(0deg);
+    }
+
+    .poem-modal-close {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      line-height: 1;
+      color: white;
+      background: #111417;
+      border: none;
+      border-radius: 50%;
+      box-shadow:
+        0 6px 14px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+    }
+
+    .poem-modal-label {
+      margin: 0;
+      text-align: center;
+      font-family: "Courier New", monospace;
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #77736b;
+    }
+
+    .poem-modal-title {
+      margin: 8px 0 0;
+      text-align: center;
+      font-family: "Times New Roman", Times, serif;
+      font-style: normal;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #111316;
+    }
+
+    .poem-modal-divider {
+      width: 38px;
+      height: 1px;
+      margin: 16px auto;
+      background: #b5b0a5;
+    }
+
+    .poem-modal-text {
+      margin: 0;
+      font-family: "Times New Roman", Times, serif;
+      font-style: normal;
+      font-size: 15px;
+      line-height: 1.9;
+      color: #2b2d2f;
+      text-align: center;
+      white-space: pre-line;
+    }
+
+    .poem-modal-link {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 22px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+      font-family: "Courier New", monospace;
+      font-size: 8px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #3d3a36;
+      transition:
+        color 0.3s ease,
+        gap 0.3s ease;
+    }
+
+    .poem-modal-link.is-visible {
+      display: flex;
+    }
+
+    .poem-modal-link:hover {
+      color: var(--blue);
+      gap: 12px;
+    }
+
+    .map-caption {
+      position: absolute;
+      left: 50%;
+      bottom: 25px;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      font-family: "Courier New", monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(244, 244, 240, 0.75);
+      white-space: nowrap;
+    }
+
+    .map-caption-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #d81f1f;
+    }
+
+    /* =========================
+       ABOUT
+    ========================= */
+
+    .about-section {
+      position: relative;
+      min-height: 580px;
+      background: var(--paper-light);
+      overflow: hidden;
+    }
+
+    .about-image-full {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center 30%;
+      filter:
+        saturate(0.82)
+        contrast(1.05);
+    }
+
+    .about-section::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(232,230,223,0.97) 0%,
+          rgba(232,230,223,0.86) 25%,
+          rgba(232,230,223,0.43) 45%,
+          rgba(232,230,223,0.08) 62%,
+          transparent 75%
+        );
+    }
+
+    .about-grid {
+      position: relative;
+      z-index: 2;
+      width: min(var(--max), 90vw);
+      min-height: 580px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+    }
+
+    .about-copy {
+      max-width: 470px;
+      padding: 80px 0;
+    }
+
+    .about-label {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 31px;
+      font-size: 8px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #17191b;
+    }
+
+    .about-label::after {
+      content: "";
+      width: 45px;
+      height: 1px;
+      background: var(--blue);
+    }
+
+    .about-title {
+      max-width: 470px;
+      margin: 0;
+      font-size: clamp(27px, 3.4vw, 45px);
+      font-weight: 500;
+      line-height: 1.16;
+      letter-spacing: -0.035em;
+      text-transform: uppercase;
+      color: #111316;
+      will-change: transform;
+    }
+
+    .about-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 35px;
+      font-size: 8px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #111316;
+    }
+
+    .about-link span {
+      width: 43px;
+      height: 1px;
+      background: #111316;
+      transition:
+        width 0.35s ease,
+        background 0.35s ease;
+    }
+
+    .about-link:hover span {
+      width: 68px;
+      background: var(--blue);
+    }
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    .mading-modal {
+      position: fixed;
+      z-index: 100;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      visibility: hidden;
+      opacity: 0;
+      transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+    }
+
+    .mading-modal.is-open {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .mading-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(5, 6, 8, 0.87);
+    }
+
+    .mading-modal-card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 400px;
+      padding: 18px 18px 24px;
+      background: var(--paper-white);
+      box-shadow:
+        0 32px 60px rgba(0, 0, 0, 0.55);
+      transform:
+        translateY(14px)
+        rotate(-1deg);
+      transition:
+        transform 0.35s ease;
+    }
+
+    .mading-modal.is-open .mading-modal-card {
+      transform:
+        translateY(0)
+        rotate(-0.6deg);
+    }
+
+    .mading-modal-card::before {
+      content: "";
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      width: 15px;
+      height: 15px;
+      background:
+        radial-gradient(
+          circle at 34% 30%,
+          #ff8577,
+          #d81f1f 62%,
+          #8c1212 100%
+        );
+      border-radius: 50%;
+      box-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.5);
+      transform: translateX(-50%);
+    }
+
+    .mading-modal-close {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      line-height: 1;
+      color: white;
+      background: #111417;
+      border: none;
+      border-radius: 50%;
+      box-shadow:
+        0 6px 14px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+    }
+
+    .mading-modal-photo {
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      background: #ddd8ce;
+    }
+
+    .mading-modal-photo.is-landscape {
+      aspect-ratio: 3 / 2;
+    }
+
+    .mading-modal-card.is-landscape {
+      max-width: 560px;
+    }
+
+    .mading-modal-photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter:
+        saturate(0.75)
+        contrast(1.05);
+    }
+
+    .mading-modal-caption {
+      margin: 15px 4px 0;
+      font-family: "Courier New", monospace;
+      font-style: italic;
+      font-size: 11px;
+      line-height: 1.55;
+      letter-spacing: 0.02em;
+      color: #3d4043;
+      text-align: center;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      background: #0a0d10;
+      color: white;
+      padding: 43px 5vw 39px;
+    }
+
+    .footer-inner {
+      width: min(var(--max), 90vw);
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .footer-location {
+      font-family: "Courier New", monospace;
+      font-size: 8px;
+      line-height: 1.9;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .footer-location span {
+      color: var(--blue-light);
+    }
+
+    .footer-right {
+      text-align: right;
+      font-size: 8px;
+      line-height: 1.9;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.42);
+    }
+
+    .footer-right strong {
+      color: white;
+      font-weight: 400;
+    }
+
+    .footer-mark {
+      margin-top: 7px;
+    }
+
+    .footer-mark span {
+      color: var(--blue-light);
+    }
+
+    /* =========================
+       ANIMATION
+    ========================= */
+
+    .works-column {
+      animation: reveal 0.9s both ease;
+    }
+
+    .works-column:nth-child(2) {
+      animation-delay: 0.12s;
+    }
+
+    .about-copy {
+      animation: reveal 1s both ease;
+    }
+
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 850px) {
+
+      .site-header {
+        height: 65px;
+        padding: 0 22px;
+      }
+
+      .site-name {
+        font-size: 7px;
+        letter-spacing: 0.2em;
+      }
+
+      .nav {
+        gap: 19px;
+      }
+
+      .nav a {
+        font-size: 7px;
+        letter-spacing: 0.16em;
+      }
+
+      .nav-dot {
+        display: none;
+      }
+
+      .hero {
+        min-height: 760px;
+        height: 100svh;
+      }
+
+      .hero-image {
+        object-position: 60% center;
+      }
+
+      .hero::before {
+        background:
+          linear-gradient(
+            180deg,
+            rgba(4,7,10,0.46) 0%,
+            rgba(4,7,10,0.18) 25%,
+            rgba(4,7,10,0.82) 76%,
+            rgba(4,7,10,0.97) 100%
+          );
+      }
+
+      .hero::after {
+        background:
+          linear-gradient(
+            180deg,
+            rgba(0,0,0,0.25),
+            transparent 35%,
+            rgba(0,0,0,0.65) 100%
+          );
+      }
+
+      .hero-grid {
+        width: calc(100% - 44px);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-top: 0;
+        padding-bottom: 94px;
+      }
+
+      .hero-content {
+        max-width: 100%;
+        padding-top: 0;
+      }
+
+      .hero-title {
+        max-width: 95%;
+        font-size: clamp(48px, 14vw, 92px);
+        line-height: 0.86;
+        letter-spacing: -0.045em;
+      }
+
+      .hero-description {
+        max-width: 290px;
+        margin-top: 28px;
+        padding-left: 14px;
+        font-size: 10px;
+        line-height: 1.75;
+      }
+
+      .hero-enter {
+        margin-top: 27px;
+        font-size: 7px;
+        letter-spacing: 0.2em;
+      }
+
+      .hero-enter-line {
+        width: 45px;
+      }
+
+      .scroll-cue {
+        left: 22px;
+        bottom: 27px;
+        gap: 10px;
+        font-size: 6px;
+      }
+
+      .scroll-line {
+        width: 34px;
+      }
+
+      .section {
+        width: calc(100% - 44px);
+      }
+
+      .works-section {
+        padding: 75px 0 86px;
+      }
+
+      .works-grid {
+        display: block;
+      }
+
+      .works-column + .works-column {
+        margin-top: 76px;
+      }
+
+      .section-heading {
+        padding-bottom: 14px;
+      }
+
+      .section-title {
+        font-size: 12px;
+        letter-spacing: 0.15em;
+      }
+
+      .work {
+        grid-template-columns:
+          34px
+          minmax(0, 1fr)
+          23px;
+        min-height: 76px;
+      }
+
+      .work:hover {
+        padding-left: 8px;
+      }
+
+      .work-title {
+        font-size: 10px;
+        letter-spacing: 0.065em;
+      }
+
+      .work-meta {
+        margin-top: 6px;
+        font-size: 7px;
+      }
+
+      .work-arrow {
+        font-size: 15px;
+      }
+
+      .journal-stack {
+        margin-top: 33px;
+        padding: 10px 12px 17px;
+      }
+
+      .journal-image {
+        padding: 10px 10px 16px;
+      }
+
+      .journal-photo {
+        aspect-ratio: 16 / 9;
+      }
+
+      .journal-caption {
+        margin-top: 13px;
+        font-size: 9px;
+        line-height: 1.7;
+      }
+
+      .journal-note {
+        font-size: 6px;
+      }
+
+      /* =========================
+         MADING MOBILE
+      ========================= */
+
+      .map-section {
+        padding: 68px 0 82px;
+      }
+
+      .mading-board {
+        margin-top: 30px;
+        padding: 42px 5vw 78px;
+        border-width: 7px;
+        flex-direction: column;
+        gap: 34px;
+      }
+
+      .map-frame {
+        width: 100%;
+        padding: 22px 18px 20px;
+      }
+
+      .map-tape {
+        width: 52px;
+        height: 20px;
+      }
+
+      .mading-pin {
+        width: 13px;
+        height: 13px;
+      }
+
+      .mading-side {
+        flex: none;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .mading-side .youtube-note,
+      .mading-side .poem-note {
+        width: 59px;
+      }
+
+      .youtube-note,
+      .poem-note {
+        padding: 6px 4px 6px;
+      }
+
+      .youtube-note {
+        transform: rotate(-1.8deg);
+      }
+
+      .youtube-note:hover {
+        transform:
+          rotate(0deg)
+          translateY(-2px);
+      }
+
+      .youtube-tape,
+      .poem-tape {
+        top: -3px;
+        width: 13px;
+        height: 5px;
+      }
+
+      .youtube-tape.left {
+        left: 3px;
+      }
+
+      .youtube-tape.right {
+        right: 3px;
+      }
+
+      .youtube-logo {
+        width: 15px;
+        height: 11px;
+        margin: 3px auto 4px;
+        border-radius: 3px;
+      }
+
+      .youtube-logo::after {
+        border-top-width: 2px;
+        border-bottom-width: 2px;
+        border-left-width: 3px;
+        margin-left: 1px;
+      }
+
+      .youtube-small-label,
+      .youtube-handle,
+      .youtube-link,
+      .poem-note-label,
+      .poem-note-link {
+        font-size: 2.8px;
+      }
+
+      .youtube-title,
+      .poem-note-title {
+        margin-top: 2.8px;
+        font-size: 4.2px;
+      }
+
+      .youtube-divider,
+      .poem-note-divider {
+        width: 13px;
+        margin: 4px auto;
+      }
+
+      .youtube-link,
+      .poem-note-link {
+        gap: 2.8px;
+        margin-top: 4px;
+        padding-top: 4px;
+      }
+
+      .youtube-link-arrow {
+        font-size: 4.2px;
+      }
+
+      .poem-tape.left {
+        left: 3px;
+      }
+
+      .poem-tape.right {
+        right: 3px;
+      }
+
+      .poem-note {
+        transform: rotate(1.8deg);
+      }
+
+      .poem-note:hover {
+        transform:
+          rotate(0deg)
+          translateY(-2px);
+      }
+
+      .poem-note-excerpt {
+        margin-top: 4px;
+        font-size: 4.2px;
+        line-height: 1.3;
+        -webkit-line-clamp: 2;
+      }
+
+      .poem-note-arrow {
+        font-size: 3px;
+      }
+
+      .poem-modal-card {
+        max-width: 340px;
+        padding: 28px 22px 22px;
+      }
+
+      .map-caption {
+        bottom: 25px;
+        font-size: 7px;
+      }
+
+      .mading-modal-card {
+        max-width: 320px;
+        padding: 14px 14px 20px;
+      }
+
+      .about-section {
+        min-height: 500px;
+        background: var(--paper-light);
+      }
+
+      .about-image-full {
+        object-position: 70% center;
+      }
+
+      .about-section::after {
+        background:
+          linear-gradient(
+            180deg,
+            rgba(232,230,223,0.97) 0%,
+            rgba(232,230,223,0.9) 40%,
+            rgba(232,230,223,0.52) 67%,
+            rgba(232,230,223,0.05) 100%
+          );
+      }
+
+      .about-grid {
+        width: 100%;
+        display: block;
+        min-height: 500px;
+        padding: 68px 22px 42px;
+      }
+
+      .about-copy {
+        max-width: 100%;
+        padding: 0;
+      }
+
+      .about-label {
+        margin-bottom: 28px;
+        font-size: 7px;
+        color: #17191b;
+      }
+
+      .about-label::after {
+        background: var(--blue);
+      }
+
+      .about-title {
+        max-width: 100%;
+        font-size: 26px;
+        line-height: 1.22;
+        color: #111316;
+      }
+
+      .about-link {
+        margin-top: 31px;
+        font-size: 7px;
+        color: #111316;
+      }
+
+      .about-link span {
+        background: #111316;
+      }
+
+      footer {
+        padding: 31px 22px;
+      }
+
+      .footer-inner {
+        width: 100%;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 27px;
+      }
+
+      .footer-location {
+        font-size: 7px;
+      }
+
+      .footer-right {
+        text-align: left;
+        font-size: 7px;
+      }
+    }
+
+    @media (max-width: 390px) {
+
+      .hero-title {
+        font-size: 46px;
+      }
+
+      .hero-description {
+        font-size: 9px;
+      }
+
+      .work-title {
+        font-size: 9.5px;
+      }
+
+      .about-title {
+        font-size: 24px;
+      }
+
+      .scroll-cue {
+        display: none;
+      }
+
+      .mading-side .youtube-note,
+      .mading-side .poem-note {
+        width: 56px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header class="site-header">
+
+    <a
+      href="index.html"
+      class="site-name"
+      aria-label="Hendi Hesa Mahendra"
+    >
+      HENDI HESA MAHENDRA
+    </a>
+
+    <nav
+      class="nav"
+      aria-label="Main navigation"
+    >
+
+      <a href="#works">
+        Works
+      </a>
+
+      <a href="#about">
+        About
+      </a>
+
+      <a href="#map">
+        Map
+      </a>
+
+      <span
+        class="nav-dot"
+        aria-hidden="true"
+      ></span>
+
+    </nav>
+
+  </header>
+
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <img
+      src="hero.jpg"
+      alt="Hendi Hesa Mahendra"
+      class="hero-image"
+    />
+
+    <div class="hero-grid">
+
+      <div class="hero-content">
+
+        <h1 class="hero-title" aria-label="A Small Archive of Being.">
+          <span class="hero-line">
+            <span class="hero-char">A</span>
+            <span class="hero-char hero-space" aria-hidden="true">&nbsp;</span>
+            <span class="hero-char">S</span><span class="hero-char">M</span><span class="hero-char">A</span><span class="hero-char">L</span><span class="hero-char">L</span>
+          </span>
+          <span class="hero-line">
+            <span class="hero-char">A</span><span class="hero-char">R</span><span class="hero-char">C</span><span class="hero-char">H</span><span class="hero-char">I</span><span class="hero-char">V</span><span class="hero-char">E</span>
+          </span>
+          <span class="hero-line">
+            <span class="hero-char">O</span><span class="hero-char hero-space" aria-hidden="true">&nbsp;</span><span class="hero-char">F</span>
+            <span class="hero-char hero-space" aria-hidden="true">&nbsp;</span>
+            <span class="hero-char hero-accent">B</span><span class="hero-char hero-accent">E</span><span class="hero-char hero-accent">I</span><span class="hero-char hero-accent">N</span><span class="hero-char hero-accent">G</span><span class="hero-char hero-accent">.</span>
+          </span>
         </h1>
 
         <div class="hero-description">
