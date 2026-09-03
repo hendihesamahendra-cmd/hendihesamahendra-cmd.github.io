@@ -1703,48 +1703,116 @@
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 18px;
+        gap: 10px;
       }
 
       .mading-side .youtube-note,
       .mading-side .poem-note {
-        width: 170px;
+        width: 42px;
+      }
+
+      .youtube-note,
+      .poem-note {
+        padding: 4px 3px 4px;
       }
 
       .youtube-note {
-        padding: 18px 14px 16px;
         transform: rotate(-1.8deg);
       }
 
       .youtube-note:hover {
         transform:
           rotate(0deg)
-          translateY(-4px);
+          translateY(-2px);
+      }
+
+      .youtube-tape,
+      .poem-tape {
+        top: -3px;
+        width: 13px;
+        height: 5px;
+      }
+
+      .youtube-tape.left {
+        left: 3px;
+      }
+
+      .youtube-tape.right {
+        right: 3px;
       }
 
       .youtube-logo {
-        width: 43px;
-        height: 30px;
-        margin-bottom: 13px;
+        width: 11px;
+        height: 8px;
+        margin: 2px auto 3px;
+        border-radius: 2px;
       }
 
-      .youtube-title {
-        font-size: 12px;
+      .youtube-logo::after {
+        border-top-width: 2px;
+        border-bottom-width: 2px;
+        border-left-width: 3px;
+        margin-left: 1px;
+      }
+
+      .youtube-small-label,
+      .youtube-handle,
+      .youtube-link,
+      .poem-note-label,
+      .poem-note-link {
+        font-size: 2px;
+      }
+
+      .youtube-title,
+      .poem-note-title {
+        margin-top: 2px;
+        font-size: 3px;
+      }
+
+      .youtube-divider,
+      .poem-note-divider {
+        width: 9px;
+        margin: 3px auto;
+      }
+
+      .youtube-link,
+      .poem-note-link {
+        gap: 2px;
+        margin-top: 3px;
+        padding-top: 3px;
+      }
+
+      .youtube-link-arrow {
+        font-size: 3px;
+      }
+
+      .poem-tape.left {
+        left: 3px;
+      }
+
+      .poem-tape.right {
+        right: 3px;
       }
 
       .poem-note {
-        padding: 18px 14px 16px;
         transform: rotate(1.8deg);
       }
 
       .poem-note:hover {
         transform:
           rotate(0deg)
-          translateY(-4px);
+          translateY(-2px);
       }
 
-      .poem-note-title {
-        font-size: 11px;
+      .poem-note-excerpt {
+        margin-top: 3px;
+        font-size: 3px;
+        line-height: 1.3;
+        -webkit-line-clamp: 2;
+      }
+
+      .poem-note-arrow {
+        font-size: 3px;
       }
 
       .poem-modal-card {
@@ -1866,7 +1934,7 @@
 
       .mading-side .youtube-note,
       .mading-side .poem-note {
-        width: 160px;
+        width: 40px;
       }
     }
 
