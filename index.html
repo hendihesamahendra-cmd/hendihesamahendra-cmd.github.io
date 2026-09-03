@@ -256,6 +256,7 @@
       letter-spacing: -0.045em;
       text-transform: uppercase;
       animation: fadeUp 1s 0.15s both ease;
+      will-change: transform, opacity;
     }
 
     .hero-title span {
@@ -3028,6 +3029,85 @@ HHM, 17 Oktober 2024"
 
         }
       );
+
+    })();
+
+
+    (function () {
+
+      var heroTitle =
+        document.querySelector(".hero-title");
+
+      if (!heroTitle) {
+        return;
+      }
+
+      var prefersReducedMotion =
+        window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+      if (prefersReducedMotion) {
+        return;
+      }
+
+      var ticking = false;
+
+      var maxScroll = 700;
+
+      var speed = 0.35;
+
+
+      function updateHeroParallax() {
+
+        var scrolled =
+          window.scrollY || window.pageYOffset;
+
+        var clamped =
+          Math.min(scrolled, maxScroll);
+
+        var translateY =
+          clamped * speed;
+
+        var opacity =
+          Math.max(
+            1 - clamped / maxScroll,
+            0.15
+          );
+
+        heroTitle.style.transform =
+          "translateY(" + translateY + "px)";
+
+        heroTitle.style.opacity = opacity;
+
+        ticking = false;
+
+      }
+
+
+      function onScroll() {
+
+        if (!ticking) {
+
+          window.requestAnimationFrame(
+            updateHeroParallax
+          );
+
+          ticking = true;
+
+        }
+
+      }
+
+
+      window.addEventListener(
+        "scroll",
+        onScroll,
+        { passive: true }
+      );
+
+
+      updateHeroParallax();
 
     })();
 
