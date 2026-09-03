@@ -1361,6 +1361,14 @@
       background: #ddd8ce;
     }
 
+    .mading-modal-photo.is-landscape {
+      aspect-ratio: 3 / 2;
+    }
+
+    .mading-modal-card.is-landscape {
+      max-width: 560px;
+    }
+
     .mading-modal-photo img {
       display: block;
       width: 100%;
@@ -2348,6 +2356,7 @@
               style="left: 45%; top: 57%;"
               data-image="kerayaan-beccu.jpg"
               data-caption="Kerayaan Beccu, Kalimantan Selatan"
+              data-orientation="landscape"
               aria-label="Lihat foto: Kerayaan Beccu, Kalimantan Selatan"
             ></button>
 
@@ -2408,6 +2417,7 @@
               style="left: 47%; top: 36%;"
               data-image="balikpapan.jpg"
               data-caption="Balikpapan, Kalimantan Timur"
+              data-orientation="landscape"
               aria-label="Lihat foto: Balikpapan, Kalimantan Timur"
             ></button>
 
@@ -2420,6 +2430,7 @@
               style="left: 47%; top: 15%;"
               data-image="tanjung-selor.jpg"
               data-caption="Tanjung Selor, Kalimantan Utara"
+              data-orientation="landscape"
               aria-label="Lihat foto: Tanjung Selor, Kalimantan Utara"
             ></button>
 
@@ -2751,14 +2762,34 @@ HHM, 17 Oktober 2024"
       var modalCaption =
         document.getElementById("madingModalCaption");
 
+      var modalCard =
+        modal.querySelector(".mading-modal-card");
 
-      function openMading(src, caption) {
+      var modalPhoto =
+        modal.querySelector(".mading-modal-photo");
+
+
+      function openMading(src, caption, orientation) {
 
         modalImg.src = src;
 
         modalImg.alt = caption;
 
         modalCaption.textContent = caption;
+
+        if (orientation === "landscape") {
+
+          modalPhoto.classList.add("is-landscape");
+
+          modalCard.classList.add("is-landscape");
+
+        } else {
+
+          modalPhoto.classList.remove("is-landscape");
+
+          modalCard.classList.remove("is-landscape");
+
+        }
 
         modal.classList.add("is-open");
 
@@ -2792,7 +2823,8 @@ HHM, 17 Oktober 2024"
 
               openMading(
                 pin.getAttribute("data-image"),
-                pin.getAttribute("data-caption")
+                pin.getAttribute("data-caption"),
+                pin.getAttribute("data-orientation")
               );
 
             }
