@@ -5285,6 +5285,86 @@ Jangan tinggalkan aku.
     }
   </style>
 </head>
+<!-- BACKGROUND MUSIC -->
 
+<audio
+  id="bgMusic"
+  src="latar.mp3"
+  loop
+  preload="auto"
+></audio>
+
+<button
+  type="button"
+  id="musicToggle"
+  aria-label="Putar atau matikan musik"
+  style="
+    position: fixed;
+    z-index: 50;
+    right: 20px;
+    bottom: 20px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(244,244,240,0.25);
+    background: rgba(7,9,11,0.75);
+    backdrop-filter: blur(6px);
+    color: #f4f4f0;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease, border-color 0.3s ease;
+  "
+>♪</button>
+
+<script>
+  (function () {
+    var audio = document.getElementById("bgMusic");
+    var toggleBtn = document.getElementById("musicToggle");
+
+    function updateIcon() {
+      toggleBtn.textContent = audio.paused ? "♪" : "❚❚";
+      toggleBtn.style.borderColor = audio.paused
+        ? "rgba(244,244,240,0.25)"
+        : "rgba(130,193,255,0.6)";
+    }
+
+    function tryAutoplay() {
+      var playPromise = audio.play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(updateIcon)
+          .catch(function () {
+            // Autoplay diblokir browser — tunggu interaksi pertama
+            var startOnInteract = function () {
+              audio.play().then(updateIcon);
+              document.removeEventListener("click", startOnInteract);
+              document.removeEventListener("scroll", startOnInteract);
+              document.removeEventListener("keydown", startOnInteract);
+            };
+
+            document.addEventListener("click", startOnInteract, { once: true });
+            document.addEventListener("scroll", startOnInteract, { once: true });
+            document.addEventListener("keydown", startOnInteract, { once: true });
+          });
+      }
+    }
+
+    toggleBtn.addEventListener("click", function () {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+      updateIcon();
+    });
+
+    updateIcon();
+    tryAutoplay();
+  })();
+</script>
 <body>
 </html>
