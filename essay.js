@@ -731,8 +731,8 @@ metamorfosis: {
 
 
     <div class="essay-signature">
-      <span>GANTI: JAM</span>
-      <span>GANTI: Lokasi, Tanggal Bulan Tahun.</span>
+      <span>00:00</span>
+      <span>PANDAN SARI, 31 JULI 2026.</span>
     </div>
 
   `
