@@ -491,7 +491,252 @@ const essays = {
       </div>
 
     `
-  }
+  },
+  
+  /* =====================================================
+   KETIKA KITA TIDAK LAGI BERGUNA
+===================================================== */
+
+metamorfosis: {
+
+  title: "Ketika Kita Tidak Lagi Berguna",
+
+  meta: "Essay · Reflection",
+
+  subtitle:
+    "Tentang Franz Kafka, tentang kegunaan, dan tentang apa yang tersisa dari sebuah hubungan ketika seseorang tidak lagi mampu memberi.",
+
+  year: "2026",
+
+  content: `
+
+    <p class="byline">
+      Oleh Hendi Hesa Mahendra
+    </p>
+
+
+    <p>
+      Ada sesuatu dari <em>Metamorfosis</em> karya Franz Kafka yang membuatku
+      terus berpikir setelah buku itu selesai dibaca.
+    </p>
+
+    <p>
+      Bukan tentang bagaimana Gregor Samsa berubah menjadi seekor serangga.
+      Bukan pula tentang absurditas perubahan itu.
+    </p>
+
+    <p>
+      Melainkan tentang apa yang terjadi setelah seseorang tidak lagi mampu
+      memberikan apa-apa.
+    </p>
+
+    <p>
+      Selama ini Gregor adalah seseorang yang bekerja. Ia menanggung
+      keluarganya. Kehadirannya memiliki fungsi. Tetapi ketika tubuhnya
+      berubah dan ia tidak lagi mampu bekerja, sesuatu dalam hubungan mereka
+      ikut berubah.
+    </p>
+
+    <p>
+      Seolah-olah nilai seseorang perlahan menjadi bergantung pada apa yang
+      bisa ia berikan.
+    </p>
+
+    <p>
+      Aku kemudian berpikir, mungkin persoalan itu tidak hanya milik Gregor.
+    </p>
+
+    <p>
+      Mungkin kita semua pernah berada di kedua sisi hubungan semacam itu.
+    </p>
+
+    <p>
+      Kita pernah menjadi seseorang yang dibutuhkan. Dan mungkin kita juga
+      pernah menjadi seseorang yang hanya dicari ketika dibutuhkan.
+    </p>
+
+    <p>
+      Seorang teman yang selalu ada ketika temannya sedang kesulitan, lalu
+      perlahan dilupakan ketika keadaan membaik.
+    </p>
+
+    <p>
+      Seorang kakak yang selalu membantu adiknya, sampai suatu hari ia
+      sendiri membutuhkan bantuan dan tidak lagi dianggap sebagai tempat
+      untuk meminta.
+    </p>
+
+    <p>
+      Seorang anak yang selama bertahun-tahun dibanggakan karena
+      prestasinya, lalu perlahan merasa tidak berharga ketika ia gagal
+      memenuhi harapan keluarganya.
+    </p>
+
+    <p>
+      Orang tua yang sepanjang hidupnya menjadi tempat pulang, tetapi ketika
+      usia membuat mereka semakin lemah, hubungan itu berubah. Sekarang
+      merekalah yang membutuhkan kita.
+    </p>
+
+    <p>
+      Bahkan mungkin kita sendiri.
+    </p>
+
+    <p>
+      Ada masa ketika kita merasa sangat berguna. Kita bekerja, menghasilkan
+      sesuatu, membantu orang lain, punya banyak rencana, dan merasa
+      kehadiran kita berarti.
+    </p>
+
+    <p>
+      Lalu datang suatu hari ketika kita tidak mampu melakukan sebanyak dulu.
+    </p>
+
+    <p>
+      Kita gagal.
+    </p>
+
+    <p>
+      Kita kehilangan pekerjaan.
+    </p>
+
+    <p>
+      Kita sakit.
+    </p>
+
+    <p>
+      Kita tidak punya uang.
+    </p>
+
+    <p>
+      Kita tidak bisa lagi menjadi tempat orang lain bersandar.
+    </p>
+
+    <p>
+      Dan pada saat seperti itu, ada pertanyaan yang diam-diam muncul:
+    </p>
+
+    <p class="lead">
+      Kalau aku tidak bisa memberikan apa-apa, apakah aku masih berharga?
+    </p>
+
+    <p>
+      Aku rasa ini yang sebenarnya membuat persoalan tentang &ldquo;berguna&rdquo;
+      menjadi begitu dekat dengan manusia.
+    </p>
+
+    <p>
+      Sebab mungkin tanpa sadar kita sering mencintai seseorang bersama
+      dengan apa yang ia berikan kepada kita.
+    </p>
+
+    <p>
+      Kita menyukai teman yang selalu menghibur.
+    </p>
+
+    <p>
+      Menyayangi pasangan yang selalu memahami.
+    </p>
+
+    <p>
+      Menghormati orang tua yang selalu mampu menjaga.
+    </p>
+
+    <p>
+      Membutuhkan saudara yang selalu membantu.
+    </p>
+
+    <p>
+      Lalu apa yang terjadi ketika semua itu berhenti?
+    </p>
+
+    <p>
+      Apakah hubungan tersebut masih memiliki alasan untuk bertahan?
+    </p>
+
+    <p>
+      Aku tidak tahu.
+    </p>
+
+    <p>
+      Dan mungkin aku juga tidak ingin buru-buru menemukan jawabannya.
+    </p>
+
+    <p>
+      Sebab semakin kupikirkan, semakin terasa bahwa cinta dan kebutuhan
+      sering kali berada terlalu dekat satu sama lain. Kadang kita sulit
+      membedakan apakah kita mencintai seseorang karena dirinya, atau karena
+      kehidupan kita menjadi lebih mudah ketika ia ada.
+    </p>
+
+    <p>
+      Mungkin itulah mengapa kehilangan seseorang tidak selalu dimulai
+      ketika ia pergi.
+    </p>
+
+    <p>
+      Kadang kehilangan dimulai ketika kita tidak lagi melihat alasan untuk
+      membutuhkannya.
+    </p>
+
+    <p>
+      Dan mungkin yang lebih menakutkan adalah kemungkinan bahwa suatu hari
+      nanti kita sendiri akan menjadi orang yang tidak lagi dibutuhkan.
+    </p>
+
+    <p>
+      Ketika itu terjadi, aku ingin percaya bahwa nilai manusia tidak pernah
+      benar-benar ditentukan oleh seberapa banyak yang bisa ia berikan.
+    </p>
+
+    <p>
+      Bahwa seorang ayah tetap seorang ayah ketika ia sudah terlalu tua
+      untuk bekerja.
+    </p>
+
+    <p>
+      Bahwa seorang ibu tetap seorang ibu ketika ia tidak lagi mampu
+      mengurus rumah.
+    </p>
+
+    <p>
+      Bahwa seorang teman tetap berarti meskipun ia sedang tidak punya
+      tenaga untuk mendengarkan.
+    </p>
+
+    <p>
+      Bahwa seorang anak tetap layak dicintai meskipun ia gagal menjadi
+      seperti yang diharapkan.
+    </p>
+
+    <p>
+      Dan bahwa diriku sendiri tetap memiliki nilai ketika suatu hari aku
+      tidak mampu menghasilkan apa-apa.
+    </p>
+
+    <p>
+      Mungkin pada akhirnya, ukuran paling jujur dari sebuah hubungan
+      bukanlah seberapa banyak yang bisa kita berikan satu sama lain.
+    </p>
+
+    <p>
+      Tetapi apakah kita masih memilih untuk tinggal ketika sudah tidak ada
+      lagi yang bisa kita dapatkan.
+    </p>
+
+    <p class="lead final-line">
+      Ketika seseorang tidak lagi berguna bagi kita, apa yang sebenarnya
+      tersisa dari hubungan kita dengannya?
+    </p>
+
+
+    <div class="essay-signature">
+      <span>GANTI: JAM</span>
+      <span>GANTI: Lokasi, Tanggal Bulan Tahun.</span>
+    </div>
+
+  `
+}
 
 };
 
