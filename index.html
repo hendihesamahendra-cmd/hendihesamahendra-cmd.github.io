@@ -627,10 +627,12 @@
         inset 0 0 70px rgba(0, 0, 0, 0.4),
         0 26px 54px rgba(0, 0, 0, 0.42);
 
+      /* Desktop: map di atas, tiga kertas di bawah */
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 38px;
+      justify-content: flex-start;
+      gap: 42px;
     }
 
     /* =========================
@@ -639,8 +641,9 @@
 
     .map-frame {
       position: relative;
-      flex: 1 1 auto;
-      max-width: 780px;
+      width: min(100%, 900px);
+      flex: 0 0 auto;
+      max-width: 900px;
       padding: 34px 34px 30px;
       background: var(--paper-white);
       border-radius: 2px;
@@ -754,10 +757,12 @@
 
     .mading-side {
       display: flex;
-      flex-direction: column;
-      gap: 24px;
-      flex: 0 0 185px;
-      width: 185px;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 28px;
+      width: min(720px, 100%);
+      flex: 0 0 auto;
     }
 
     .mading-side .youtube-note,
