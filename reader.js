@@ -33,6 +33,11 @@ const books = {
   keuangan: {
     title: "Manajemen Keuangan Kecil-Kecilan",
     pdf: "books/manajemen-keuangan-kecil-kecilan.pdf"
+  },
+
+  "angin-di-senin-pagi": {
+    title: "Angin di Senin Pagi",
+    pdf: "books/angin-di-senin-pagi.pdf"
   }
 
 };
